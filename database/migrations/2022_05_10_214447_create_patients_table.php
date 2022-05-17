@@ -14,6 +14,7 @@ class CreatePatientsTable extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
+            $table->id() ; 
             $table->string('nom');
             $table->string('prenom');
             $table->date('date_naissance');
@@ -25,15 +26,8 @@ class CreatePatientsTable extends Migration
             $table->string('tel_fixe');
             $table->string('adresse');
             $table->string('cni');
-            $table->string('id_ville');
-            $table->string('nom_passion');
-            $table->string('nom_passion');
-            $table->string('nom_passion');
-            $table->string('nom_passion');
-            $table->string('nom_passion');
-            $table->string('nom_passion');
-            $table->string('nom_passion');
-
+            $table->string('id_pays');
+            $table->string('id_ville'); 
             $table->timestamps();
         });
     }

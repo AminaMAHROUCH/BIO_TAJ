@@ -28,11 +28,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ asset('template/vendor/jqvmap/css/jqvmap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('template/vendor/chartist/css/chartist.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('template/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('template/css/style.css')}}">
-    <link rel="stylesheet" href="{{ asset('template/css/skin-2.css')}}">
+    <link rel="stylesheet" href="{{ asset('template/vendor/jqvmap/css/jqvmap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/vendor/chartist/css/chartist.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/css/skin-2.css') }}">
+
+
+    <link href="{{ asset('template/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -62,14 +65,15 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('template/images/logo-white.png')}}" alt="">
-                <img class="logo-compact" src="{{ asset('template/images/img.png')}}" alt="">
-                <img class="brand-title" src="{{ asset('template/images/img.png')}}" alt="">
+                <img class="logo-abbr" src="{{ asset('template/images/logo-white.png') }}" alt="">
+                <img class="logo-compact" src="{{ asset('template/images/img.png') }}" alt="">
+                <img class="brand-title" src="{{ asset('template/images/img.png') }}" alt="">
             </a>
 
             <div class="nav-control">
                 <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                    <span class="line"></span><span class="line"></span><span
+                        class="line"></span>
                 </div>
             </div>
         </div>
@@ -166,102 +170,112 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
-                        <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
-                                <i class="la la-calendar"></i>
-                                <span class="nav-text">الصفحة الرئيسيــــة</span>
-                            </a>
-                        </li>
+                    <li><a class="ai-icon" href="/acceuil" aria-expanded="false">
+                            <i class="la la-calendar"></i>
+                            <span class="nav-text">الصفحة الرئيسيــــة</span>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">المرضى</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">لائحة المرضى</a></li>
-                                <li><a href="add-professor.html">إضافة مريض</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">المنتوجات</span>
-                            </a>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">المرضى</span>
+                        </a>
                         <ul aria-expanded="false">
-                            <li><a href="all-professors.html">لائحة المنتوجات</a></li>
-                            <li><a href="add-professor.html">لائحة منتوج جديد</a></li>
+                            <li><a href="{{ route('patient.index', false) }}">لائحة المرضى</a></li>
+                            <li><a href="{{ route('patient.create', false) }}">إضافة مريض</a></li>
                         </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">المزودين</span>
-                            </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">الامراض</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('maladie.index', false) }}">لائحة الامراض</a></li>
+                            <li><a href="{{ route('maladie.create', false) }}">إضافة مرض</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">المنتوجات</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('produit.index', false) }}">لائحة المنتوجات</a></li>
+                            <li><a href="{{ route('produit.create', false) }}">لائحة منتوج جديد</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">المزودين</span>
+                        </a>
                         <ul aria-expanded="false">
                             <li><a href="all-professors.html">لائحة المزودين</a></li>
                             <li><a href="add-professor.html">إضافة مزود جديد</a></li>
                         </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">Liste des achats</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">Liste des achats </a></li>
-                                <li><a href="add-professor.html">Nouveau achat</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">Liste des achats</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">Liste des achats </a></li>
-                                <li><a href="add-professor.html">Nouveau achat</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">Liste des achats</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">Liste des achats </a></li>
-                                <li><a href="add-professor.html">Nouveau achat</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">Liste des achats</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">Liste des achats </a></li>
-                                <li><a href="add-professor.html">Nouveau achat</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">Achats</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">Liste des achats </a></li>
-                                <li><a href="add-professor.html">Nouveau achat</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="la la-user"></i>
-                                <span class="nav-text">Ventes</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="all-professors.html">Liste des ventes </a></li>
-                                <li><a href="add-professor.html">Nouveau vente</a></li>
-                            </ul>
-                        </li>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">Liste des achats</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="all-professors.html">Liste des achats </a></li>
+                            <li><a href="add-professor.html">Nouveau achat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">Liste des achats</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="all-professors.html">Liste des achats </a></li>
+                            <li><a href="add-professor.html">Nouveau achat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">Liste des achats</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="all-professors.html">Liste des achats </a></li>
+                            <li><a href="add-professor.html">Nouveau achat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">Liste des achats</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="all-professors.html">Liste des achats </a></li>
+                            <li><a href="add-professor.html">Nouveau achat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">Achats</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="all-professors.html">Liste des achats </a></li>
+                            <li><a href="add-professor.html">Nouveau achat</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">Ventes</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="all-professors.html">Liste des ventes </a></li>
+                            <li><a href="add-professor.html">Nouveau vente</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -288,23 +302,22 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="http://127.0.0.1:8000/template/vendor/global/global.min.js"></script>
-	<script src="http://127.0.0.1:8000/template/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="http://127.0.0.1:8000/template/js/custom.min.js"></script>
-    <script src="http://127.0.0.1:8000/template/js/dlabnav-init.js"></script>
-    
-    <script src="http://127.0.0.1:8000/template/vendor/highlightjs/highlight.pack.min.js"></script>
-    <!-- Circle progress -->
+    <script src="{{ asset('template/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/bootstrap-select/dist/js/bootstrap-select.min.js ') }}"></script>
+    <script src="{{ asset('template/js/custom.min.js ') }}"></script>
+    <script src="{{ asset('template/js/dlabnav-init.js ') }}"></script>
 
-    <script src="http://127.0.0.1:8000/template/js/layout-rtl.js"></script>
+    <script src="{{ asset('template/vendor/highlightjs/highlight.pack.min.js ') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/js/plugins-init/datatables.init.js') }}"></script>
 
-	<!-- Svganimation scripts -->
-    <script src="http://127.0.0.1:8000/template/vendor/svganimation/vivus.min.js"></script>
-    <script src="http://127.0.0.1:8000/template/vendor/svganimation/svg.animation.js"></script>
+
+    <script src="{{ asset('template/js/layout-rtl.js ') }}"></script>
+
+
     <!-- Svganimation scripts -->
-    <script src="{{ asset('template/vendor/svganimation/vivus.min.js')}}"></script>
-    <script src="{{ asset('template/vendor/svganimation/svg.animation.js')}}"></script>
-
+    <script src="{{ asset('template/vendor/svganimation/vivus.min.js ') }}"></script>
+    <script src="{{ asset('template/vendor/svganimation/svg.animation.js ') }}"></script>
 
 </body>
 

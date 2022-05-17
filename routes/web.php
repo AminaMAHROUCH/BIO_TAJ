@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MaladieController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\ProduitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/acceuil', function () {
+    return view('dashboard');
 });
-Route::get('/test', function () {
-    return view('test');
-});
+
+
+Route::resource('patient', PatientController::class);
+Route::resource('maladie', MaladieController::class);
+Route::resource('produit', ProduitController::class);
+
 
 Auth::routes();
 
