@@ -114,7 +114,7 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
         $patient = Patient::findOrFail($id) ; 
         $patient->delete() ; 
         return redirect()->back()->with('message', 'تمت العملية بنجاح');

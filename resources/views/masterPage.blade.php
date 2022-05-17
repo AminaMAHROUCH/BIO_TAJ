@@ -203,7 +203,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('produit.index', false) }}">لائحة المنتوجات</a></li>
-                            <li><a href="{{ route('produit.create', false) }}">لائحة منتوج جديد</a></li>
+                            <li><a href="{{ route('produit.create', false) }}">إضافة المنتوج </a></li>
                         </ul>
                     </li>
                     <li>
@@ -212,9 +212,25 @@
                             <span class="nav-text">المزودين</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="all-professors.html">لائحة المزودين</a></li>
-                            <li><a href="add-professor.html">إضافة مزود جديد</a></li>
+                            <li><a href="{{ route('fournisseur.index', false) }}">لائحة المزودين</a></li>
+                            <li><a href="{{ route('fournisseur.create', false) }}">إضافة مزود جديد</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a class="   has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">العلاج</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('traitement.index', false) }}">لائحة المنتوجات</a></li>
+                            <li><a href="{{ route('traitement.create', false) }}">إضافة العلاج</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="   has-arrow" href="/rendez-vous" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">المواعيد</span>
+                        </a>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">

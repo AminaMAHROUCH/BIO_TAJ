@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Maladie;
+use App\Models\Traitement;
 use Illuminate\Http\Request;
 
-class MaladieController extends Controller
+class TraitementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class MaladieController extends Controller
     public function index()
     {
         //
-        $maladies = Maladie::all() ; 
-        return view("listemaladies",['maladies'=>$maladies]) ;
+        $traitements = Traitement::all() ; 
+        return view("listetraitements",['traitements'=>$traitements]) ; 
     }
 
     /**
@@ -27,7 +27,7 @@ class MaladieController extends Controller
     public function create()
     {
         //
-        return view("addmaladie") ; 
+        return view("addtraitement") ; 
     }
 
     /**
@@ -39,11 +39,10 @@ class MaladieController extends Controller
     public function store(Request $request)
     {
         //
-        $maladie = new Maladie() ; 
-        $maladie->soin = $request->soin ; 
-        $maladie->maladie = $request->maladie ; 
-        $maladie->description = $request->description ; 
-        $maladie->save() ; 
+        $traitement = new Traitement() ; 
+        $traitement->nom = $request->nom ;   
+        $traitement->description = $request->description ;   
+        $traitement->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
     }
 
@@ -79,11 +78,10 @@ class MaladieController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $maladie = Maladie::findOrFail($id) ; 
-        $maladie->soin = $request->soin ; 
-        $maladie->maladie = $request->maladie ; 
-        $maladie->description = $request->description ; 
-        $maladie->save() ; 
+        $traitement = Traitement::findOrFail($id) ;  
+        $traitement->nom = $request->nom ;  
+        $traitement->description = $request->description ;  
+        $traitement->save() ; 
         return redirect()->back()->with('message', 'تمت التعديل بنجاح');
     }
 
@@ -96,8 +94,8 @@ class MaladieController extends Controller
     public function destroy($id)
     {
         //
-        $maladie = Maladie::findOrFail($id) ; 
-        $maladie->delete() ; 
+        $traitement = Traitement::findOrFail($id) ; 
+        $traitement->delete() ; 
         return redirect()->back()->with('message', 'تمت العملية بنجاح');
     }
 }

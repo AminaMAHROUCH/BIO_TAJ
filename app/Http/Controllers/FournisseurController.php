@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Maladie;
+use App\Models\Fournisseur;
 use Illuminate\Http\Request;
 
-class MaladieController extends Controller
+class FournisseurController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class MaladieController extends Controller
     public function index()
     {
         //
-        $maladies = Maladie::all() ; 
-        return view("listemaladies",['maladies'=>$maladies]) ;
+        $fournisseurs = Fournisseur::all() ; 
+        return view("listefournisseurs",['fournisseurs'=>$fournisseurs]) ;
     }
 
     /**
@@ -27,7 +27,7 @@ class MaladieController extends Controller
     public function create()
     {
         //
-        return view("addmaladie") ; 
+        return view("addfournisseur") ; 
     }
 
     /**
@@ -39,11 +39,11 @@ class MaladieController extends Controller
     public function store(Request $request)
     {
         //
-        $maladie = new Maladie() ; 
-        $maladie->soin = $request->soin ; 
-        $maladie->maladie = $request->maladie ; 
-        $maladie->description = $request->description ; 
-        $maladie->save() ; 
+        $fournisseur = new Fournisseur() ; 
+        $fournisseur->nom = $request->nom ; 
+        $fournisseur->telephone = $request->telephone ; 
+        $fournisseur->adresse = $request->adresse ; 
+        $fournisseur->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
     }
 
@@ -79,11 +79,11 @@ class MaladieController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $maladie = Maladie::findOrFail($id) ; 
-        $maladie->soin = $request->soin ; 
-        $maladie->maladie = $request->maladie ; 
-        $maladie->description = $request->description ; 
-        $maladie->save() ; 
+        $fournisseur = Fournisseur::findOrFail($id) ; 
+        $fournisseur->nom = $request->nom ; 
+        $fournisseur->telephone = $request->telephone ; 
+        $fournisseur->adresse = $request->adresse ; 
+        $fournisseur->save() ; 
         return redirect()->back()->with('message', 'تمت التعديل بنجاح');
     }
 
@@ -96,8 +96,9 @@ class MaladieController extends Controller
     public function destroy($id)
     {
         //
-        $maladie = Maladie::findOrFail($id) ; 
-        $maladie->delete() ; 
+
+        $fournisseur = Fournisseur::findOrFail($id) ; 
+        $fournisseur->delete() ; 
         return redirect()->back()->with('message', 'تمت العملية بنجاح');
     }
 }

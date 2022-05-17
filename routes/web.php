@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\MaladieController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\TraitementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,12 @@ Route::get('/acceuil', function () {
 Route::resource('patient', PatientController::class);
 Route::resource('maladie', MaladieController::class);
 Route::resource('produit', ProduitController::class);
+Route::resource('traitement', TraitementController::class);
+Route::resource('fournisseur', FournisseurController::class);
+
+Route::get('/rendez-vous',function(){
+    return view("listerendezvous") ; 
+});
 
 
 Auth::routes();

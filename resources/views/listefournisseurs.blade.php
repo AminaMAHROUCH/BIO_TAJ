@@ -3,14 +3,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>لائحة المرضى</h4>
+                <h4>لائحة المزودين</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/acceuil">الرئيسية</a></li>
-                <li class="breadcrumb-item active"><a href="{{ route('produit.index', false) }}">المنتوجات</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">لائحة المنتوجات</a></li>
+                <li class="breadcrumb-item active"><a href="{{ route('fournisseur.index', false) }}">المزودون</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">لائحة المزودين </a></li>
             </ol>
         </div>
     </div>
@@ -42,8 +42,8 @@
                 <div id="list-view" class="tab-pane fade col-lg-12 active show">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">لائحة المنتوجات </h4>
-                            <a href="{{ route('produit.create', false) }}" class="btn btn-primary">اضف</a>
+                            <h4 class="card-title">لائحة الموزودين </h4>
+                            <a href="{{ route('fournisseur.create', false) }}" class="btn btn-primary">اضف</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -83,45 +83,32 @@
                                                     رقم</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Roll No.: activate to sort column ascending">
-                                                    الاسم المنتوج</th>
+                                                    اسم المزود</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Name: activate to sort column ascending">
-                                                    نوعه</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Education: activate to sort column ascending">
-                                                    الكمية</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Mobile: activate to sort column ascending">
-                                                    سعر البيع</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Email: activate to sort column ascending">سعر
-                                                    ادنى
-                                                </th>
-
+                                                    colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                                    الهاتف</th>
                                                 <th class="sorting text-center" tabindex="0" aria-controls="example3"
                                                     colspan="1" aria-label="Action: activate to sort column ascending">
                                                     الإجراء</th>
                                             </tr>
                                         </thead>
-                                        @foreach ($produits as $produit)
+                                        @foreach ($fournisseurs as $fournisseur)
                                             <tbody>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><strong>{{ $produit->id }}</strong></td>
-                                                    <td>{{ $produit->titre }}</td>
-                                                    <td>{{ $produit->type }}</td>
-                                                    <td>{{ $produit->quantite }}</td>
-                                                    <td>{{ $produit->prix_vente }}</td>
-                                                    <td>{{ $produit->prix_minimal }}</td>
+                                                    <td class="sorting_1"><strong>{{ $fournisseur->id }}</strong>
+                                                    </td>
+                                                    <td>{{ $fournisseur->nom }}</td>
+                                                    <td>{{ $fournisseur->telephone }}</td>
                                                     <td class="text-center">
                                                         <a data-toggle="modal"
-                                                            data-target="#produit-edit-{{ $produit->id }}"
+                                                            data-target="#fournisseur-edit-{{ $fournisseur->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
                                                         <a data-toggle="modal"
-                                                            data-target="#produit-remove-{{ $produit->id }}"
+                                                            data-target="#fournisseur-remove-{{ $fournisseur->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
                                                         <a data-toggle="modal"
-                                                            data-target="#produit-info-{{ $produit->id }}"
+                                                            data-target="#fournisseur-info-{{ $fournisseur->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
                                                     </td>
@@ -147,8 +134,8 @@
                 </div>
 
                 <!-- Modal edit -->
-                @foreach ($produits as $produit)
-                    <div class="modal fade" id="produit-edit-{{ $produit->id }}">
+                @foreach ($fournisseurs as $fournisseur)
+                    <div class="modal fade" id="fournisseur-edit-{{ $fournisseur->id }}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-primary">
@@ -157,49 +144,28 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('produit.update', $produit->id) }}" method="POST">
+                                    <form action="{{ route('fournisseur.update', $fournisseur->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="PUT">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">اسم المنتوج</label>
-                                                    <input type="text" class="form-control" name="titre"
-                                                        value="{{ $produit->titre }}">
+                                                    <label class="form-label">الاسم الموزد</label>
+                                                    <input type="text" class="form-control" name="nom"
+                                                        value="{{ $fournisseur->nom }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label">الكمية</label>
-                                                    <input type="text" class="form-control" name="quantite"
-                                                        value="{{ $produit->quantite }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">سعر البيع</label>
-                                                    <input type="text" class="form-control" name="prix_vente"
-                                                        value="{{ $produit->prix_vente }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">سعر ادنى</label>
-                                                    <input type="text" class="form-control" name="prix_minimal"
-                                                        value="{{ $produit->prix_minimal }}">
+                                                    <label class="form-label">هاتفه</label>
+                                                    <input type="text" class="form-control" name="telephone"
+                                                        value="{{ $fournisseur->telephone }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label class="form-label"> النوع</label>
-                                                    <input type="text" class="form-control" name="type"
-                                                        value="{{ $produit->type }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">الوصف</label>
-                                                    <textarea type="date" class="form-control" name="description" rows="5"> {{ $produit->description }}"</textarea>
+                                                    <label class="form-label">عنوانه</label>
+                                                    <textarea type="date" class="form-control" name="adresse">{{ $fournisseur->adresse }}</textarea>
                                                 </div>
                                             </div>
 
@@ -209,17 +175,14 @@
                                             </div>
                                         </div>
                                     </form>
-
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-                <!-- Modal remove -->
-                @foreach ($produits as $produit)
-                    <div class="modal fade" id="produit-remove-{{ $produit->id }}">
+                @foreach ($fournisseurs as $fournisseur)
+                    <!-- Modal remove -->
+                    <div class="modal fade" id="fournisseur-remove-{{ $fournisseur->id }}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-danger">
@@ -228,10 +191,10 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    هل حقا تريد مسح هذا المريض
+                                    هل حقا تريد مسح هذا المزود
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{{ route('produit.destroy', $produit->id) }}" method="POST">
+                                    <form action="{{ route('fournisseur.destroy', $fournisseur->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -244,12 +207,12 @@
                     </div>
                 @endforeach
                 <!-- Modal info -->
-                @foreach ($produits as $produit)
-                    <div class="modal fade" id="produit-info-{{ $produit->id }}">
+                @foreach ($fournisseurs as $fournisseur)
+                    <div class="modal fade" id="fournisseur-info-{{ $fournisseur->id }}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <h5 class="modal-title  text-white"> المعلومات</h5>
+                                <div class="modal-header bg-secondary">
+                                    <h5 class="modal-title text-white">المعلومات</h5>
                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                     </button>
                                 </div>
@@ -257,50 +220,29 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">اسم المنتوج</label>
-                                                <input type="text" class="form-control" name="titre"
-                                                    value="{{ $produit->titre }}">
+                                                <label class="form-label">الاسم المزود</label>
+                                                <input type="text" class="form-control" name="nom"
+                                                    value="{{ $fournisseur->nom }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">الكمية</label>
-                                                <input type="text" class="form-control" name="quantite"
-                                                    value="{{ $produit->quantite }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">سعر البيع</label>
-                                                <input type="text" class="form-control" name="prix_vente"
-                                                    value="{{ $produit->prix_vente }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">سعر ادنى</label>
-                                                <input type="text" class="form-control" name="prix_minimal"
-                                                    value="{{ $produit->prix_minimal }}">
+                                                <label class="form-label">هاتفه</label>
+                                                <input type="text" class="form-control" name="telephone"
+                                                    value="{{ $fournisseur->telephone }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label"> النوع</label>
-                                                <input type="text" class="form-control" name="type"
-                                                    value="{{ $produit->type }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">الوصف</label>
-                                                <textarea type="date" class="form-control" name="description" rows="5"> {{ $produit->description }}"</textarea>
+                                                <label class="form-label">عنوانه</label>
+                                                <textarea type="date" class="form-control" name="adresse">{{ $fournisseur->adresse }}</textarea>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
                 @endforeach
 
 
@@ -747,7 +689,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 @endsection

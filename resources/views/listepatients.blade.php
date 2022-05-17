@@ -301,8 +301,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <form action="{{ route('patient.destroy', $patient->id) }}" method="POST">
-                                        <input type="hidden" name="_method" value="PUT">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        @csrf
+                                        @method('DELETE')
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <button type="submit" class="btn btn-danger text-white">نعم</button>
                                         </div>

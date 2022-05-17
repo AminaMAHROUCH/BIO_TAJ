@@ -3,14 +3,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>لائحة المرضى</h4>
+                <h4>لائحة المواعيد</h4>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/acceuil">الرئيسية</a></li>
-                <li class="breadcrumb-item active"><a href="{{ route('produit.index', false) }}">المنتوجات</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">لائحة المنتوجات</a></li>
+                <li class="breadcrumb-item active"><a href="/rendez-vous">الموعد</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">لائحة المواعيد</a></li>
             </ol>
         </div>
     </div>
@@ -42,8 +42,8 @@
                 <div id="list-view" class="tab-pane fade col-lg-12 active show">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">لائحة المنتوجات </h4>
-                            <a href="{{ route('produit.create', false) }}" class="btn btn-primary">اضف</a>
+                            <h4 class="card-title">لائحة المواعيد </h4>
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#rendezvous-add">اضف</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -83,51 +83,46 @@
                                                     رقم</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Roll No.: activate to sort column ascending">
-                                                    الاسم المنتوج</th>
+                                                    الاسم العائلي</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Name: activate to sort column ascending">
-                                                    نوعه</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Education: activate to sort column ascending">
-                                                    الكمية</th>
+                                                    colspan="1" aria-label="Name: activate to sort column ascending">الاسم
+                                                    الشخصي</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Mobile: activate to sort column ascending">
-                                                    سعر البيع</th>
+                                                    الهاتف</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-label="Email: activate to sort column ascending">سعر
-                                                    ادنى
-                                                </th>
+                                                    colspan="1" aria-label="Email: activate to sort column ascending">
+                                                    الحالة</th>
 
                                                 <th class="sorting text-center" tabindex="0" aria-controls="example3"
                                                     colspan="1" aria-label="Action: activate to sort column ascending">
                                                     الإجراء</th>
                                             </tr>
                                         </thead>
-                                        @foreach ($produits as $produit)
+                                        {{-- @foreach ($rendezvouss as $rendezvous)
                                             <tbody>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><strong>{{ $produit->id }}</strong></td>
-                                                    <td>{{ $produit->titre }}</td>
-                                                    <td>{{ $produit->type }}</td>
-                                                    <td>{{ $produit->quantite }}</td>
-                                                    <td>{{ $produit->prix_vente }}</td>
-                                                    <td>{{ $produit->prix_minimal }}</td>
+                                                    <td class="sorting_1"><strong>{{ $rendezvous->id }}</strong></td>
+                                                    <td>{{ $rendezvous->nom }}</td>
+                                                    <td>{{ $rendezvous->prenom }}</td>
+                                                    <td>{{ $rendezvous->telephone }}</td>
+                                                    <td>{{ $rendezvous->status }}</td>
                                                     <td class="text-center">
                                                         <a data-toggle="modal"
-                                                            data-target="#produit-edit-{{ $produit->id }}"
+                                                            data-target="#rendezvous-edit-{{ $rendezvous->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
                                                         <a data-toggle="modal"
-                                                            data-target="#produit-remove-{{ $produit->id }}"
+                                                            data-target="#rendezvous-remove-{{ $rendezvous->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
                                                         <a data-toggle="modal"
-                                                            data-target="#produit-info-{{ $produit->id }}"
+                                                            data-target="#rendezvous-info-{{ $rendezvous->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        @endforeach
+                                        @endforeach --}}
                                     </table>
                                     <div class="dataTables_info" id="example3_info" role="status" aria-live="polite">
                                         Showing 1 to 10 of 30 entries</div>
@@ -146,80 +141,81 @@
                     </div>
                 </div>
 
-                <!-- Modal edit -->
-                @foreach ($produits as $produit)
-                    <div class="modal fade" id="produit-edit-{{ $produit->id }}">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <h5 class="modal-title  text-white">تعديل المعلومات</h5>
-                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('produit.update', $produit->id) }}" method="POST">
-                                        <input type="hidden" name="_method" value="PUT">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">اسم المنتوج</label>
-                                                    <input type="text" class="form-control" name="titre"
-                                                        value="{{ $produit->titre }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">الكمية</label>
-                                                    <input type="text" class="form-control" name="quantite"
-                                                        value="{{ $produit->quantite }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">سعر البيع</label>
-                                                    <input type="text" class="form-control" name="prix_vente"
-                                                        value="{{ $produit->prix_vente }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">سعر ادنى</label>
-                                                    <input type="text" class="form-control" name="prix_minimal"
-                                                        value="{{ $produit->prix_minimal }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label"> النوع</label>
-                                                    <input type="text" class="form-control" name="type"
-                                                        value="{{ $produit->type }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="form-label">الوصف</label>
-                                                    <textarea type="date" class="form-control" name="description" rows="5"> {{ $produit->description }}"</textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <button type="submit" class="btn btn-primary">تعديل</button>
-                                                <button type="reset" class="btn btn-light">مسح</button>
+                <!-- Modal add -->
+                <div class="modal fade" id="rendezvous-add">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h5 class="modal-title  text-white"> اضافة موعد</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الاسم العائلي</label>
+                                                <input type="text" class="form-control" name="nom">
                                             </div>
                                         </div>
-                                    </form>
-
-
-
-                                </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الاسم الشخصي</label>
+                                                <input type="text" class="form-control" name="prenom">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الهاتف </label>
+                                                <input type="tel" class="form-control" name="telephone">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">التاريخ</label>
+                                                <input type="date" class="form-control" name="date">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الساعة</label>
+                                                <input type="time" class="form-control" name="time">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">اسم المرض (ليس ضروري)</label>
+                                                <input type="email" class="form-control" name="nom_malade">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الوصف</label>
+                                                <textarea class="form-control" rows="3" name="description"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <input type="checkbox" name="isFirstTime">
+                                                <label class="form-label ml-1"> أول زيارة ؟ </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <button type="submit" class="btn btn-primary">تعديل</button>
+                                            <button type="reset" class="btn btn-light">مسح</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                @endforeach
-                <!-- Modal remove -->
-                @foreach ($produits as $produit)
-                    <div class="modal fade" id="produit-remove-{{ $produit->id }}">
+                </div>
+
+                {{-- @foreach ($rendezvouss as $rendezvous)
+                    <!-- Modal remove -->
+                    <div class="modal fade" id="rendezvous-remove-{{ $rendezvous->id }}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-danger">
@@ -231,7 +227,7 @@
                                     هل حقا تريد مسح هذا المريض
                                 </div>
                                 <div class="modal-footer">
-                                    <form action="{{ route('produit.destroy', $produit->id) }}" method="POST">
+                                    <form action="{{ route('rendezvous.destroy', $rendezvous->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -244,12 +240,12 @@
                     </div>
                 @endforeach
                 <!-- Modal info -->
-                @foreach ($produits as $produit)
-                    <div class="modal fade" id="produit-info-{{ $produit->id }}">
+                @foreach ($rendezvouss as $rendezvous)
+                    <div class="modal fade" id="rendezvous-info-{{ $rendezvous->id }}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <h5 class="modal-title  text-white"> المعلومات</h5>
+                                <div class="modal-header bg-secondary">
+                                    <h5 class="modal-title text-white">المعلومات</h5>
                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                     </button>
                                 </div>
@@ -257,51 +253,101 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">اسم المنتوج</label>
-                                                <input type="text" class="form-control" name="titre"
-                                                    value="{{ $produit->titre }}">
+                                                <label class="form-label">الاسم العائلي</label>
+                                                <input type="text" class="form-control bg-light" name="nom" readonly
+                                                    value="{{ $rendezvous->nom }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">الكمية</label>
-                                                <input type="text" class="form-control" name="quantite"
-                                                    value="{{ $produit->quantite }}">
+                                                <label class="form-label">الاسم الشخصي</label>
+                                                <input type="text" class="form-control bg-light" name="prenom" readonly
+                                                    value="{{ $rendezvous->prenom }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">سعر البيع</label>
-                                                <input type="text" class="form-control" name="prix_vente"
-                                                    value="{{ $produit->prix_vente }}">
+                                                <label class="form-label">تاريخ الازدياد</label>
+                                                <input type="date" class="form-control bg-light" name="date_naissance"
+                                                    readonly value="{{ $rendezvous->date_naissance }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label">سعر ادنى</label>
-                                                <input type="text" class="form-control" name="prix_minimal"
-                                                    value="{{ $produit->prix_minimal }}">
+                                                <label class="form-label">مكان الازدياد</label>
+                                                <input type="text" class="form-control bg-light" name="lieu_naissance"
+                                                    value="{{ $rendezvous->lieu_naissance }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الحالة العائلية</label>
+                                                <input class="form-control bg-light" readonly
+                                                    value="{{ $rendezvous->situation_familiale }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">المهنة</label>
+                                                <input type="text" class="form-control bg-light" name="profession" readonly
+                                                    value="{{ $rendezvous->profession }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">رقم البطاقة الوطنية</label>
+                                                <input type="text" class="form-control bg-light" name="cni" readonly
+                                                    value="{{ $rendezvous->cni }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">البلد</label>
+                                                <input type="text" class="form-control bg-light" name="id_pays" readonly
+                                                    value="{{ $rendezvous->id_pays }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">المدينة</label>
+                                                <input type="text" class="form-control bg-light" name="id_ville" readonly
+                                                    value="{{ $rendezvous->id_ville }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الهاتف النقال</label>
+                                                <input type="tel" class="form-control bg-light" name="telephone" readonly
+                                                    value="{{ $rendezvous->telephone }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label">الهاتف الفاكس</label>
+                                                <input type="tel" class="form-control bg-light" name="tel_fixe" readonly
+                                                    value="{{ $rendezvous->tel_fixe }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="form-label"> البريد الالكتروني</label>
+                                                <input type="email" class="form-control bg-light" name="email" readonly
+                                                    value="{{ $rendezvous->email }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label class="form-label"> النوع</label>
-                                                <input type="text" class="form-control" name="type"
-                                                    value="{{ $produit->type }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">الوصف</label>
-                                                <textarea type="date" class="form-control" name="description" rows="5"> {{ $produit->description }}"</textarea>
+                                                <label class="form-label">العنوان</label>
+                                                <textarea class="form-control bg-light" rows="3" name="adresse" readonly>{{ $rendezvous->adresse }}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
 
 
 
