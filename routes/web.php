@@ -5,6 +5,7 @@ use App\Http\Controllers\MaladieController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\TraitementController;
+use App\Http\Controllers\VenteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,7 @@ Route::resource('maladie', MaladieController::class);
 Route::resource('produit', ProduitController::class);
 Route::resource('traitement', TraitementController::class);
 Route::resource('fournisseur', FournisseurController::class);
+Route::resource('vente', VenteController::class);
 
 Route::get('/rendez-vous',function(){
     return view("listerendezvous") ; 

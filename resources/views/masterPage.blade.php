@@ -235,11 +235,11 @@
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
-                            <span class="nav-text">Liste des achats</span>
+                            <span class="nav-text">المبيعات</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="all-professors.html">Liste des achats </a></li>
-                            <li><a href="add-professor.html">Nouveau achat</a></li>
+                            <li><a href="{{ route('vente.index', false) }}">لائحة المبيعات</a></li>
+                            <li><a href="{{ route('vente.create', false) }}">اضافة مبيعة</a></li>
                         </ul>
                     </li>
                     <li>
