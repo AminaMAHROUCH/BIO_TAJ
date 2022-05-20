@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\MaladieController;
 use App\Http\Controllers\PatientController;
@@ -30,10 +32,15 @@ Route::resource('produit', ProduitController::class);
 Route::resource('traitement', TraitementController::class);
 Route::resource('fournisseur', FournisseurController::class);
 Route::resource('vente', VenteController::class);
+Route::resource('client', ClientController::class);
+Route::resource('consultation', ConsultationController::class);
+
 
 Route::get('/rendez-vous',function(){
     return view("listerendezvous") ; 
 });
+
+Route::get('getproduit',[VenteController::class,"getProduitData"])->name('getproduit') ; 
 
 
 Auth::routes();

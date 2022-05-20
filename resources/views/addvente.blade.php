@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label class="form-label">اسم المنتوج</label>
                                     {{-- select with search sera tant mieux --}}
-                                    <select name="nom_produit" id="" class="form-control">
+                                    <select name="nom_produit" id="test" class="form-control">
                                         @foreach ($produits as $produit)
                                             <option value="{{ $produit->id }}"
                                                 {{ old('nom_produit') == $produit->titre ? 'selected' : '' }}>
@@ -64,32 +64,86 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
-                                {{-- pour selection le bon patient => utiliser le cni qui unique --}}
-                                <div class="form-group">
-                                    <label class="form-label">ر.ب.و المريض</label>
-                                    <input type="text" class="form-control" name="cni" value="{{ old('cni') }}">
-                                    @if (session()->get('error'))
-                                        <span class="text-danger"> * املئ مجددا هذا الحقل</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">الكمية</label>
                                     <input type="number" class="form-control" name="quantite"
                                         value="{{ old('quantite') }}">
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
+                                <div class="form-group">
+                                    <label class="form-label">ثمن البيع</label>
+                                    <input type="number" class="form-control bg-light" name="quantite" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
+                                <div class="form-group">
+                                    <label class="form-label">ثمن الادنى</label>
+                                    <input type="number" class="form-control bg-light" name="quantite" readonly>
+                                </div>
+                            </div>
+
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">الثمن</label>
                                     <input type="number" class="form-control" name="prix" value="{{ old('prix') }}">
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">التسبيق</label>
                                     <input type="text" class="form-control" name="avance" value="{{ old('avance') }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 patient">
+                                {{-- pour selection le bon patient => utiliser le cni qui unique --}}
+                                <div class="form-group">
+                                    <label class="form-label">هل الشاري من المرضى ؟</label>
+                                    <label for="success-outlined" class="ml-4">نعم</label>
+                                    <input type="radio" class="btn-check " name="options-outlined" id="isPatient">
+                                    <label for="danger-outlined" class="ml-5">لا</label>
+                                    <input type="radio" class="btn-check" name="options-outlined" id="isNotPatient">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 isPatientToHidden">
+                                <div class="form-group">
+                                    <label class="form-label">ر.ب.و للمريض</label>
+                                    <input type="text" class="form-control" name="prix" value="{{ old('prix') }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 isClientShow">
+                                {{-- pour selection le bon patient => utiliser le cni qui unique --}}
+                                <div class="form-group">
+                                    <label class="form-label">هل الشاري من الزبناء ؟</label>
+                                    <div class="form-check form-check-inline ">
+                                        <label class="form-check-label" for="inlineRadio1">نعم</label>
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="isClient"
+                                            value="option1">
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="inlineRadio2">لا</label>
+                                        <input class="form-check-input" type="radio" id="isNotClient"
+                                            name="inlineRadioOptions" value="option2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 isClientToHidden">
+                                <div class="form-group">
+                                    <label class="form-label">اسم الكامل للشاري</label>
+                                    <input type="text" class="form-control" name="prix" value="{{ old('prix') }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 clientData">
+                                <div class="form-group">
+                                    <label class="form-label">هاتفه</label>
+                                    <input type="text" class="form-control" name="telephone"
+                                        value="{{ old('avance') }}">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 clientData">
+                                <div class="form-group">
+                                    <label class="form-label">عنوانه</label>
+                                    <textarea class="form-control" name="adresse" rows="3"> </textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -102,4 +156,94 @@
             </div>
         </div>
     </div>
+
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(".isPatientToHidden , .isClientShow , .clientData , .pricehide , .isClientToHidden").hide();
+
+        $('#isPatient').change(function() {
+            $(".isPatientToHidden").show();
+            $(".isClientShow").hide();
+            $('.isClientToHidden').hide();
+            $(".clientData").hide();
+        })
+        $('#isNotPatient').change(function() {
+            $(".isClientShow").show();
+            $(".isPatientToHidden").hide();
+        })
+
+        $('#isClient').change(function() {
+            $('.clientData').hide();
+            $('.isClientToHidden').show();
+        })
+        $('#isNotClient').change(function() {
+            $('.clientData').show();
+        })
+
+        $('#test').change(function() {
+            var prd = $(this).val();
+            var _token = $("input[name='_token']").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var data = {
+                _token: _token,
+                prd: prd,
+            }
+
+            $.ajax({
+                url: "{{ route('getproduit') }}",
+                type: 'GET',
+                data: {
+                    _token: _token,
+                    prd: prd
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+        })
+    </script>
+
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
+            $(".btn-submit").click(function(e) {
+                e.preventDefault();
+
+                var _token = $("input[name='_token']").val();
+                var email = $("#email").val();
+                var pswd = $("#pwd").val();
+                var address = $("#address").val();
+
+                $.ajax({
+                    // url: "{{ route('ajax.request.store') }}",
+                    type: 'POST',
+                    data: {
+                        _token: _token,
+                        email: email,
+                        pswd: pswd,
+                        address: address
+                    },
+                    success: function(data) {
+                        printMsg(data);
+                    }
+                });
+            });
+
+            function printMsg(msg) {
+                if ($.isEmptyObject(msg.error)) {
+                    console.log(msg.success);
+                    $('.alert-block').css('display', 'block').append('<strong>' + msg.success + '</strong>');
+                } else {
+                    $.each(msg.error, function(key, value) {
+                        $('.' + key + '_err').text(value);
+                    });
+                }
+            }
+        });
+    </script> --}}
 @endsection

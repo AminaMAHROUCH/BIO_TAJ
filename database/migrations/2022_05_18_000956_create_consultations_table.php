@@ -17,7 +17,7 @@ class CreateConsultationsTable extends Migration
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
             $table->text('remarque')->nullable() ; 
-            $table->date("date") ; 
+            $table->timestamp('date')->useCurrent() ; 
             $table->foreignIdFor(Patient::class)->constrained() ; 
             $table->timestamps();
         });

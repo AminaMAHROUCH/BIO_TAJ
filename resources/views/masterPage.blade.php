@@ -13,7 +13,6 @@
     <meta property="og:description" content="Edumin - Bootstrap Admin Dashboard" />
     <meta property="og:image" content="https://edumin.dexignlab.com/xhtml/social-image.png" />
     <meta name="format-detection" content="telephone=no">
-
     <!-- FAVICONS ICON -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
@@ -34,6 +33,9 @@
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/css/skin-2.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('template/css/skin-2.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/vendor/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
 
     <link href="{{ asset('template/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
@@ -199,6 +201,16 @@
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
+                            <span class="nav-text">الزبناء</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('client.index', false) }}">لائحة الزبناء</a></li>
+                            <li><a href="{{ route('client.create', false) }}">إضافة زبون</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
                             <span class="nav-text">المنتوجات</span>
                         </a>
                         <ul aria-expanded="false">
@@ -240,6 +252,16 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ route('vente.index', false) }}">لائحة المبيعات</a></li>
                             <li><a href="{{ route('vente.create', false) }}">اضافة مبيعة</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">الكشف</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('consultation.index', false) }}">لائحة الكشف</a></li>
+                            <li><a href="{{ route('consultation.create', false) }}">اضافة كشف</a></li>
                         </ul>
                     </li>
                     <li>
@@ -329,6 +351,10 @@
 
 
     <script src="{{ asset('template/js/layout-rtl.js ') }}"></script>
+
+    <script src="{{ asset('template/vendor/bootstrap-select/dist/js/bootstrap-select.min.js ') }}"></script>
+    <script src="{{ asset('template/vendor/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('template/js/plugins-init/select2-init.js') }}"></script>
 
 
     <!-- Svganimation scripts -->

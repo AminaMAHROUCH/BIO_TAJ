@@ -109,4 +109,11 @@ class VenteController extends Controller
     {
         //
     }
+
+
+    public function getProduitData(Request $request)
+    {
+        $produit = Produit::where('id','=',$request->prd)->first ; 
+        return response()->json($produit);
+    }
 }

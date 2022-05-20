@@ -2,6 +2,7 @@
 
 use App\Models\Patient;
 use App\Models\Produit;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +25,7 @@ class CreateVentesTable extends Migration
             $table->timestamp('date_vente')->useCurrent();
             $table->foreignIdFor(Produit::class)->constrained() ; 
             $table->foreignIdFor(Patient::class)->constrained() ; 
+            //$table->foreignIdFor(User::class)->constrained() ; à décommenter
             $table->timestamps();
         });
     }
