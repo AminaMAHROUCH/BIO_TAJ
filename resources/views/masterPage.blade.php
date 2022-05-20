@@ -97,7 +97,7 @@
                                 </span>
                                 <div class="dropdown-menu p-0 m-0">
                                     <form>
-                                        <input class="form-control" type="search" placeholder="Search"
+                                        <input class="form-control" type="search" placeholder="ابحث...."
                                             aria-label="Search">
                                     </form>
                                 </div>
@@ -262,56 +262,6 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ route('consultation.index', false) }}">لائحة الكشف</a></li>
                             <li><a href="{{ route('consultation.create', false) }}">اضافة كشف</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-user"></i>
-                            <span class="nav-text">Liste des achats</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-professors.html">Liste des achats </a></li>
-                            <li><a href="add-professor.html">Nouveau achat</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-user"></i>
-                            <span class="nav-text">Liste des achats</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-professors.html">Liste des achats </a></li>
-                            <li><a href="add-professor.html">Nouveau achat</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-user"></i>
-                            <span class="nav-text">Liste des achats</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-professors.html">Liste des achats </a></li>
-                            <li><a href="add-professor.html">Nouveau achat</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-user"></i>
-                            <span class="nav-text">Achats</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-professors.html">Liste des achats </a></li>
-                            <li><a href="add-professor.html">Nouveau achat</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-user"></i>
-                            <span class="nav-text">Ventes</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-professors.html">Liste des ventes </a></li>
-                            <li><a href="add-professor.html">Nouveau vente</a></li>
                         </ul>
                     </li>
                 </ul>
