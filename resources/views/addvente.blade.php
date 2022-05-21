@@ -54,7 +54,8 @@
                                 <div class="form-group">
                                     <label class="form-label">اسم المنتوج</label>
                                     {{-- select with search sera tant mieux --}}
-                                    <select name="nom_produit" id="test" class="form-control">
+                                    <select name="id_produit" id="test" class="form-control">
+                                        <option value="">اختر...</option>
                                         @foreach ($produits as $produit)
                                             <option value="{{ $produit->id }}"
                                                 {{ old('nom_produit') == $produit->titre ? 'selected' : '' }}>
@@ -73,13 +74,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
                                 <div class="form-group">
                                     <label class="form-label">ثمن البيع</label>
-                                    <input type="number" class="form-control bg-light" name="quantite" readonly>
+                                    <input type="number" class="form-control bg-light" name="" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
                                 <div class="form-group">
                                     <label class="form-label">ثمن الادنى</label>
-                                    <input type="number" class="form-control bg-light" name="quantite" readonly>
+                                    <input type="number" class="form-control bg-light" name="" readonly>
                                 </div>
                             </div>
 
@@ -98,49 +99,57 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 patient">
                                 {{-- pour selection le bon patient => utiliser le cni qui unique --}}
                                 <div class="form-group">
-                                    <label class="form-label">هل الشاري من المرضى ؟</label>
-                                    <label for="success-outlined" class="ml-4">نعم</label>
+                                    <label class="form-label">الشاري ؟ </label>
+                                    <label for="success-outlined" class="ml-4">مريض</label>
                                     <input type="radio" class="btn-check " name="options-outlined" id="isPatient">
-                                    <label for="danger-outlined" class="ml-5">لا</label>
-                                    <input type="radio" class="btn-check" name="options-outlined" id="isNotPatient">
+                                    <label for="danger-outlined" class="ml-5">زبون</label>
+                                    <input type="radio" class="btn-check" name="options-outlined" id="isClient">
+                                    <label for="danger-outlined" class="ml-5">جديد</label>
+                                    <input type="radio" class="btn-check" name="options-outlined" id="newClient">
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 isPatientToHidden">
+
+
+                            {{-- patient --}}
+                            <div class="col-lg-12 col-md-12 col-sm-12 patientInfo">
                                 <div class="form-group">
-                                    <label class="form-label">ر.ب.و للمريض</label>
-                                    <input type="text" class="form-control" name="prix" value="{{ old('prix') }}">
+                                    <label class="form-label">اسم المريض </label>
+                                    <select name="patient_id" id="" class="form-control">
+                                        <option value="">اختر...</option>
+                                        @foreach ($patients as $patient)
+                                            <option value="{{ $patient->id }}">{{ $patient->nom }}
+                                                {{ $patient->prenom }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 isClientShow">
-                                {{-- pour selection le bon patient => utiliser le cni qui unique --}}
+                            {{-- client --}}
+                            <div class="col-lg-12 col-md-12 col-sm-12 clientInfo">
                                 <div class="form-group">
-                                    <label class="form-label">هل الشاري من الزبناء ؟</label>
-                                    <div class="form-check form-check-inline ">
-                                        <label class="form-check-label" for="inlineRadio1">نعم</label>
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="isClient"
-                                            value="option1">
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="inlineRadio2">لا</label>
-                                        <input class="form-check-input" type="radio" id="isNotClient"
-                                            name="inlineRadioOptions" value="option2">
-                                    </div>
+                                    <label class="form-label">اسم الزبون </label>
+                                    <select name="client_id" id="" class="form-control">
+                                        <option value="">اختر...</option>
+                                        @foreach ($clients as $client)
+                                            <option value="{{ $client->id }}">{{ $client->fullname }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 isClientToHidden">
+
+                            {{-- nouveau client --}}
+                            <div class="col-lg-6 col-md-6 col-sm-12 newClientDisplay">
                                 <div class="form-group">
                                     <label class="form-label">اسم الكامل للشاري</label>
-                                    <input type="text" class="form-control" name="prix" value="{{ old('prix') }}">
+                                    <input type="text" class="form-control" name="fullname">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 clientData">
+                            <div class="col-lg-6 col-md-6 col-sm-12 newClientDisplay">
                                 <div class="form-group">
                                     <label class="form-label">هاتفه</label>
-                                    <input type="text" class="form-control" name="telephone"
-                                        value="{{ old('avance') }}">
+                                    <input type="text" class="form-control" name="telephone">
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 clientData">
+                            <div class="col-lg-12 col-md-12 col-sm-12 newClientDisplay">
                                 <div class="form-group">
                                     <label class="form-label">عنوانه</label>
                                     <textarea class="form-control" name="adresse" rows="3"> </textarea>
@@ -161,26 +170,26 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(".isPatientToHidden , .isClientShow , .clientData , .pricehide , .isClientToHidden").hide();
+        $(".newClientDisplay , .pricehide , .patientInfo , .clientInfo").hide();
 
         $('#isPatient').change(function() {
-            $(".isPatientToHidden").show();
-            $(".isClientShow").hide();
-            $('.isClientToHidden').hide();
-            $(".clientData").hide();
+            $('.patientInfo').show();
+            $(".newClientDisplay").hide();
+            $(".clientInfo").hide();
         })
-        $('#isNotPatient').change(function() {
-            $(".isClientShow").show();
-            $(".isPatientToHidden").hide();
+
+        $('#newClient').change(function() {
+            $(".newClientDisplay").show();
+            $('.patientInfo').hide();
+            $(".clientInfo").hide();
         })
 
         $('#isClient').change(function() {
-            $('.clientData').hide();
-            $('.isClientToHidden').show();
+            $(".newClientDisplay").hide();
+            $('.patientInfo').hide();
+            $(".clientInfo").show();
         })
-        $('#isNotClient').change(function() {
-            $('.clientData').show();
-        })
+
 
         $('#test').change(function() {
             var prd = $(this).val();

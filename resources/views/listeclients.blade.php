@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة الزبناء </h4>
+                            {{-- @can('client_add') --}}
                             <a href="{{ route('client.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -104,17 +106,23 @@
                                                     <td>{{ $client->telephone }}</td>
                                                     <td>{{ $client->adresse }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('client_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#client-edit-{{ $client->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('client_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#client-remove-{{ $client->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('client_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#client-info-{{ $client->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>

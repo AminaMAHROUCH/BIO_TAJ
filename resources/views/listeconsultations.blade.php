@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة الكشف </h4>
+                            {{-- @can('consultation_add') --}}
                             <a href="{{ route('consultation.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -100,17 +102,23 @@
                                                     <td>{{ $consultation->nom }} {{ $consultation->prenom }}</td>
                                                     <td>{{ $consultation->telephone }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('consultation_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#consultation-edit-{{ $consultation->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('consultation_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#consultation-remove-{{ $consultation->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('consultation_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#consultation-info-{{ $consultation->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use App\Models\Patient;
 use App\Models\Produit;
 use App\Models\User;
@@ -22,9 +23,13 @@ class CreateVentesTable extends Migration
             $table->double("prix_total") ; 
             $table->double("avance") ; 
             $table->double("reste") ; 
-            $table->timestamp('date_vente')->useCurrent();
-            $table->foreignIdFor(Produit::class)->constrained() ; 
-            $table->foreignIdFor(Patient::class)->constrained() ; 
+            $table->timestamp('date_vente')->useCurrent(); 
+            $table->integer("patient_id")->nullable() ; 
+            $table->integer("client_id")->nullable() ;
+            $table->integer("nvclient_id")->nullable() ;
+            $table->foreignIdFor(Produit::class)->constrained() ;  // un patient est un clien
+            // $table->foreignIdFor(Client::class)->constrained() ; 
+            //$table->foreignIdFor(Patient::class)->constrained() ; 
             //$table->foreignIdFor(User::class)->constrained() ; à décommenter
             $table->timestamps();
         });

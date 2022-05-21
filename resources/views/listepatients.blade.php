@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة المرضى </h4>
+                            {{-- @can('patient_add') --}}
                             <a href="{{ route('patient.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -112,17 +114,23 @@
                                                     <td>{{ $patient->telephone }}</td>
                                                     <td>{{ $patient->email }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('patient_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#patient-edit-{{ $patient->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('patient_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#patient-remove-{{ $patient->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('patient_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#patient-info-{{ $patient->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>
