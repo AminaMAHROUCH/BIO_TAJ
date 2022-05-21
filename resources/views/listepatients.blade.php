@@ -48,31 +48,6 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length" id="example3_length"><label>Show <div
-                                                class="dropdown bootstrap-select"><select name="example3_length"
-                                                    aria-controls="example3" class="" tabindex="-98">
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select><button type="button" class="btn dropdown-toggle btn-light"
-                                                    data-toggle="dropdown" role="button" title="10">
-                                                    <div class="filter-option">
-                                                        <div class="filter-option-inner">
-                                                            <div class="filter-option-inner-inner">10</div>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                                <div class="dropdown-menu " role="combobox">
-                                                    <div class="inner show" role="listbox" aria-expanded="false"
-                                                        tabindex="-1">
-                                                        <ul class="dropdown-menu inner show"></ul>
-                                                    </div>
-                                                </div>
-                                            </div> entries</label></div>
-                                    <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                class="" placeholder="" aria-controls="example3"></label>
-                                    </div>
                                     <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
                                         role="grid" aria-describedby="example3_info">
                                         <thead>
@@ -128,17 +103,7 @@
                                             </tbody>
                                         @endforeach
                                     </table>
-                                    <div class="dataTables_info" id="example3_info" role="status" aria-live="polite">
-                                        Showing 1 to 10 of 30 entries</div>
-                                    <div class="dataTables_paginate paging_simple_numbers" id="example3_paginate"><a
-                                            class="paginate_button previous disabled" aria-controls="example3"
-                                            data-dt-idx="0" tabindex="0" id="example3_previous">Previous</a><span><a
-                                                class="paginate_button current" aria-controls="example3" data-dt-idx="1"
-                                                tabindex="0">1</a><a class="paginate_button " aria-controls="example3"
-                                                data-dt-idx="2" tabindex="0">2</a><a class="paginate_button "
-                                                aria-controls="example3" data-dt-idx="3" tabindex="0">3</a></span><a
-                                            class="paginate_button next" aria-controls="example3" data-dt-idx="4"
-                                            tabindex="0" id="example3_next">Next</a></div>
+                                  
                                 </div>
                             </div>
                         </div>

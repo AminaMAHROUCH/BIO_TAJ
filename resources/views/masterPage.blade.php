@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 
     <!-- PAGE TITLE HERE -->
-    <title>الكفاية المدرسية: فضاء التلميذ</title>
+    <title> مركز التاج للعلاج الطبيعي </title>
 
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,9 +67,8 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('template/images/logo-white.png') }}" alt="">
-                <img class="logo-compact" src="{{ asset('template/images/img.png') }}" alt="">
-                <img class="brand-title" src="{{ asset('template/images/img.png') }}" alt="">
+                <img class="logo-compact" src="{{ asset('template/images/logo.png') }}" alt="">
+                <img class="brand-title" src="{{ asset('template/images/logo.png') }}" alt="">
             </a>
 
             <div class="nav-control">
@@ -172,7 +171,7 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="ai-icon" href="/acceuil" aria-expanded="false">
+                    <li><a class="ai-icon" href="{{url('dashboard')}}" aria-expanded="false">
                             <i class="la la-calendar"></i>
                             <span class="nav-text">الصفحة الرئيسيــــة</span>
                         </a>

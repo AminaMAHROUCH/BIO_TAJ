@@ -8,6 +8,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\TraitementController;
 use App\Http\Controllers\VenteController;
+use App\Http\Controllers\TodayController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +23,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('auth/login');
+});
 Route::get('/acceuil', function () {
     return view('dashboard');
 });
+Route::get('dashboard', [DashboardController::class, "index"]);
 
 
 Route::resource('patient', PatientController::class);
@@ -46,3 +52,6 @@ Route::get('getproduit',[VenteController::class,"getProduitData"])->name('getpro
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//TodayList
+Route::post('addToday', [TodayController::class,"store"]);
