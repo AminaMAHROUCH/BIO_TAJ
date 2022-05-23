@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة الموزودين </h4>
+                            {{-- @can('fournisseur_add') --}}
                             <a href="{{ route('fournisseur.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -100,17 +102,23 @@
                                                     <td>{{ $fournisseur->nom }}</td>
                                                     <td>{{ $fournisseur->telephone }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('fournisseur_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#fournisseur-edit-{{ $fournisseur->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('fournisseur_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#fournisseur-remove-{{ $fournisseur->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('fournisseur_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#fournisseur-info-{{ $fournisseur->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>

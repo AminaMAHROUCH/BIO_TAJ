@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة المبيعات </h4>
+                            {{-- @can('vente_add') --}}
                             <a href="{{ route('vente.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -104,28 +106,67 @@
                                                     الإجراء</th>
                                             </tr>
                                         </thead>
-                                        @foreach ($ventes as $vente)
+                                        @foreach ($clients as $client)
                                             <tbody>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><strong>{{ $vente->id }}</strong></td>
-                                                    <td>{{ $vente->nom }} {{ $vente->prenom }}</td>
-                                                    <td>{{ $vente->titre }}</td>
-                                                    <td>{{ $vente->quantite_v }}</td>
-                                                    <td>{{ $vente->prix_total }}</td>
-                                                    <td>{{ $vente->avance }}</td>
-                                                    <td>{{ $vente->reste }}</td>
+                                                    <td class="sorting_1"><strong>{{ $client->id }}</strong></td>
+                                                    <td>{{ $client->fullname }} </td>
+                                                    <td>{{ $client->titre }}</td>
+                                                    <td>{{ $client->quantite_v }}</td>
+                                                    <td>{{ $client->prix_total }}</td>
+                                                    <td>{{ $client->avance }}</td>
+                                                    <td>{{ $client->reste }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('vente_update') --}}
                                                         <a data-toggle="modal"
-                                                            data-target="#vente-edit-{{ $vente->id }}"
+                                                            data-target="#vente-edit-{{ $client->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('vante_delete') --}}
                                                         <a data-toggle="modal"
-                                                            data-target="#vente-remove-{{ $vente->id }}"
+                                                            data-target="#vente-remove-{{ $client->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('vente_display') --}}
                                                         <a data-toggle="modal"
-                                                            data-target="#vente-info-{{ $vente->id }}"
+                                                            data-target="#vente-info-{{ $client->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        @endforeach
+                                        @foreach ($patients as $patient)
+                                            <tbody>
+                                                <tr role="row" class="odd">
+                                                    <td class="sorting_1"><strong>{{ $patient->id }}</strong>
+                                                    </td>
+                                                    <td>{{ $patient->nom }} {{ $patient->prenom }} </td>
+                                                    <td>{{ $patient->titre }}</td>
+                                                    <td>{{ $patient->quantite_v }}</td>
+                                                    <td>{{ $patient->prix_total }}</td>
+                                                    <td>{{ $patient->avance }}</td>
+                                                    <td>{{ $patient->reste }}</td>
+                                                    <td class="text-center">
+                                                        {{-- @can('vente_update') --}}
+                                                        <a data-toggle="modal"
+                                                            data-target="#vente-edit-{{ $patient->id }}"
+                                                            class="btn btn-sm btn-primary"><i
+                                                                class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('vante_delete') --}}
+                                                        <a data-toggle="modal"
+                                                            data-target="#vente-remove-{{ $patient->id }}"
+                                                            class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('vente_display') --}}
+                                                        <a data-toggle="modal"
+                                                            data-target="#vente-info-{{ $patient->id }}"
+                                                            class="btn btn-sm btn-secondary"><i
+                                                                class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -149,7 +190,7 @@
                 </div>
 
                 <!-- Modal edit -->
-                @foreach ($ventes as $vente)
+                {{-- @foreach ($ventes as $vente)
                     <div class="modal fade" id="vente-edit-{{ $vente->id }}">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -244,7 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                @endforeach
+                @endforeach --}}
 
 
 

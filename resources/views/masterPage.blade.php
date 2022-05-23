@@ -176,93 +176,143 @@
                             <span class="nav-text">الصفحة الرئيسيــــة</span>
                         </a>
                     </li>
-
+                    {{-- @endcan --}}
+                    {{-- @can('patient_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المرضى</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('patients_list') --}}
                             <li><a href="{{ route('patient.index', false) }}">لائحة المرضى</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('patient_add') --}}
                             <li><a href="{{ route('patient.create', false) }}">إضافة مريض</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('malade_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الامراض</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('malade_liste') --}}
                             <li><a href="{{ route('maladie.index', false) }}">لائحة الامراض</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('malade_add') --}}
                             <li><a href="{{ route('maladie.create', false) }}">إضافة مرض</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('client_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الزبناء</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('clients_list') --}}
                             <li><a href="{{ route('client.index', false) }}">لائحة الزبناء</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('client_add') --}}
                             <li><a href="{{ route('client.create', false) }}">إضافة زبون</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('produit_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المنتوجات</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('produit_list') --}}
                             <li><a href="{{ route('produit.index', false) }}">لائحة المنتوجات</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('produit_add') --}}
                             <li><a href="{{ route('produit.create', false) }}">إضافة المنتوج </a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('fournisseur_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المزودين</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('fournisseur_list') --}}
                             <li><a href="{{ route('fournisseur.index', false) }}">لائحة المزودين</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('fournisseur_add') --}}
                             <li><a href="{{ route('fournisseur.create', false) }}">إضافة مزود جديد</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('traitement_item') --}}
                     <li>
-                        <a class="   has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">العلاج</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('traitement_list') --}}
                             <li><a href="{{ route('traitement.index', false) }}">لائحة المنتوجات</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('traitement_add') --}}
                             <li><a href="{{ route('traitement.create', false) }}">إضافة العلاج</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('rendezvous_item') --}}
                     <li>
                         <a class="   has-arrow" href="/rendez-vous" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المواعيد</span>
                         </a>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('vente_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المبيعات</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('vente_list') --}}
                             <li><a href="{{ route('vente.index', false) }}">لائحة المبيعات</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('vente_add') --}}
                             <li><a href="{{ route('vente.create', false) }}">اضافة مبيعة</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
+                    {{-- @can('cosnsultation_item') --}}
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الكشف</span>
                         </a>
                         <ul aria-expanded="false">
+                            {{-- @can('consultation_list') --}}
                             <li><a href="{{ route('consultation.index', false) }}">لائحة الكشف</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('consultation_add') --}}
                             <li><a href="{{ route('consultation.create', false) }}">اضافة كشف</a></li>
+                            {{-- @endcan --}}
                         </ul>
                     </li>
+                    {{-- @endcan --}}
                 </ul>
             </div>
         </div>

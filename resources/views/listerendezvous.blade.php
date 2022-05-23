@@ -28,14 +28,6 @@
     @endif
 
     <div class="row">
-        <div class="col-lg-12">
-            <ul class="nav nav-pills mb-3">
-                <li class="nav-item"><a href="#list-view" data-toggle="tab"
-                        class="nav-link btn-primary mr-1 show active">List View</a></li>
-                <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid View</a>
-                </li>
-            </ul>
-        </div>
 
         <div class="col-lg-12">
             <div class="row tab-content">
@@ -47,32 +39,6 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length" id="example3_length"><label>Show <div
-                                                class="dropdown bootstrap-select"><select name="example3_length"
-                                                    aria-controls="example3" class="" tabindex="-98">
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select><button type="button" class="btn dropdown-toggle btn-light"
-                                                    data-toggle="dropdown" role="button" title="10">
-                                                    <div class="filter-option">
-                                                        <div class="filter-option-inner">
-                                                            <div class="filter-option-inner-inner">10</div>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                                <div class="dropdown-menu " role="combobox">
-                                                    <div class="inner show" role="listbox" aria-expanded="false"
-                                                        tabindex="-1">
-                                                        <ul class="dropdown-menu inner show"></ul>
-                                                    </div>
-                                                </div>
-                                            </div> entries</label></div>
-                                    <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                class="" placeholder="" aria-controls="example3"></label>
-                                    </div>
                                     <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
                                         role="grid" aria-describedby="example3_info">
                                         <thead>
@@ -99,7 +65,7 @@
                                                     الإجراء</th>
                                             </tr>
                                         </thead>
-                                        {{-- @foreach ($rendezvouss as $rendezvous)
+                                        @foreach ($rendezvouss as $rendezvous)
                                             <tbody>
                                                 <tr role="row" class="odd">
                                                     <td class="sorting_1"><strong>{{ $rendezvous->id }}</strong></td>
@@ -122,19 +88,9 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        @endforeach --}}
+                                        @endforeach
                                     </table>
-                                    <div class="dataTables_info" id="example3_info" role="status" aria-live="polite">
-                                        Showing 1 to 10 of 30 entries</div>
-                                    <div class="dataTables_paginate paging_simple_numbers" id="example3_paginate"><a
-                                            class="paginate_button previous disabled" aria-controls="example3"
-                                            data-dt-idx="0" tabindex="0" id="example3_previous">Previous</a><span><a
-                                                class="paginate_button current" aria-controls="example3" data-dt-idx="1"
-                                                tabindex="0">1</a><a class="paginate_button " aria-controls="example3"
-                                                data-dt-idx="2" tabindex="0">2</a><a class="paginate_button "
-                                                aria-controls="example3" data-dt-idx="3" tabindex="0">3</a></span><a
-                                            class="paginate_button next" aria-controls="example3" data-dt-idx="4"
-                                            tabindex="0" id="example3_next">Next</a></div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -151,33 +107,36 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="POST">
+                                <form action="{{url('add_rendezvous')}}" method="POST">
                                     @csrf
+                                   <div class="row">
+                                    <div class="col-lg-6" style="padding: 10px;">
+                                        <button class="btn btn-warning">
+                                            <a href="{{ route('patient.create') }}">Add New Patient</a>
+                                        </button>
+                                   </div>
+                                   <div lass="col-lg-6">
+                                    <div class="input-group mb-2">
+                                        <select id="select2" name="Id_client" class="form-control">
+                                          <option value="">Patient</option>
+                                          @foreach ($patients as $patient)
+                                         <option value="{{ $patient->id }}">{{ $patient->nom }}{{ $patient->prenom }}</option>
+                                          
+                                          @endforeach
+                                        </select>
+                                        </div>
+                                </div>
+                                   </div>
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">الاسم العائلي</label>
-                                                <input type="text" class="form-control" name="nom">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">الاسم الشخصي</label>
-                                                <input type="text" class="form-control" name="prenom">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="form-label">الهاتف </label>
-                                                <input type="tel" class="form-control" name="telephone">
-                                            </div>
-                                        </div>
+
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">التاريخ</label>
                                                 <input type="date" class="form-control" name="date">
                                             </div>
+                                           
                                         </div>
+                                       
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">الساعة</label>
@@ -797,3 +756,10 @@
 
     </div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" integrity="sha512-yVvxUQV0QESBt1SyZbNJMAwyKvFTLMyXSyBHDO4BG5t7k/Lw34tyqlSDlKIrIENIzCl+RVUNjmCPG+V/GMesRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
+  $("#select2").chosen();
+  $("#select1").chosen();
+</script>

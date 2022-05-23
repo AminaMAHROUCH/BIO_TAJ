@@ -28,14 +28,7 @@
     @endif
 
     <div class="row">
-        <div class="col-lg-12">
-            <ul class="nav nav-pills mb-3">
-                <li class="nav-item"><a href="#list-view" data-toggle="tab"
-                        class="nav-link btn-primary mr-1 show active">List View</a></li>
-                <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid View</a>
-                </li>
-            </ul>
-        </div>
+        
 
         <div class="col-lg-12">
             <div class="row tab-content">
@@ -43,35 +36,16 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة الامراض </h4>
+                            {{-- @can('traitement_add') --}}
                             <a href="{{ route('traitement.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length" id="example3_length"><label>Show <div
-                                                class="dropdown bootstrap-select"><select name="example3_length"
-                                                    aria-controls="example3" class="" tabindex="-98">
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select><button type="button" class="btn dropdown-toggle btn-light"
-                                                    data-toggle="dropdown" role="button" title="10">
-                                                    <div class="filter-option">
-                                                        <div class="filter-option-inner">
-                                                            <div class="filter-option-inner-inner">10</div>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                                <div class="dropdown-menu " role="combobox">
-                                                    <div class="inner show" role="listbox" aria-expanded="false"
-                                                        tabindex="-1">
-                                                        <ul class="dropdown-menu inner show"></ul>
-                                                    </div>
-                                                </div>
-                                            </div> entries</label></div>
-                                    <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                class="" placeholder="" aria-controls="example3"></label>
+                                    
+                                    {{-- <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="" placeholder="" aria-controls="example3"></label> --}}
                                     </div>
                                     <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
                                         role="grid" aria-describedby="example3_info">
@@ -95,17 +69,23 @@
                                                     <td class="sorting_1"><strong>{{ $traitement->id }}</strong></td>
                                                     <td>{{ $traitement->nom }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('traitement_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#traitement-edit-{{ $traitement->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('traitement_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#traitement-remove-{{ $traitement->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('traitement_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#traitement-info-{{ $traitement->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>

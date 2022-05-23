@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة المنتوجات </h4>
+                            {{-- @can('produit_add') --}}
                             <a href="{{ route('produit.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -113,17 +115,23 @@
                                                     <td>{{ $produit->prix_vente }}</td>
                                                     <td>{{ $produit->prix_minimal }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('produit_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#produit-edit-{{ $produit->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('produit_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#produit-remove-{{ $produit->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('produit_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#produit-info-{{ $produit->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>

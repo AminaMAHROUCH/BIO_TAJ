@@ -10,6 +10,7 @@ use App\Http\Controllers\TraitementController;
 use App\Http\Controllers\VenteController;
 use App\Http\Controllers\TodayController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RendezVousController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,9 +43,8 @@ Route::resource('client', ClientController::class);
 Route::resource('consultation', ConsultationController::class);
 
 
-Route::get('/rendez-vous',function(){
-    return view("listerendezvous") ; 
-});
+Route::get('/rendez-vous', [RendezVousController::class, "index"]);
+Route::post('/add_rendezvous', [RendezVousController::class, "store"]);
 
 Route::get('getproduit',[VenteController::class,"getProduitData"])->name('getproduit') ; 
 
@@ -54,4 +54,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //TodayList
-Route::post('addToday', [TodayController::class,"store"]);
+Route::post('addToday', [DashboardController::class,"storeToday"]);

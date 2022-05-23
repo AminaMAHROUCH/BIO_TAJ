@@ -16,7 +16,7 @@
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-primary overflow-hidden">
                 <div class="card-header">
-                    <h3 class="card-title text-white">Total Students</h3>
+                    <h3 class="card-title text-white">المرضى</h3>
                     <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 422</h5>
                 </div>
                 <div class="card-body text-center mt-3">
@@ -29,7 +29,7 @@
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-success overflow-hidden">
                 <div class="card-header">
-                    <h3 class="card-title text-white">New Students</h3>
+                    <h3 class="card-title text-white">عدد المرضى الشهري</h3>
                     <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 357</h5>
                 </div>
                 <div class="card-body text-center mt-4 p-0">
@@ -42,7 +42,7 @@
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-secondary overflow-hidden">
                 <div class="card-header pb-3">
-                    <h3 class="card-title text-white">Total Course</h3>
+                    <h3 class="card-title text-white">رعاية طبية</h3>
                     <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 547</h5>
                 </div>
                 <div class="card-body p-0 mt-2">
@@ -55,7 +55,7 @@
         <div class="col-xl-3 col-xxl-3 col-sm-6">
             <div class="widget-stat card bg-danger overflow-hidden">
                 <div class="card-header pb-3">
-                    <h3 class="card-title text-white">Fees Collection</h3>
+                    <h3 class="card-title text-white">المدخول الشهري</h3>
                     <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 3280$</h5>
                 </div>
                 <div class="card-body p-0 mt-1">
@@ -74,13 +74,15 @@
                 <div class="card-body">
                     <table id="example3" class="display dataTable no-footer">
                         <thead>
+                            <th>#</th>
                             <th>الاسم الكامل</th>
                             <th>أول زيارة</th>
                         </thead>
                         <tbody>
                             @foreach ($rendezvous as $rendezvou)  
-                                <td>{{$rendezvou->nom}} {{$rendezvou->prenom}}</td>
-                                <td>{{$rendezvou->isFirstTime}}</td>
+                            <td><input type="checkbox" name="row[]" value="{{$rendezvou->id}}"></td>
+                            <td>{{$rendezvou->nom}} {{$rendezvou->prenom}}</td>
+                            <td>{{$rendezvou->isFirstTime}}</td>
                             @endforeach
                         </tbody>
                     </table>
@@ -114,15 +116,22 @@
                                 </tr>
                             </thead>
                             <tbody id="customers">
-                                <tr class="btn-reveal-trigger">
-                                   
-                                    <td class="py-2">Herman Beck</td>
-                                    <td><span class="badge badge-rounded badge-primary">DONE</span></td>
-                                    <td>
-                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
-                                                class="la la-trash-o"></i></a>
-                                    </td>
-                                </tr>
+                                @foreach ($today_patients as $today_p) 
+                                    <tr class="btn-reveal-trigger">
+                                    
+                                        <td class="py-2">{{$today_p->patient->nom}} {{$today_p->patient->prenom}}</td>
+                                        <td>
+                                            @if($today_p->isFirstTime == 1)
+                                            <span class="badge badge-rounded badge-success">أول زيارة</span></td>
+                                            @else 
+                                            <span class="badge badge-rounded badge-primary">ليست أول زيارة</span></td>
+                                            @endif
+                                        <td>
+                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                    class="la la-file-o"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                
                             </tbody>
                         </table>
@@ -137,17 +146,37 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">إضافة</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <form action="{{url('addToday')}}" method="post">
+            @csrf
+              <div class="row">
+                <div class="col-lg-12">
+                    <select name="patient" id="">
+                        <option value="" selected></option>
+                        @foreach ($patients as $item)    
+                        <option value="{{$item->id}}">{{$item->nom}} {{$item->prenom}}</option>
+                        @endforeach
+                </select>
+               </div>
+                <div class="col-lg-6" style="padding: 10px;">
+                    <button class="btn btn-warning">
+                        <a href="{{ route('patient.create') }}">Add New Patient</a>
+                    </button>
+               </div>
+                <div class="col-lg-6" style="padding: 10px;">
+                    <label for="">أول زيارة <input type="checkbox" name="firstTime" id="" value="1"></label>
+                </div>
+              </div>
+             <div style="float: left !important;">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-primary">Save changes</button>
+             </div>
+          </form>
         </div>
       </div>
     </div>

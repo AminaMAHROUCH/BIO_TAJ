@@ -29,27 +29,21 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <ul class="nav nav-pills mb-3">
-                <li class="nav-item"><a href="#list-view" data-toggle="tab"
-                        class="nav-link btn-primary mr-1 show active">List View</a></li>
-                <li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid View</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-lg-12">
             <div class="row tab-content">
                 <div id="list-view" class="tab-pane fade col-lg-12 active show">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة المرضى </h4>
+                            {{-- @can('patient_add') --}}
                             <a href="{{ route('patient.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                    <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
-                                        role="grid" aria-describedby="example3_info">
+                                    <div id="example3_wrapper" class="dataTables_wrapper no-footer">
+                                        <table id="example1" class="display dataTable no-footer" style="min-width: 845px"
+                                            role="grid" aria-describedby="example3_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
@@ -87,17 +81,23 @@
                                                     <td>{{ $patient->telephone }}</td>
                                                     <td>{{ $patient->email }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('patient_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#patient-edit-{{ $patient->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('patient_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#patient-remove-{{ $patient->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('patient_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#patient-info-{{ $patient->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -210,7 +210,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">المدينة</label>
                                                     <input type="text" class="form-control" name="id_ville"
-                                                        value="{{ $patient->id_ville }}">
+                                                        value="{{ $patient->ville($patient->id_ville)  }} ">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">

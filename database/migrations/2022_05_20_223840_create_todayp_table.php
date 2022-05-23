@@ -15,6 +15,7 @@ class CreateTodaypTable extends Migration
     {
         Schema::create('todayp', function (Blueprint $table) {
             $table->id();
+            $table->boolean('isFirstTime')->default(0);
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->timestamps();

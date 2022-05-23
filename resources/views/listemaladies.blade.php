@@ -43,7 +43,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة الامراض </h4>
+                            {{-- @can('malade_add') --}}
                             <a href="{{ route('maladie.create', false) }}" class="btn btn-primary">اضف</a>
+                            {{-- @endcan --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -99,17 +101,23 @@
                                                     <td>{{ $maladie->maladie }}</td>
                                                     <td>{{ $maladie->soin }}</td>
                                                     <td class="text-center">
+                                                        {{-- @can('malade_update') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#maladie-edit-{{ $maladie->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('malade_delete') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#maladie-remove-{{ $maladie->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                        {{-- @endcan --}}
+                                                        {{-- @can('malade_display') --}}
                                                         <a data-toggle="modal"
                                                             data-target="#maladie-info-{{ $maladie->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
+                                                        {{-- @endcan --}}
                                                     </td>
                                                 </tr>
                                             </tbody>
