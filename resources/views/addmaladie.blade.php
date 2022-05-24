@@ -47,7 +47,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">الرعاية</label>
-                                    <input type="text" class="form-control" name="soin">
+                                    <select class="form-control" name="soin[]" multiple>
+                                        @foreach ($traitements as $traitement)
+                                            {{-- using id --}}
+                                            {{-- <option value="{{ $traitement->id }}">{{ $traitement->nom }}</option> --}}
+                                            <option value="{{ $traitement->nom }}">{{ $traitement->nom }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">

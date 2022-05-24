@@ -74,13 +74,13 @@
                             <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
                                 <div class="form-group">
                                     <label class="form-label">ثمن البيع</label>
-                                    <input type="number" class="form-control bg-light" name="" readonly>
+                                    <input type="text" class="form-control bg-light prixvente" name="" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
                                 <div class="form-group">
                                     <label class="form-label">ثمن الادنى</label>
-                                    <input type="number" class="form-control bg-light" name="" readonly>
+                                    <input type="text" class="form-control bg-light prixminimal" name="" readonly>
                                 </div>
                             </div>
 
@@ -212,7 +212,9 @@
                     prd: prd
                 },
                 success: function(data) {
-                    console.log(data);
+                    $('.pricehide').show();
+                    $('.prixvente').attr('value', data['prix_vente']);
+                    $('.prixminimal').attr('value', data['prix_minimal']);
                 }
             });
         })

@@ -42,20 +42,17 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                    <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
-                                        role="grid" aria-describedby="example3_info">
+                                    <table id="example3"
+                                        class="display dataTable no-footer  table-bordered table-responsive-sm"
+                                        style="min-width: 845px" role="grid" aria-describedby="example3_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="#: activate to sort column descending">
-                                                    رقم</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Roll No.: activate to sort column ascending">
                                                     اسم المريض الكامل</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Roll No.: activate to sort column ascending">
-                                                    الهاتف</th>
+                                                    التاريخ</th>
                                                 <th class="sorting text-center" tabindex="0" aria-controls="example3"
                                                     colspan="1" aria-label="Action: activate to sort column ascending">
                                                     الإجراء</th>
@@ -64,10 +61,8 @@
                                         @foreach ($consultations as $consultation)
                                             <tbody>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><strong>{{ $consultation->id }}</strong>
-                                                    </td>
                                                     <td>{{ $consultation->nom }} {{ $consultation->prenom }}</td>
-                                                    <td>{{ $consultation->telephone }}</td>
+                                                    <td>{{ $consultation->date }}</td>
                                                     <td class="text-center">
                                                         {{-- @can('consultation_update') --}}
                                                         <a data-toggle="modal"
@@ -91,7 +86,7 @@
                                             </tbody>
                                         @endforeach
                                     </table>
-                                 
+
                                 </div>
                             </div>
                         </div>

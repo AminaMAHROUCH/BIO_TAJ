@@ -41,6 +41,7 @@ class TraitementController extends Controller
         //
         $traitement = new Traitement() ; 
         $traitement->nom = $request->nom ;   
+        $traitement->prix = $request->prix ;
         $traitement->description = $request->description ;   
         $traitement->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
@@ -79,7 +80,8 @@ class TraitementController extends Controller
     {
         //
         $traitement = Traitement::findOrFail($id) ;  
-        $traitement->nom = $request->nom ;  
+        $traitement->nom = $request->nom ; 
+        $traitement->prix = $request->prix ; 
         $traitement->description = $request->description ;  
         $traitement->save() ; 
         return redirect()->back()->with('message', 'تمت التعديل بنجاح');

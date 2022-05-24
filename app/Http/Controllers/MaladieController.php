@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maladie;
+use App\Models\Traitement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MaladieController extends Controller
 {
@@ -16,7 +18,8 @@ class MaladieController extends Controller
     {
         //
         $maladies = Maladie::all() ; 
-        return view("listemaladies",['maladies'=>$maladies]) ;
+        $traitemetns = Traitement::all() ;   
+        return view("listemaladies",['maladies'=>$maladies,'traitements'=>$traitemetns]) ;
     }
 
     /**
@@ -27,7 +30,8 @@ class MaladieController extends Controller
     public function create()
     {
         //
-        return view("addmaladie") ; 
+        $traitemetns = Traitement::all() ; 
+        return view("addmaladie",['traitements'=>$traitemetns]) ; 
     }
 
     /**
@@ -40,9 +44,9 @@ class MaladieController extends Controller
     {
         //
         $maladie = new Maladie() ; 
-        $maladie->soin = $request->soin ; 
+        $maladie->soin = implode(",",$request->soin) ;   
         $maladie->maladie = $request->maladie ; 
-        $maladie->description = $request->description ; 
+        $maladie->description = $request->description ;  
         $maladie->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -80,7 +84,7 @@ class MaladieController extends Controller
     {
         //
         $maladie = Maladie::findOrFail($id) ; 
-        $maladie->soin = $request->soin ; 
+        $maladie->soin = implode(",",$request->soin) ;  
         $maladie->maladie = $request->maladie ; 
         $maladie->description = $request->description ; 
         $maladie->save() ; 

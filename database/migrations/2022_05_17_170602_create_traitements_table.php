@@ -18,9 +18,9 @@ class CreateTraitementsTable extends Migration
             $table->id();
             $table->string('nom',45) ; 
             $table->text('description') ; 
-            $table->boolean('isEffected')->default(0); // wach dar le traitement ou nn 
+          //$table->boolean('isEffected')->default(0); // wach dar le traitement ou nn 
             $table->double('prix') ; 
-            $table->foreignIdFor(User::class)->constrained(); 
+            //$table->foreignIdFor(User::class)->constrained(); 
             $table->timestamps();
         });
     }

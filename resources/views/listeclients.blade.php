@@ -75,14 +75,11 @@
                                     <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
                                                 class="" placeholder="" aria-controls="example3"></label>
                                     </div>
-                                    <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
-                                        role="grid" aria-describedby="example3_info">
+                                    <table id="example3"
+                                        class="display dataTable no-footer  table-bordered table-responsive-sm"
+                                        style="min-width: 845px" role="grid" aria-describedby="example3_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="#: activate to sort column descending">
-                                                    رقم</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Roll No.: activate to sort column ascending">
                                                     اسم الزبون</th>
@@ -100,8 +97,6 @@
                                         @foreach ($clients as $client)
                                             <tbody>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><strong>{{ $client->id }}</strong>
-                                                    </td>
                                                     <td>{{ $client->fullname }}</td>
                                                     <td>{{ $client->telephone }}</td>
                                                     <td>{{ $client->adresse }}</td>

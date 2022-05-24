@@ -33,7 +33,7 @@ class VenteController extends Controller
     {
         //
         $produits = Produit::all() ; 
-        $client = Patient::all() ;
+        $patients = Patient::all() ;
         $clients = Client::all() ;  
         return view("addvente",['produits'=>$produits,'patients'=>$patients, 'clients'=>$clients]) ; 
     }
@@ -129,7 +129,7 @@ class VenteController extends Controller
 
     public function getProduitData(Request $request)
     {
-        $produit = Produit::where('id','=',$request->prd)->first ; 
+        $produit = Produit::where('id','=',$request->prd)->first() ; 
         return response()->json($produit);
     }
 }

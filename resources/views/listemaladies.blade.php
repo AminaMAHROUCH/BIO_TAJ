@@ -75,14 +75,11 @@
                                     <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
                                                 class="" placeholder="" aria-controls="example3"></label>
                                     </div>
-                                    <table id="example3" class="display dataTable no-footer" style="min-width: 845px"
-                                        role="grid" aria-describedby="example3_info">
+                                    <table id="example3"
+                                        class="display dataTable no-footer  table-bordered table-responsive-sm"
+                                        style="min-width: 845px" role="grid" aria-describedby="example3_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example3" rowspan="1"
-                                                    colspan="1" aria-sort="ascending"
-                                                    aria-label="#: activate to sort column descending">
-                                                    رقم</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                     colspan="1" aria-label="Roll No.: activate to sort column ascending">
                                                     اسم المرض</th>
@@ -97,9 +94,13 @@
                                         @foreach ($maladies as $maladie)
                                             <tbody>
                                                 <tr role="row" class="odd">
-                                                    <td class="sorting_1"><strong>{{ $maladie->id }}</strong></td>
                                                     <td>{{ $maladie->maladie }}</td>
-                                                    <td>{{ $maladie->soin }}</td>
+                                                    <td class="text-center">
+                                                        <a data-toggle="modal"
+                                                            data-target="#soin-details-{{ $maladie->id }}"
+                                                            class="btn btn-sm btn-primary"><i
+                                                                class="la la-plus"></i></a>
+                                                    </td>
                                                     <td class="text-center">
                                                         {{-- @can('malade_update') --}}
                                                         <a data-toggle="modal"
@@ -165,11 +166,17 @@
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">الرعاية</label>
-                                                    <input type="text" class="form-control" name="soin"
-                                                        value="{{ $maladie->soin }}">
+                                                    <select class="form-control" name="soin[]" multiple>
+                                                        @foreach ($traitements as $traitement)
+                                                            <option value="{{ $traitement->nom }}"
+                                                                {{ in_array($traitement->nom, explode(',', $maladie->soin)) ? 'selected' : '' }}>
+                                                                {{ $traitement->nom }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label class="form-label">الوصف</label>
                                                     <textarea type="date" class="form-control" name="description">{{ $maladie->description }}</textarea>
@@ -228,21 +235,28 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">الاسم المرض</label>
-                                                <input type="text" class="form-control" name="maladie"
-                                                    value="{{ $maladie->maladie }}">
+                                                <input type="text" class="form-control bg-light" name="maladie"
+                                                    value="{{ $maladie->maladie }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">الرعاية</label>
-                                                <input type="text" class="form-control" name="soin"
-                                                    value="{{ $maladie->soin }}">
+                                                <select class="form-control" multiple>
+                                                    @foreach ($traitements as $traitement)
+                                                        <option value="{{ $traitement->nom }}"
+                                                            {{ in_array($traitement->nom, explode(',', $maladie->soin)) ? 'selected' : '' }}>
+                                                            {{ $traitement->nom }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label class="form-label">الوصف</label>
-                                                <textarea type="date" class="form-control" name="description">{{ $maladie->description }}</textarea>
+                                                <textarea type="date" class="form-control bg-light" readonly
+                                                    name="description">{{ $maladie->description }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -250,8 +264,32 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 @endforeach
 
+
+
+                <!-- Modal soin détail -->
+                @foreach ($maladies as $maladie)
+                    <div class="modal fade" id="soin-details-{{ $maladie->id }}">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-secondary">
+                                    <h5 class="modal-title text-white">الرعاية</h5>
+                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        @foreach (explode(',', $maladie->soin) as $soin)
+                                            <li> - {{ $soin }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
 
 
 
