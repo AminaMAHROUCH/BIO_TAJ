@@ -69,7 +69,7 @@
                     @php
                       $date= date("Y-m-d");  
                     @endphp
-                    <h3 class="card-title">لائحة المواعيد : {{$date}}</h3>
+                    <h3 class="card-title">لائحة المواعيد للكشف  : {{$date}}</h3>
                 </div>
                 <div class="card-body">
                     <table id="example3" class="display dataTable no-footer">
@@ -79,7 +79,7 @@
                             <th>أول زيارة</th>
                         </thead>
                         <tbody>
-                            @foreach ($rendezvous as $rendezvou)  
+                            @foreach ($rendezvous_consultation as $rendezvou)  
                             <td><input type="checkbox" name="row[]" value="{{$rendezvou->id}}"></td>
                             <td>{{$rendezvou->nom}} {{$rendezvou->prenom}}</td>
                             <td>{{$rendezvou->isFirstTime}}</td>
@@ -93,10 +93,26 @@
         <div class="col-xl-6 col-xxl-6 col-sm-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">لائحة المرضى اليومية</h3>
+                    <h3 class="card-title">لائحة المواعيد للعلاج: {{$date}} </h3>
                 </div>
                 <div class="card-body">
-                    <canvas id="areaChart_1"></canvas>
+                    <div class="card-body">
+                        <table id="example3" class="display dataTable no-footer">
+                            <thead>
+                                <th>#</th>
+                                <th>الاسم الكامل</th>
+                                <th>أول زيارة</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($rendezvous_soins as $rendezvou)  
+                                <td><input type="checkbox" name="row[]" value="{{$rendezvou->id}}"></td>
+                                <td>{{$rendezvou->nom}} {{$rendezvou->prenom}}</td>
+                                <td>{{$rendezvou->isFirstTime}}</td>
+                                @endforeach
+                            </tbody>
+                        </table>
+                       
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,6 +142,45 @@
                                             @else 
                                             <span class="badge badge-rounded badge-primary">ليست أول زيارة</span></td>
                                             @endif
+                                        <td>
+                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                    class="la la-file-o"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- traitemant liste --}}
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">لائحة العلاجات  </h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="px-5 py-3">Name</th>
+                                    <th class="py-3">soins</th>
+                                    <th class="py-3">prix</th>
+                                    <th class="py-3">status</th>
+                                    <th class="py-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($traitement_historiques as $traitement_hist) 
+                                    <tr class="btn-reveal-trigger">
+                                    
+                                        <td class="py-2">test</td>
+                                        <td class="py-2">test</td>
+                                        <td class="py-2">test</td>
+                                        <td class="py-2">test</td>
                                         <td>
                                             <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
                                                     class="la la-file-o"></i></a>

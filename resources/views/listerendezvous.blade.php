@@ -67,7 +67,7 @@
                                                 <td>{{ $rendezvous->nom }}</td>
                                                 <td>{{ $rendezvous->prenom }}</td>
                                                 <td>{{ $rendezvous->telephone }}</td>
-                                                <td>{{ $rendezvous->status }}</td>
+                                                <td>{{ $rendezvous->type }}</td>
                                                 <td class="text-center">
                                                     <a data-toggle="modal"
                                                         data-target="#rendezvous-edit-{{ $rendezvous->id }}"
@@ -110,7 +110,7 @@
                                     </div>
                                     <div lass="col-lg-6">
                                         <div class="input-group mb-2">
-                                            <select id="select2" name="Id_client" class="form-control">
+                                            <select id="select2" name="id_patient" class="form-control">
                                                 <option value="">Patient</option>
                                                 @foreach ($patients as $patient)
                                                     <option value="{{ $patient->id }}">
@@ -140,6 +140,15 @@
                                         <div class="form-group">
                                             <label class="form-label">اسم المرض (ليس ضروري)</label>
                                             <input type="email" class="form-control" name="nom_malade">
+                                        </div>
+                                    </div>
+                                    <div lass="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="input-group mb-2">
+                                            <select id="select2" name="type" class="form-control">
+                                                <option value="">-select votre choix-</option>
+                                                <option value="soins">soins</option>
+                                                <option value="consultation">consultation</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">

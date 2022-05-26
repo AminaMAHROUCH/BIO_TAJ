@@ -23,6 +23,7 @@ class CreateTraitementHistoriquesTable extends Migration
             $table->foreignIdFor(Traitement::class)->constrained() ;
             $table->foreignIdFor(User::class)->constrained() ;
             $table->foreignIdFor(Patient::class)->constrained() ;
+            $table->foreignIdFor(Maladie::class)->constrained() ;
             
             $table->timestamps();
         });

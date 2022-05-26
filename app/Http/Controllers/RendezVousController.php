@@ -48,6 +48,7 @@ class RendezVousController extends Controller
         $rendezvous->description = $request->input('description'); 
         $rendezvous->isFirstTime = $request->input('isFirstTime'); 
         $rendezvous->id_patient = $request->input('id_patient'); 
+        $rendezvous->type = $request->input('type'); 
         $rendezvous->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -84,11 +85,15 @@ class RendezVousController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $client = Client::findOrFail($id) ; 
-        $client->fullname = $request->fullname ; 
-        $client->telephone = $request->telephone ; 
-        $client->adresse = $request->adresse ; 
-        $client->save() ; 
+        $rendezvous = RendezVous::findOrFail($id) ; 
+        $rendezvous->date = $request->input('date'); 
+        $rendezvous->time = $request->input('time'); 
+        $rendezvous->nom_malade = $request->input('nom_malade'); 
+        $rendezvous->description = $request->input('description'); 
+        $rendezvous->isFirstTime = $request->input('isFirstTime'); 
+        $rendezvous->id_patient = $request->input('id_patient'); 
+        $rendezvous->type = $request->input('type'); 
+        $rendezvous->save() ; 
         return redirect()->back()->with('message', 'تمت التعديل بنجاح');
     }
 
@@ -101,7 +106,7 @@ class RendezVousController extends Controller
     public function destroy($id)
     {
         //
-        $client = Client::findOrFail($id) ; 
+        $client = RendezVous::findOrFail($id) ; 
         $client->delete() ; 
         return redirect()->back()->with('message', 'تمت العملية بنجاح');
     }

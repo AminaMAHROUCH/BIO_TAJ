@@ -6,6 +6,7 @@ use App\Models\Todayp;
 use App\Models\RendezVous;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -16,10 +17,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-      $rendezvous = RendezVous::where('date',date('Y-m-d'))->get();
+      $rendezvous_soins = RendezVous::whereDate('date', '=',date('Y-m-d'))->where("type","soins")->get();
+      $rendezvous_consultation = RendezVous::whereDate('date', '=',date('Y-m-d'))->where('type',"consultation")->get();
       $today_patients = Todayp::get();
       $patients = Patient::get();
-      return view('dashboard', compact('rendezvous', 'today_patients', 'patients'));
+      $traitement_historiques = DB::table('traitement_historiques')->get();//id user connecetr
+      return view('dashboard', compact('rendezvous_consultation','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
     }
 
     public function storeToday(Request $request){

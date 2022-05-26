@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 class CreateRendezVousTable extends Migration
 {
@@ -24,6 +25,8 @@ class CreateRendezVousTable extends Migration
             $table->text('description') ;
             $table->string('isFirstTime',10)->default('نعم'); 
             $table->string('status',100)->default('en cours') ; 
+            $table->string('type',100)->nullable();
+            $table->foreignIdFor(User::class)->constrained() ; 
             $table->timestamps();
         });
     }
