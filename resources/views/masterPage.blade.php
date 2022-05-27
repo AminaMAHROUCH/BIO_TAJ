@@ -39,6 +39,14 @@
 
     <link href="{{ asset('template/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+        body {
+            font-family: 'Droid Arabic Kufi', serif !important;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -171,7 +179,7 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="ai-icon" href="{{url('dashboard')}}" aria-expanded="false">
+                    <li><a class="ai-icon" href="{{ url('dashboard') }}" aria-expanded="false">
                             <i class="la la-calendar"></i>
                             <span class="nav-text">الصفحة الرئيسيــــة</span>
                         </a>

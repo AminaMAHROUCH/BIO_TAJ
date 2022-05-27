@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Maladie;
 use App\Models\Patient;
 use App\Models\Traitement;
 use App\Models\User;
