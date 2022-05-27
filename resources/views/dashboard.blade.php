@@ -213,26 +213,24 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
-                                <select name="patient" id="">
-                                    <option value="" selected></option>
+                                <select name="patient" id="single-select" class="form-control">
+                                    <option value="" selected>اختر...</option>
                                     @foreach ($patients as $item)
                                         <option value="{{ $item->id }}">{{ $item->nom }} {{ $item->prenom }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-6" style="padding: 10px;">
-                                <button class="btn btn-warning">
-                                    <a href="{{ route('patient.create') }}">اضف مريض جديد</a>
-                                </button>
-                            </div>
+
                             <div class="col-lg-6" style="padding: 10px;">
                                 <label for="">أول زيارة <input type="checkbox" name="firstTime" id="" value="1"></label>
                             </div>
                         </div>
-                        <div style="float: left !important;">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                            <button type="submit" class="btn btn-primary">حفظ </button>
+                        {{-- <div style="float: left !important;"> --}}
+                        <div>
+                            <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">اغلاق</button>
+                            <button type="submit" class="btn btn-primary float-right ">حفظ </button>
+                            <a href="{{ route('patient.create') }}" class="btn btn-warning">اضف مريض جديد </a>
                         </div>
                     </form>
                 </div>

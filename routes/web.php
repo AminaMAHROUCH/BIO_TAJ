@@ -47,7 +47,9 @@ Route::get('/rendez-vous', [RendezVousController::class, "index"]);
 Route::post('/add_rendezvous', [RendezVousController::class, "store"]);
 
 Route::get('getproduit',[VenteController::class,"getProduitData"])->name('getproduit') ; 
-
+Route::get("test",function(){
+    return view("test") ; 
+});
 
 Auth::routes();
 

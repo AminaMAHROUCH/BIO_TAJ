@@ -42,13 +42,20 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">الاسم المريض الكامل</label>
-                                    <select name="nom_patient" id="test" class="form-control">
+                                    <select id="single-select" class="form-control w-100 " name="nom_patient">
+                                        <option value="">اختر...</option>
+                                        @foreach ($patients as $patient)
+                                            <option value="{{ $patient->id }}">
+                                                {{ $patient->nom }}{{ $patient->prenom }}</option>
+                                        @endforeach>
+                                    </select>
+                                    {{-- <select name="nom_patient" id="test" class="form-control">
                                         <option value=""> اختر ... </option>
                                         @foreach ($patients as $patient)
                                             <option value="{{ $patient->id }}">
                                                 {{ $patient->nom }} {{ $patient->prenom }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
                                     @if ($patients->count() == 0)
                                         <span class="text-danger"> * لائحة المرضى فارغة </span>
                                     @endif

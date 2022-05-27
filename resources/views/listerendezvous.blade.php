@@ -90,8 +90,78 @@
                 </div>
             </div>
 
-            <!-- Modal add -->
             <div class="modal fade" id="rendezvous-add">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <h5 class="modal-title  text-white"> اضافة موعد</h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ url('add_rendezvous') }}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="contrainer-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <select id="single-select" class="form-control w-100 ">
+                                                <option value="">المريض</option>
+                                                @foreach ($patients as $patient)
+                                                    <option value="{{ $patient->id }}">
+                                                        {{ $patient->nom }}{{ $patient->prenom }}</option>
+                                                @endforeach>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <select name="type" class="form-control">
+                                                <option value="">-اختر-</option>
+                                                <option value="soins">الرعاية</option>
+                                                <option value="consultation">الكشف</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6"> <label class="form-label">التاريخ</label>
+                                            <input type="date" class="form-control" name="date">
+                                        </div>
+                                        <div class="col-lg-6"><label class="form-label">الساعة</label>
+                                            <input type="time" class="form-control" name="time">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><label class="form-label">اسم المرض (ليس
+                                                ضروري)</label>
+                                            <input type="text" class="form-control" name="nom_malade">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12"><label class="form-label">الوصف</label>
+                                            <textarea class="form-control" rows="3" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <input type="checkbox" name="isFirstTime">
+                                            <label class="form-label ml-1"> أول زيارة ؟ </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-warning" href="{{ route('patient.create') }}">اضف مريض
+                                    جديد</a>
+                                <button type="submit" class="btn btn-primary  ">تعديل</button>
+                                <button type="reset" class="btn btn-light  ">مسح</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Modal add old-->
+            {{-- <div class="modal fade" id="">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
@@ -103,21 +173,19 @@
                             <form action="{{ url('add_rendezvous') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-lg-6" style="padding: 10px;">
+                                    <div class="col-lg-6">
                                         <button class="btn btn-warning">
                                             <a href="{{ route('patient.create') }}">اضف مريض جديد</a>
                                         </button>
                                     </div>
                                     <div lass="col-lg-6">
-                                        <div class="input-group mb-2">
-                                            <select id="select2" name="id_patient" class="form-control">
-                                                <option value="">المريض</option>
-                                                @foreach ($patients as $patient)
-                                                    <option value="{{ $patient->id }}">
-                                                        {{ $patient->nom }}{{ $patient->prenom }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <select id="single-select" class="form-control w-100 ">
+                                            <option value="">المريض</option>
+                                            @foreach ($patients as $patient)
+                                                <option value="{{ $patient->id }}">
+                                                    {{ $patient->nom }}{{ $patient->prenom }}</option>
+                                            @endforeach>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -172,7 +240,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- @foreach ($rendezvouss as $rendezvous)
                     <!-- Modal remove -->

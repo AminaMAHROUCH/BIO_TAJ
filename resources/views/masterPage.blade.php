@@ -29,13 +29,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('template/vendor/jqvmap/css/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/vendor/chartist/css/chartist.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/css/skin-2.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('template/css/skin-2.css') }}">
     <link rel="stylesheet" href="{{ asset('template/vendor/select2/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
+    <link href="{{ asset('template/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 
     <link href="{{ asset('template/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
@@ -324,33 +322,14 @@
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 @yield('etudiantContent')
             </div>
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="{{ asset('template/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('template/vendor/bootstrap-select/dist/js/bootstrap-select.min.js ') }}"></script>
-    <script src="{{ asset('template/js/custom.min.js ') }}"></script>
-    <script src="{{ asset('template/js/dlabnav-init.js ') }}"></script>
+
 
     <script src="{{ asset('template/vendor/highlightjs/highlight.pack.min.js ') }}"></script>
     <script src="{{ asset('template/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
@@ -359,14 +338,18 @@
 
     <script src="{{ asset('template/js/layout-rtl.js ') }}"></script>
 
-    <script src="{{ asset('template/vendor/bootstrap-select/dist/js/bootstrap-select.min.js ') }}"></script>
+
+    <script src="{{ asset('template/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('template/js/custom.min.js') }}"></script>
+    <script src="{{ asset('template/js/dlabnav-init.js') }}"></script>
+
     <script src="{{ asset('template/vendor/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('template/js/plugins-init/select2-init.js') }}"></script>
 
-
     <!-- Svganimation scripts -->
-    <script src="{{ asset('template/vendor/svganimation/vivus.min.js ') }}"></script>
-    <script src="{{ asset('template/vendor/svganimation/svg.animation.js ') }}"></script>
+    <script src="{{ asset('template/vendor/svganimation/vivus.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/svganimation/svg.animation.js') }}"></script>
 
 </body>
 

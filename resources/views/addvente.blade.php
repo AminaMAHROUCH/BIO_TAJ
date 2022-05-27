@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label class="form-label">اسم المنتوج</label>
                                     {{-- select with search sera tant mieux --}}
-                                    <select name="id_produit" id="test" class="form-control">
+                                    <select id="single-select" name="id_produit" class="form-control w-100 ">
                                         <option value="">اختر...</option>
                                         @foreach ($produits as $produit)
                                             <option value="{{ $produit->id }}"
@@ -62,6 +62,14 @@
                                                 {{ $produit->titre }}</option>
                                         @endforeach
                                     </select>
+                                    {{-- <select name="id_produit" id="test" class="form-control">
+                                        <option value="">اختر...</option>
+                                        @foreach ($produits as $produit)
+                                            <option value="{{ $produit->id }}"
+                                                {{ old('nom_produit') == $produit->titre ? 'selected' : '' }}>
+                                                {{ $produit->titre }}</option>
+                                        @endforeach
+                                    </select> --}}
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -114,7 +122,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 patientInfo">
                                 <div class="form-group">
                                     <label class="form-label">اسم المريض </label>
-                                    <select name="patient_id" id="" class="form-control">
+                                    <select name="patient_id" id="single-select" class="form-control">
                                         <option value="">اختر...</option>
                                         @foreach ($patients as $patient)
                                             <option value="{{ $patient->id }}">{{ $patient->nom }}
@@ -127,7 +135,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 clientInfo">
                                 <div class="form-group">
                                     <label class="form-label">اسم الزبون </label>
-                                    <select name="client_id" id="" class="form-control">
+                                    <select name="client_id" class="form-control">
                                         <option value="">اختر...</option>
                                         @foreach ($clients as $client)
                                             <option value="{{ $client->id }}">{{ $client->fullname }}</option>
