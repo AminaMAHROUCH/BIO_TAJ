@@ -10,7 +10,10 @@ use App\Http\Controllers\TraitementController;
 use App\Http\Controllers\VenteController;
 use App\Http\Controllers\TodayController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RendezVousController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,3 +60,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //TodayList
 Route::post('addToday', [DashboardController::class,"storeToday"]);
+
+
+// les roles et les permissions 
+Route::resource('permissions',PermissionsController::class); 
+Route::resource('roles',RolesController::class);
+Route::resource('users',UsersController::class);

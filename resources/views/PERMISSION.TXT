@@ -48,7 +48,15 @@ consultation_update
 consultation_delete
 consultation_display
 
-
+permission_item
+permissions_list
+permissions_add
+roles_item
+roles_list
+roles_add
+users_item
+users_list
+users_add
 
 
 //

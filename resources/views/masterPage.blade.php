@@ -319,6 +319,56 @@
                         </ul>
                     </li>
                     {{-- @endcan --}}
+                    {{-- @can('permission_item') --}}
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">الرخص</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            {{-- @can('permissions_list') --}}
+                            <li><a href="{{ route('permissions.index', false) }}">لائحة الرخص</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('permissions_add') --}}
+                            <li><a href="{{ route('permissions.create', false) }}">اضافة رخصة</a></li>
+                            {{-- @endcan --}}
+
+                        </ul>
+                    </li>
+                    {{-- @endcan --}}
+                    {{-- @can('roles_item') --}}
+
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">الادوار</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            {{-- @can('roles_list') --}}
+                            <li><a href="{{ route('roles.index', false) }}">لائحة الادوار</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('roles_add') --}}
+                            <li><a href="{{ route('roles.create', false) }}">اضافة الدور</a></li>
+                            {{-- @endcan --}}
+                        </ul>
+                    </li>
+                    {{-- @endcan --}}
+                    {{-- @can('users_item') --}}
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="la la-user"></i>
+                            <span class="nav-text">المستعمل</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            {{-- @can('users_list') --}}
+                            <li><a href="{{ route('users.index', false) }}">لائحة المستعملين</a></li>
+                            {{-- @endcan --}}
+                            {{-- @can('users_add') --}}
+                            <li><a href="{{ route('users.create', false) }}">اضافة مستعمل</a></li>
+                            {{-- @endcan --}}
+                        </ul>
+                    </li>
+                    {{-- @endcan --}}
                 </ul>
             </div>
         </div>
