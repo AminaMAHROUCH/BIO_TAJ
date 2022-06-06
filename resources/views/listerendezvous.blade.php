@@ -35,7 +35,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة المواعيد </h4>
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#rendezvous-add">اضف</a>
+                            <a class="btn btn-primary" href="{{url('/createrendezvous')}}">اضف</a>
+
+                            {{-- <a class="btn btn-primary" data-toggle="modal" data-target="#rendezvous-add">اضف</a> --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -64,9 +66,9 @@
                                     @foreach ($rendezvouss as $rendezvous)
                                         <tbody>
                                             <tr role="row" class="odd">
-                                                <td>{{ $rendezvous->nom }}</td>
-                                                <td>{{ $rendezvous->prenom }}</td>
-                                                <td>{{ $rendezvous->telephone }}</td>
+                                                <td>{{ $rendezvous->patient($rendezvous->id_patient)->nom }}</td>
+                                                <td>{{ $rendezvous->patient($rendezvous->id_patient)->prenom }}</td>
+                                                <td>{{ $rendezvous->patient($rendezvous->id_patient)->telephone }}</td>
                                                 <td>{{ $rendezvous->type }}</td>
                                                 <td class="text-center">
                                                     <a data-toggle="modal"
@@ -90,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="rendezvous-add">
+            {{-- <div class="modal fade" id="rendezvous-add">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
@@ -104,7 +106,7 @@
                                 <div class="contrainer-fluid">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <select id="single-select" class="form-control w-100 ">
+                                            <select id="single-select" class="form-control w-100 " name="id_patient">
                                                 <option value="">المريض</option>
                                                 @foreach ($patients as $patient)
                                                     <option value="{{ $patient->id }}">
@@ -158,7 +160,7 @@
                 </div>
             </div>
 
-
+ --}}
 
             <!-- Modal add old-->
             {{-- <div class="modal fade" id="">

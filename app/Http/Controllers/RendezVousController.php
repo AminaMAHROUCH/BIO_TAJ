@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RendezVous;
 use App\Models\Patient;
+use App\Models\Todayp;
 use Illuminate\Http\Request;
 
 class RendezVousController extends Controller
@@ -17,6 +18,7 @@ class RendezVousController extends Controller
     {
         //
         $rendezvouss = RendezVous::all() ; 
+        // dd($rendezvouss->patient());
         $patients = Patient::all() ; 
         return view("listerendezvous",['rendezvouss'=>$rendezvouss, 'patients'=>$patients]);
     }
@@ -28,9 +30,10 @@ class RendezVousController extends Controller
      */
     public function create()
     {
-        //
-        return view("addclient") ; 
+        $patients = Patient::all();
+        return view("addrendez_vous", compact('patients')); 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -49,6 +52,7 @@ class RendezVousController extends Controller
         $rendezvous->isFirstTime = $request->input('isFirstTime'); 
         $rendezvous->id_patient = $request->input('id_patient'); 
         $rendezvous->type = $request->input('type'); 
+        $rendezvous->present = 0;
         $rendezvous->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
     }
@@ -109,5 +113,39 @@ class RendezVousController extends Controller
         $client = RendezVous::findOrFail($id) ; 
         $client->delete() ; 
         return redirect()->back()->with('message', 'تمت العملية بنجاح');
+    }
+
+    public function add(Request $request)
+    {
+        $patient = new Patient ; 
+        $patient->nom = $request->nom ;  
+        $patient->prenom = $request->prenom ;  
+        $patient->date_naissance = $request->date_naissance ;  
+        $patient->lieu_naissance = $request->lieu_naissance ;  
+        $patient->situation_familiale = $request->situation_familiale ;  
+        $patient->email = $request->email ;  
+        $patient->profession = $request->profession ;  
+        $patient->telephone = $request->telephone ;  
+        $patient->tel_fixe = $request->tel_fixe ;  
+        $patient->adresse = $request->adresse ;  
+        $patient->cni = $request->cni ;  
+        $patient->id_pays = $request->id_pays ;  
+        $patient->id_ville = $request->id_ville ;  
+        $patient->save() ; 
+        return response()->json(['success'=>'Data is successfully added']);
+    }
+
+    public function add_today(Request $request){
+        $idrdv= $request->rend_id;
+        $rendezvou = RendezVous::where('id_patient', $idrdv)->first();
+        $rendezvou->present = 1;
+        $patient= Patient::where('id', $idrdv)->first();
+        
+        $today = new Todayp();
+        $today->patient_id = $idrdv;
+        $today->isFirstTime= $rendezvou->isFirstTime;
+        $today->save();
+        $rendezvou->save();
+        return back();
     }
 }

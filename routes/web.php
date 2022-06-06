@@ -35,6 +35,8 @@ Route::get('/acceuil', function () {
 });
 Route::get('dashboard', [DashboardController::class, "index"]);
 
+Route::post('patient/add', [RendezVousController::class, "add"])->name('patient.add');
+Route::post('addToList', [RendezVousController::class, "add_today"])->name('addToList');
 
 Route::resource('patient', PatientController::class);
 Route::resource('maladie', MaladieController::class);
@@ -47,6 +49,7 @@ Route::resource('consultation', ConsultationController::class);
 
 
 Route::get('/rendez-vous', [RendezVousController::class, "index"]);
+Route::get('/createrendezvous', [RendezVousController::class, "create"]);
 Route::post('/add_rendezvous', [RendezVousController::class, "store"]);
 
 Route::get('getproduit',[VenteController::class,"getProduitData"])->name('getproduit') ; 
@@ -66,3 +69,6 @@ Route::post('addToday', [DashboardController::class,"storeToday"]);
 Route::resource('permissions',PermissionsController::class); 
 Route::resource('roles',RolesController::class);
 Route::resource('users',UsersController::class);
+Route::get('dossier_medical/{patient_id}', [DashboardController::class,"dossier_medical"]);
+Route::post('add_consult', [DashboardController::class,"add_consult"]);
+Route::post('add_maladie', [DashboardController::class,"add_maladie"]);

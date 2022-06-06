@@ -56,6 +56,7 @@ class PatientController extends Controller
         $patient->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');
     }
+   
 
     /**
      * Display the specified resource.

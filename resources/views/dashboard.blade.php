@@ -4,68 +4,62 @@
         display: inline;
         padding: 5px;
     }
+    .textpos{
+        float: left;
+        margin: 10px;
+        color: white;
+        font-weight: bold;
+        font-size: 60px;
+        font-family: sans-serif;
+    }
+    .card{
+        margin-bottom: 0 !important;
+    }
 
 </style>
 @section('etudiantContent')
-    <ul id="menu" style="padding: 5px;">
-        <li><a href="{{ url('rendez-vous') }}">لائحة المواعيد</a></li>
-        <li><a data-toggle="modal" data-target="#exampleModal" href="#" id="modalToday">أضف إلى قائمة اليوم</a></li>
-
-    </ul>
+ 
     <div class="row">
-        <div class="col-xl-3 col-xxl-3 col-sm-6">
+        <div class="col-xl-4 col-xxl-4 col-sm-6">
             <div class="widget-stat card bg-primary overflow-hidden">
                 <div class="card-header">
                     <h3 class="card-title text-white">المرضى</h3>
-                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 422</h5>
                 </div>
                 <div class="card-body text-center mt-3">
                     <div class="ico-sparkline">
-                        <div id="sparkline12"></div>
+                        <div id="sparkline12"class="textpos">97</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-xxl-3 col-sm-6">
-            <div class="widget-stat card bg-success overflow-hidden">
-                <div class="card-header">
-                    <h3 class="card-title text-white">عدد المرضى الشهري</h3>
-                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 357</h5>
-                </div>
-                <div class="card-body text-center mt-4 p-0">
-                    <div class="ico-sparkline">
-                        <div id="spark-bar-2"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-xxl-3 col-sm-6">
+        <div class="col-xl-4 col-xxl-4 col-sm-6">
             <div class="widget-stat card bg-secondary overflow-hidden">
                 <div class="card-header pb-3">
                     <h3 class="card-title text-white">رعاية طبية</h3>
-                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 547</h5>
                 </div>
-                <div class="card-body p-0 mt-2">
-                    <div class="px-4"><span class="bar1"
-                            data-peity='{ "fill": ["rgb(0, 0, 128)", "rgb(7, 135, 234)"]}'>6,2,8,4,-3,8,1,-3,6,-5,9,2,-8,1,4,8,9,8,2,1</span>
+                <div class="card-body text-center mt-4 p-0">
+                    <div class="ico-sparkline">
+                        <div id="spark-bar-6" class="textpos">47</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-xxl-3 col-sm-6">
+        <div class="col-xl-4 col-xxl-4 col-sm-6">
             <div class="widget-stat card bg-danger overflow-hidden">
                 <div class="card-header pb-3">
                     <h3 class="card-title text-white">المدخول الشهري</h3>
-                    <h5 class="text-white mb-0"><i class="fa fa-caret-up"></i> 3280$</h5>
                 </div>
-                <div class="card-body p-0 mt-1">
-                    <span class="peity-line-2" data-width="100%">7,6,8,7,3,8,3,3,6,5,9,2,8</span>
+                <div class="card-body text-center mt-4 p-0">
+                    <div class="ico-sparkline">
+                        <div id="spark-bar-8" class="textpos">765</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-xxl-6 col-sm-6">
-            <div class="card" style=" overflow-y: scroll">
-                <div class="card-header">
+        <div class="col-lg-12">
+            <div class="card" style="height: 96%; ">
+                <div class="card-header" style="background: #DCDCDC;
+                padding-bottom: 15px;">
                     @php
                         $date = date('Y-m-d');
                     @endphp
@@ -74,15 +68,37 @@
                 <div class="card-body">
                     <table id="example3" class="display dataTable no-footer">
                         <thead>
-                            <th>#</th>
                             <th>الاسم الكامل</th>
                             <th>أول زيارة</th>
+                            <th>تأكيد الحضور</th>
+                            <th>إجراء</th>
                         </thead>
                         <tbody>
                             @foreach ($rendezvous_consultation as $rendezvou)
-                                <td><input type="checkbox" name="row[]" value="{{ $rendezvou->id }}"></td>
-                                <td>{{ $rendezvou->nom }} {{ $rendezvou->prenom }}</td>
-                                <td>{{ $rendezvou->isFirstTime }}</td>
+                            <tr>
+                                <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
+                                <td>
+                                    @if($rendezvou->isFirstTime == "1")
+                                        <span class="badge bg-success">نعم</span>
+                                    @else
+                                        <span class="badge bg-danger">لا</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($rendezvou->present == "1")
+                                        <span class="badge bg-success">نعم</span>
+                                    @else
+                                        <span class="badge bg-danger">لا</span>
+                                    @endif
+                                </td>
+                                <td>
+                                   <form action="{{route('addToList')}}" method="POST">
+                                       @csrf
+                                       <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
+                                       <button type="submit" class="btn btn-secondary">إضافة</button>
+                                   </form>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -90,24 +106,47 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-xxl-6 col-sm-6">
-            <div class="card">
-                <div class="card-header">
+        <div class="col-lg-12">
+            <div class="card" style="height: 96%; ">
+                <div class="card-header" style="background: #DCDCDC;
+                padding-bottom: 15px;">
                     <h3 class="card-title">لائحة المواعيد للعلاج: {{ $date }} </h3>
                 </div>
                 <div class="card-body">
                     <div class="card-body">
                         <table id="example3" class="display dataTable no-footer">
                             <thead>
-                                <th>#</th>
                                 <th>الاسم الكامل</th>
                                 <th>أول زيارة</th>
+                                <th>تأكيد الحضور</th>
+                                <th>إجراء</th>
                             </thead>
                             <tbody>
                                 @foreach ($rendezvous_soins as $rendezvou)
-                                    <td><input type="checkbox" name="row[]" value="{{ $rendezvou->id }}"></td>
-                                    <td>{{ $rendezvou->nom }} {{ $rendezvou->prenom }}</td>
-                                    <td>{{ $rendezvou->isFirstTime }}</td>
+                                <tr>
+                                    <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
+                                    <td>
+                                        @if($rendezvou->isFirstTime == "1")
+                                            <span class="badge bg-success">نعم</span>
+                                        @else
+                                            <span class="badge bg-danger">لا</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($rendezvou->present == "1")
+                                            <span class="badge bg-success">نعم</span>
+                                        @else
+                                            <span class="badge bg-danger">لا</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                       <form action="{{route('addToList')}}" method="POST">
+                                           @csrf
+                                           <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
+                                           <button type="submit" class="btn btn-secondary">إضافة</button>
+                                       </form>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -117,18 +156,19 @@
             </div>
         </div>
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card" style="height: 96%; ">
+                <div class="card-header" style="background: #DCDCDC;
+                padding-bottom: 15px;">
                     <h3 class="card-title">لائحة المرضى اليومية</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped">
+                        <table id="example3" class="display dataTable no-footer">
                             <thead>
                                 <tr>
                                     <th class="px-5 py-3">الاسم</th>
                                     <th class="py-3">الحالة</th>
-                                    <th class="py-3">تعديل</th>
+                                    <th class="py-3">الملف الطبي</th>
                                 </tr>
                             </thead>
                             <tbody id="customers">
@@ -145,7 +185,7 @@
                                         <span class="badge badge-rounded badge-primary">ليست أول زيارة</span></td>
                                 @endif
                                 <td>
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                    <a href="{{ url('dossier_medical/'.$today_p->patient_id ) }}" class="btn btn-sm btn-danger"><i
                                             class="la la-file-o"></i></a>
                                 </td>
                                 </tr>
@@ -159,13 +199,14 @@
         </div>
         {{-- traitemant liste --}}
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card" style="height: 96%; ">
+                <div class="card-header" style="background: #DCDCDC;
+                padding-bottom: 15px;">
                     <h3 class="card-title">لائحة العلاجات </h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped">
+                        <table id="example3" class="display dataTable no-footer">
                             <thead>
                                 <tr>
                                     <th class="px-5 py-3">الاسم</th>

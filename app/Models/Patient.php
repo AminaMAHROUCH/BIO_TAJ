@@ -12,6 +12,7 @@ class Patient extends Model
     protected $primaryKey = 'id';
 
     public function ville($id_ville){
+        
         if($id_ville){
             $ville= DB::table("ville")->where("id_ville", $id_ville)->first();
             return $ville->ville;

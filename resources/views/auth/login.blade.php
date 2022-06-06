@@ -23,12 +23,7 @@
         min-height: 480px;
     }
 
-    .auth_image {
-        border-radius: 50%;
-        border: 30px solid #f7eedc;
-        max-width: 395PX;
-        max-height: 395PX;
-    }
+  
 
     .card {
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -67,11 +62,11 @@
         color: white
     }
     .logoo{
-        max-width: 156px;
-        max-height: 200px;
         position: absolute;
-        top: -18px;
-        right: 0px;
+        top: 25px;
+        right: 75px;
+    }
+
     }
     @media only screen and (max-width: 600px) {
         .container {
@@ -89,14 +84,14 @@
    
     <div class="card">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card-body" style="background-color: #f8f3e9; padding: 30px">
+            <div class="col-lg-6" >
+                <div class="card-body" style="">
                     <center>
                         <div class=" auth_image">
                             <img src="{{ asset('icones/5836.png') }}" alt=""
                                 style="margin: auto;    max-width: 144%; margin-right: -25%;">
                         </div>
-                        <img src="{{ asset('AdminLte3/asset/files/img/fondLog.png') }}" alt="" class="logoo"
+                        <img src="{{ asset('files/black.png') }}" alt="" class="logoo"
                         >
                     </center>
                 </div>
@@ -104,9 +99,9 @@
             <div class="col-lg-6">
                 <div class="card-body">
                     <div class="head">
-                        <div class="logo logo1">Login</div>
+                        <div class="logo logo1"></div>
                         <div class="logo" style="float: left;">
-                            <span>الكفاية المدرسية</span>
+                            <span> مركز التاج للعلاجات الطبيعية</span>
                             <img src="{{ asset('AdminLte3/asset/files/img/logo-icon.png') }}" alt=""
                                 style="margin-top: -7px;">
                         </div>

@@ -73,8 +73,8 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-compact" src="{{ asset('template/images/logo.png') }}" alt="">
-                <img class="brand-title" src="{{ asset('template/images/logo.png') }}" alt="">
+                <img class="logo-compact" style="width: 200px;display: block!important;" src="{{ asset('template/images/logo.png') }}" alt="">
+                {{-- <img class="brand-title" src="{{ asset('template/images/logo.png') }}" alt=""> --}}
             </a>
 
             <div class="nav-control">
@@ -97,15 +97,12 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="search_bar dropdown">
-                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                                    <i class="mdi mdi-magnify"></i>
-                                </span>
-                                <div class="dropdown-menu p-0 m-0">
-                                    <form>
-                                        <input class="form-control" type="search" placeholder="ابحث...."
-                                            aria-label="Search">
-                                    </form>
-                                </div>
+                               
+                                <ul id="menu" style="padding: 5px; display: contents;">
+                                    <li><a href="{{ url('rendez-vous') }}" class="btn btn-warning" style="colot:white">لائحة المواعيد</a></li>
+                                    <li style="margin-right: 10px;"><a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger" href="#" id="modalToday">أضف إلى قائمة اليوم</a></li>
+                            
+                                </ul>
                             </div>
                         </div>
 
@@ -380,7 +377,10 @@
     </div>
 
 
-
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
     <script src="{{ asset('template/vendor/highlightjs/highlight.pack.min.js ') }}"></script>
     <script src="{{ asset('template/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('template/js/plugins-init/datatables.init.js') }}"></script>

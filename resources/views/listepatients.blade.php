@@ -98,7 +98,7 @@
                                                             {{-- @can('patient_display') --}}
                                                             <a data-toggle="modal"
                                                                 data-target="#patient-info-{{ $patient->id }}"
-                                                                class="btn btn-sm btn-secondary"><i
+                                                                class="btn btn-sm btn-warning"><i
                                                                     class="la la-info"></i></a>
                                                             {{-- @endcan --}}
                                                         </td>
@@ -214,7 +214,7 @@
                                                     <div class="form-group">
                                                         <label class="form-label">المدينة</label>
                                                         <input type="text" class="form-control" name="id_ville"
-                                                            value="{{ $patient->ville($patient->id_ville) }} ">
+                                                            value="Fes ">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -355,7 +355,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">المدينة</label>
                                                     <input type="text" class="form-control bg-light" name="id_ville"
-                                                        readonly value="{{ $patient->id_ville }}">
+                                                        readonly value="fes">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -402,7 +402,7 @@
         </div>
     </div>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"
 integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -413,3 +413,15 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     $("#select2").chosen();
     $("#select1").chosen();
 </script>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script><script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+  
+<script src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#example1").dataTable();
+    });
+   </script> --}}
