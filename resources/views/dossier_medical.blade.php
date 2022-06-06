@@ -121,14 +121,12 @@
                                         <thead>
                                             <tr>
                                                 <th>المرض</th>
-                                                <th>العلاجات الموصوفة</th>
-                                                <th>تعديل</th>
+                                                <th>إجراء</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($maladiepatients as $maladiepatient)
                                             <tr>
-                                                <td class="bord bord_">{{ $maladiepatient->patient_id ?( $maladiepatient->patient->nom.''.$maladiepatient->patient->prenom) : '' }}</td>
                                                 <td class="bord" style="white-space: normal;">{{ $maladiepatient->maladie_id ? $maladiepatient->maladie->maladie : ''}}</td>											
                                                 <td class="bord text-center">
                                                     <a data-toggle="modal"
@@ -139,6 +137,9 @@
                                                     <a data-toggle="modal"
                                                     data-target="#maladie-remove-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                    <a data-toggle="modal"
+                                                    data-target="#maladie-remove-{{ $maladiepatient->id }}"
+                                                    class="btn btn-sm btn-danger"><i class="la la-info"></i></a>
                                                 </td>											
                                             </tr>
                                             @endforeach
@@ -273,7 +274,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             
                             <div class="form-group">
-                                <input type="hidden" name="patient" value=5>
+                                <input type="hidden" name="patient" value={{$patient->id}}>
                                 <label class="form-label">المرض</label>
                                 <select id="single-select" class="form-control w-100 " name="maladie_id">
                                     <option value="">اختر...</option>
@@ -289,8 +290,8 @@
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <button type="submit" class="btn btn-primary">تعديل</button>
-                            <button type="reset" class="btn btn-light">مسح</button>
+                            <button type="submit" class="btn btn-primary">إضافة</button>
+                            <button type="reset" class="btn btn-light">إلغاء</button>
                         </div>
                     </div>
                 </form>

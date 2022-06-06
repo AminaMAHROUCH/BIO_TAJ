@@ -56,9 +56,9 @@ class DashboardController extends Controller
 
     public function add_maladie(Request $request){
       $mald = new MaladiePatient() ; 
-      $mld->maladie_id = $request->maladie_id ;  
-      $mld->patient_id = $request->patient; 
-      $mld->save() ; 
+      $mald->maladie_id = $request->maladie_id ;  
+      $mald->patient_id = $request->patient; 
+      $mald->save() ; 
       return back();
     }
 
