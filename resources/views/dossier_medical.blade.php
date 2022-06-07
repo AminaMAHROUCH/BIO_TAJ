@@ -56,14 +56,62 @@
             <div class="card-body">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                      <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">الكشف</a>
-                      <a class="nav-link" id="nav-maladie-tab" data-toggle="tab" href="#nav-maladie" role="tab" aria-controls="nav-contact" aria-selected="false"> المرض</a>
+                        <a class="nav-link active" id="nav-maladie-tab" data-toggle="tab" href="#nav-maladie" role="tab" aria-controls="nav-contact" aria-selected="false"> المرض</a>
+                      <a class="nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">الكشف</a>
                       <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">العلاجات الموصوفة   </a>
                       <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> المنتوجات</a>
                     </div>
                   </nav>
                   <div class="tab-content" id="nav-tabContent">
                       {{-- consultation --}}
+                  
+                    <div class="tab-pane fade show active" id="nav-maladie" role="tabpanel" aria-labelledby="nav-maladie-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">المرض </h4>
+                                <a data-toggle="modal"
+                                data-target="#maladie-add"
+                                class="btn btn-sm btn-primary"><i
+                                    class="la la-plus"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>المرض</th>
+                                                <th>إجراء</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($maladiepatients as $maladiepatient)
+                                            <tr>
+                                                <td class="bord" style="white-space: normal;">{{ $maladiepatient->maladie_id ? $maladiepatient->maladie->maladie : ''}}</td>											
+                                                <td class="bord text-center">
+                                                    <a data-toggle="modal"
+                                                    data-target="#maladie-edit-{{ $maladiepatient->id }}"
+                                                    class="btn btn-sm btn-primary"><i
+                                                        class="la la-pencil"></i></a>
+                                                    <a data-toggle="modal"
+                                                    data-target="#maladie-info"
+                                                    class="btn btn-sm btn-warning"><i
+                                                        class="la la-info"></i></a>
+                                                    
+                                                    <a data-toggle="modal"
+                                                    data-target="#maladie-remove-{{ $maladiepatient->id }}"
+                                                    class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                                    <a data-toggle="modal"
+                                                    data-target="#maladie-remove-{{ $maladiepatient->id }}"
+                                                    class="btn btn-sm btn-danger"><i class="la la-info"></i></a>
+                                                </td>											
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="card">
                             <div class="card-header">
@@ -97,49 +145,6 @@
                                                     <a data-toggle="modal"
                                                     data-target="#consultation-remove-{{ $consult->id }}"
                                                     class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                                </td>											
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-maladie" role="tabpanel" aria-labelledby="nav-maladie-tab">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">المرض </h4>
-                                <a data-toggle="modal"
-                                data-target="#maladie-add"
-                                class="btn btn-sm btn-primary"><i
-                                    class="la la-plus"></i></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>المرض</th>
-                                                <th>إجراء</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($maladiepatients as $maladiepatient)
-                                            <tr>
-                                                <td class="bord" style="white-space: normal;">{{ $maladiepatient->maladie_id ? $maladiepatient->maladie->maladie : ''}}</td>											
-                                                <td class="bord text-center">
-                                                    <a data-toggle="modal"
-                                                    data-target="#maladie-edit-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-primary"><i
-                                                        class="la la-pencil"></i></a>
-                                                    
-                                                    <a data-toggle="modal"
-                                                    data-target="#maladie-remove-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                                    <a data-toggle="modal"
-                                                    data-target="#maladie-remove-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-danger"><i class="la la-info"></i></a>
                                                 </td>											
                                             </tr>
                                             @endforeach
@@ -301,4 +306,68 @@
 </div>
 {{-- end --}}
 {{-- end  --}}
+{{-- form dossier medical --}}
+{{-- @foreach ($collection as $item) --}}
+<div class="modal fade" id="maladie-info">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title  text-white">إضافة </h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('add_maladie') }}" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>consultation</h4>
+                        </div>
+                        <div class="card-body">
+                            <label for="">Remarque</label>
+                            <textarea type="text" name="remarque_consult" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>soins et produits</h4>
+                        </div>
+                        <div class="card-body">
+                            <label for="">Soins</label>
+                            <input type="hidden" name="">
+                            <div style="display: flex;">
+                                <input type="text" readonly style="width: 80%; margin-left:10%;" class="form-control">
+                                <button class="btn btn-warning text-white">Soins</button>
+                            </div>
+                         </div>
+                        <div class="card-body">
+                            <label for="">Produit</label>
+                            <input type="hidden" name="">
+                            <div style="display: flex;"> 
+                                <input type="text" readonly style="width: 80%; margin-left:10%;" class="form-control">
+                                <button class="btn btn-warning text-white">Produit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Maladie</h4>
+                        </div>
+                        <div class="card-body">
+                            <label for="">Remarque</label>
+                            <textarea type="text" name="remarque_maladie" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <button type="submit" class="btn btn-primary">إضافة</button>
+                            <button type="reset" class="btn btn-light">إلغاء</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- @endforeach --}}
 @endsection
