@@ -6,8 +6,10 @@ use App\Models\Todayp;
 use App\Models\RendezVous;
 use App\Models\Patient;
 use App\Models\Consultation;
+use App\Models\Produit;
 use App\Models\Maladie;
 use App\Models\MaladiePatient;
+use App\Models\Traitement;
 use Illuminate\Http\Request;
 use DB;
 
@@ -41,9 +43,11 @@ class DashboardController extends Controller
       $patient = Patient::where("id", $patient_id)->first();
       $patients = Patient::all() ; 
       $maladies = Maladie::all() ; 
+      $traitements = Traitement::all() ; 
+      $produits = Produit::all() ; 
       $maladiepatients = MaladiePatient::where("patient_id", $patient_id)->get();
       $consultations = Consultation::where("patient_id", $patient_id)->orderBy('id', 'DESC')->get();
-      return view('dossier_medical', compact('patient','patients', 'consultations', 'maladies', 'maladiepatients'));
+      return view('dossier_medical', compact('patient','patients', 'consultations', 'maladies', 'maladiepatients', 'traitements','produits'));
     }
 
     public function add_consult(Request $request){

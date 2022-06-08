@@ -61,11 +61,7 @@
         background: linear-gradient(#9099fa, #7c83c9);
         color: white
     }
-    .logoo{
-        position: absolute;
-        top: 25px;
-        right: 75px;
-    }
+  
 
     }
     @media only screen and (max-width: 600px) {
@@ -91,7 +87,7 @@
                             <img src="{{ asset('icones/5836.png') }}" alt=""
                                 style="margin: auto;    max-width: 144%; margin-right: -25%;">
                         </div>
-                        <img src="{{ asset('files/black.png') }}" alt="" class="logoo"
+                        <img  style="width: 100%;" src="{{ asset('files/black.png') }}" alt="" class="logoo"
                         >
                     </center>
                 </div>
