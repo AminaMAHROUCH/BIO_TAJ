@@ -86,14 +86,14 @@
                                         <tbody>
                                             @foreach($maladiepatients as $maladiepatient)
                                             <tr>
-                                                <td class="bord" style="white-space: normal;">{{ $maladiepatient->maladie_id ? $maladiepatient->maladie->maladie : ''}}</td>											
+                                                <td class="bord" style="white-space: normal;">{{ $maladiepatient->maladie_id ? $maladiepatient->maladie->maladie : ''}}</td>                                            
                                                 <td class="bord text-center">
                                                     <a data-toggle="modal"
                                                     data-target="#maladie-edit-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-primary"><i
                                                         class="la la-pencil"></i></a>
                                                     <a data-toggle="modal"
-                                                    data-target="#maladie-info"
+                                                    data-target="#maladie-info-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-warning"><i
                                                         class="la la-info"></i></a>
                                                     
@@ -103,7 +103,7 @@
                                                     <a data-toggle="modal"
                                                     data-target="#maladie-remove-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-danger"><i class="la la-info"></i></a>
-                                                </td>											
+                                                </td>                                           
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -135,7 +135,7 @@
                                             @foreach($consultations as $consult)
                                             <tr>
                                                 <td class="bord bord_">{{date('d-m-Y', strtotime($consult->date)) }}</td>
-                                                <td class="bord" style="white-space: normal;">{{ $consult->remarque}}</td>											
+                                                <td class="bord" style="white-space: normal;">{{ $consult->remarque}}</td>                                          
                                                 <td class="bord text-center">
                                                     <a data-toggle="modal"
                                                     data-target="#consultation-edit-{{ $consult->id }}"
@@ -145,7 +145,7 @@
                                                     <a data-toggle="modal"
                                                     data-target="#consultation-remove-{{ $consult->id }}"
                                                     class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                                </td>											
+                                                </td>                                           
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -304,10 +304,10 @@
         </div>
     </div>
 </div>
-{{-- end --}}
+<!-- {{-- end --}}
 {{-- end  --}}
 {{-- form dossier medical --}}
-{{-- @foreach ($collection as $item) --}}
+{{-- @foreach ($collection as $item) --}} -->
 <div class="modal fade" id="maladie-info">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -317,57 +317,206 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('add_maladie') }}" method="POST">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>consultation</h4>
-                        </div>
-                        <div class="card-body">
-                            <label for="">Remarque</label>
-                            <textarea type="text" name="remarque_consult" class="form-control"></textarea>
-                        </div>
+            <form action="" method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>الكشف</h5>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>soins et produits</h4>
-                        </div>
-                        <div class="card-body">
-                            <label for="">Soins</label>
-                            <input type="hidden" name="">
-                            <div style="display: flex;">
-                                <input type="text" readonly style="width: 80%; margin-left:10%;" class="form-control">
-                                <button class="btn btn-warning text-white">Soins</button>
-                            </div>
-                         </div>
-                        <div class="card-body">
-                            <label for="">Produit</label>
-                            <input type="hidden" name="">
-                            <div style="display: flex;"> 
-                                <input type="text" readonly style="width: 80%; margin-left:10%;" class="form-control">
-                                <button class="btn btn-warning text-white">Produit</button>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <label for="">ملاحضات</label>
+                        <textarea name="consultation_remarque" class="form-control ckeditor" id="summary-ckeditor" cols="30" rows="5"></textarea>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Maladie</h4>
-                        </div>
-                        <div class="card-body">
-                            <label for="">Remarque</label>
-                            <textarea type="text" name="remarque_maladie" class="form-control"></textarea>
-                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>العلاجات الموصوفة</h5>
                     </div>
+                    <div class="card-body">
+                        <label for="">العلاجات</label>
+                        <div style="display:flex;">
+                            <input type="hidden" value="" name="soins[]" id="soins">
+                            <input type="text" value="" class="form-control " style="margin-left: 1%;width: 80%;" id="soins_" readonly>
+                            <a class="btn btn-warning text-white" data-toggle="modal" data-target="#soins-add">Soins</a>
+                        </div>
+                        <label for="">المنتوجات</label>
+                        <div style="display:flex;">
+                            <input type="hidden" value="" name="produits[]" id="produits">
+                            <input type="text" value="" class="form-control " style="margin-left: 1%;width: 80%;" id="produits_" readonly>
+                            <a class="btn btn-warning text-white" data-toggle="modal" data-target="#produits-add">Produits</a>
 
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <button type="submit" class="btn btn-primary">إضافة</button>
-                            <button type="reset" class="btn btn-light">إلغاء</button>
                         </div>
                     </div>
+                </div>
+                <label for="">ملاحضات</label>
+                <textarea name="maladie remarque" id="" class="form-control ckeditor" cols="30" rows="5"></textarea>
                 </form>
             </div>
         </div>
     </div>
 </div>
-{{-- @endforeach --}}
+{{-- produits --}}
+<div class="modal fade" id="produits-add">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title  text-white">لائحة العلاجات</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>          
+            <div class="table-responsive">
+                <table id="example3" class="display dataTable no-footer" style="padding: 10px;">
+                <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                            colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                             #</th>
+                        <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                            colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                            الاسم المنتوج</th>
+                       
+                    </tr>
+                </thead>
+                @foreach ($produits as $produit)
+                    <tbody>
+                        <tr role="row" class="odd">
+                            <td class="text-center">
+                                <button class="btn btn-success btndatap_" data-id="{{ $produit->id }}" data-name="{{ $produit->titre }}"><i class="icon-check"></i></button>
+                            </td> 
+                            <td>{{ $produit->titre }}</td>
+                        </tr>
+                    </tbody>
+                @endforeach
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- produits end --}}
+<!-- soins -->
+<div class="modal fade" id="soins-add">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title  text-white">لائحة العلاجات</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>                
+            <div class="table-responsive">
+                <table style=" padding: 10px;" id="example3"
+                class="display  table-bordered">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                #</th>
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                اسم العلاج</th>
+                            <th class="sorting text-center" tabindex="0" aria-controls="example3"
+                                colspan="1" aria-label="Action: activate to sort column ascending">
+                                التفاصيل</th>
+                        </tr>
+                    </thead>
+                    @foreach ($traitements as $traitement)
+                        <tbody>
+                            <tr role="row" class="odd">
+                                <td class="text-center">
+                                    <button class="btn btn-success btndata_" data-id="{{ $traitement->id }}" data-name="{{ $traitement->nom }}"><i class="icon-check"></i></button>
+                                </td>                                                
+                                <td>{{ $traitement->nom }}</td>
+                                <td class="text-center">
+                                    {{-- @can('traitement_display') --}}
+                                    <a data-toggle="modal"
+                                        data-target="#traitement-info-{{ $traitement->id }}"
+                                        class="btn btn-sm btn-secondary"><i class="la la-info"></i></a>
+                                    {{-- @endcan --}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    @foreach ($traitements as $traitement)
+        <div class="modal fade" id="traitement-info-{{ $traitement->id }}">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary">
+                        <h5 class="modal-title text-white">العلاج</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">اسم العلاج</label>
+                                    <input style="background-color:#f8f9fa;" type="text" class="form-control" name="nom"
+                                        value="{{ $traitement->nom }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="form-label">الوصف</label>
+                                    <textarea style="background-color:#f8f9fa;" type="date" class="form-control" name="description" rows="5"
+                                        readonly>{{ $traitement->description }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    @endforeach
+<!-- endsoins -->
+<!--  -->
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('.ckeditor').ckeditor();
+    });
+</script>
+
+<script>
+    // $("b.edit-todo").on("click", function(){
+    $(document).ready(function(){
+        var trai_row = []; var trai_name = [];
+        $(".btndata_").on("click", function(e){
+            e.preventDefault();    
+            trai_row.push( $(this).data('id') );
+            trai_name.push( $(this).data('name') );
+            $("#soins").val(trai_row);
+            $("#soins_").val(trai_name);
+        // $("#rendezvous-add").modal('hide');
+
+//    $(".todo-form .todo-task").val(task);
+//    $(".todo-form .key").val(todoID);
+});
+});
+
+</script>
+<script>
+    // $("b.edit-todo").on("click", function(){
+    $(document).ready(function(){
+        var prod_row = []; var prod_name = [];
+        $(".btndatap_").on("click", function(e){
+            e.preventDefault();    
+            prod_row.push( $(this).data('id') );
+            prod_name.push( $(this).data('name') );
+            $("#produits").val(prod_row);
+            $("#produits_").val(prod_name);
+        // $("#rendezvous-add").modal('hide');
+
+//    $(".todo-form .todo-task").val(task);
+//    $(".todo-form .key").val(todoID);
+});
+});
+
+</script>
+

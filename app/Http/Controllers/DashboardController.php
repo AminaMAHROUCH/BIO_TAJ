@@ -6,8 +6,10 @@ use App\Models\Todayp;
 use App\Models\RendezVous;
 use App\Models\Patient;
 use App\Models\Consultation;
+use App\Models\Produit;
 use App\Models\Maladie;
 use App\Models\MaladiePatient;
+use App\Models\Traitement;
 use Illuminate\Http\Request;
 use DB;
 
@@ -41,9 +43,11 @@ class DashboardController extends Controller
       $patient = Patient::where("id", $patient_id)->first();
       $patients = Patient::all() ; 
       $maladies = Maladie::all() ; 
+      $traitements = Traitement::all() ; 
+      $produits = Produit::all() ; 
       $maladiepatients = MaladiePatient::where("patient_id", $patient_id)->get();
       $consultations = Consultation::where("patient_id", $patient_id)->orderBy('id', 'DESC')->get();
-      return view('dossier_medical', compact('patient','patients', 'consultations', 'maladies', 'maladiepatients'));
+      return view('dossier_medical', compact('patient','patients', 'consultations', 'maladies', 'maladiepatients', 'traitements','produits'));
     }
 
     public function add_consult(Request $request){
@@ -62,5 +66,36 @@ class DashboardController extends Controller
       return back();
     }
 
+
+    public function add_dossier_medical(Request $request){
+
+      //consultation
+      $consult = new Consultation();
+      $consult->remarque = $request->remarqe_consult;
+      $consult->date = date('Y-m-d H:i:s');
+      $consult->patient_id = $request->patient_id;
+      $consult->save();
+
+      //traitmentHistorique
+      $traitement_h = new TraitementHistorique();
+      $traitement_h->patient_id = $request->patient_id;
+      $traitement_h->traitement_id = $request->traitement_id;
+      $$traitement_h->save();
+
+      // produits 
+      $produit = new Vente();
+      $produit->patient_id = $request->patient_id;
+      $produit->produit_id = $request->produit_id;
+      $produit->save();
+
+      //maladie
+      $maladie = MaladiePatient::where('patient_id', $request->patient_id)->first();
+      $maladie->remarque= $request->remarque;
+      $maladie->save();
+
+      
+
+
+    }
   
 }

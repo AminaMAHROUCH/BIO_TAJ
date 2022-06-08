@@ -290,7 +290,7 @@
 });
 
 </script>
-<<script>
+<script>
     $(document).ready(function(){
        $('#ajaxSubmit').click(function(e){
           e.preventDefault();
