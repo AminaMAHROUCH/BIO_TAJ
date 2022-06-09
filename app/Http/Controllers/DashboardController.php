@@ -10,6 +10,8 @@ use App\Models\Produit;
 use App\Models\Maladie;
 use App\Models\MaladiePatient;
 use App\Models\Traitement;
+use App\Models\TraitementHistorique;
+use App\Models\Vente;
 use Illuminate\Http\Request;
 use DB;
 
@@ -59,39 +61,56 @@ class DashboardController extends Controller
     }
 
     public function add_maladie(Request $request){
+
+      //order_ need insert
       $mald = new MaladiePatient() ; 
       $mald->maladie_id = $request->maladie_id ;  
       $mald->patient_id = $request->patient; 
+      // $mald->order_ = $i; 
       $mald->save() ; 
+      
       return back();
     }
 
 
     public function add_dossier_medical(Request $request){
 
+
       //consultation
       $consult = new Consultation();
-      $consult->remarque = $request->remarqe_consult;
+      $consult->remarque = $request->consultation_remarque;
       $consult->date = date('Y-m-d H:i:s');
       $consult->patient_id = $request->patient_id;
+      $consult->patient_id = $request->maladie_id;
       $consult->save();
 
       //traitmentHistorique
-      $traitement_h = new TraitementHistorique();
-      $traitement_h->patient_id = $request->patient_id;
-      $traitement_h->traitement_id = $request->traitement_id;
-      $$traitement_h->save();
+      
+      $data = implode(',' , $request->soins);
+      $myArray = explode(',', $data);
+      for($i=0;$i<count($myArray); $i++){
+        $traitement_h = new TraitementHistorique();
+        $traitement_h->patient_id = $request->patient_id;
+        $traitement_h->traitement_id = $myArray[$i];
+        $traitement_h->save();
+      }
 
       // produits 
-      $produit = new Vente();
-      $produit->patient_id = $request->patient_id;
-      $produit->produit_id = $request->produit_id;
-      $produit->save();
+      $datap = implode(',' , $request->produits);
+      $myArrayp = explode(',', $datap);
+      for($i=0; $i<count($myArrayp); $i++){
+        $produit = new Vente();
+        $produit->patient_id = $request->patient_id;
+        $produit->produit_id = $myArrayp[$i];
+        $produit->save();
+      }
 
       //maladie
-      $maladie = MaladiePatient::where('patient_id', $request->patient_id)->first();
-      $maladie->remarque= $request->remarque;
+      $maladie = MaladiePatient::where('id', $request->maladie_id)->where('order_', $request->order_)->first();
+      $maladie->remarque= $request->maladie_remarque;
       $maladie->save();
+
+      return back();
 
       
 

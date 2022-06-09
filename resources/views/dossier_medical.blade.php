@@ -306,9 +306,9 @@
 </div>
 <!-- {{-- end --}}
 {{-- end  --}}
-{{-- form dossier medical --}}
-{{-- @foreach ($collection as $item) --}} -->
-<div class="modal fade" id="maladie-info">
+ {{-- form dossier medical --}} -->
+@foreach($maladiepatients as $maladiepatient)
+<div class="modal fade" id="maladie-info-{{$maladiepatient->id}}">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
@@ -317,7 +317,11 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form action="" method="post">
+            <form action="{{url('add_dossier_medical')}}" method="post">
+                @csrf
+            <input type="hidden" value="{{ $patient->id }}" name="patient_id">
+            <input type="hidden" value="{{ $maladiepatient->id }}" name="maladie_id">
+            <input type="hidden" value="{{ $maladiepatient->order_ }}" name="order_">
                 <div class="card">
                     <div class="card-header">
                         <h5>الكشف</h5>
@@ -348,12 +352,16 @@
                     </div>
                 </div>
                 <label for="">ملاحضات</label>
-                <textarea name="maladie remarque" id="" class="form-control ckeditor" cols="30" rows="5"></textarea>
+                <textarea name="maladie_remarque" id="" class="form-control ckeditor" cols="30" rows="5"></textarea>
+
+                <hr>
+                <button type="submit" class="btn btn-warning">Add</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endforeach
 {{-- produits --}}
 <div class="modal fade" id="produits-add">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">

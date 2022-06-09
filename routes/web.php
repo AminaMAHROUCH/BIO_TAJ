@@ -69,6 +69,7 @@ Route::post('addToday', [DashboardController::class,"storeToday"]);
 Route::resource('permissions',PermissionsController::class); 
 Route::resource('roles',RolesController::class);
 Route::resource('users',UsersController::class);
+Route::post('add_dossier_medical', [DashboardController::class,"add_dossier_medical"]);
 Route::get('dossier_medical/{patient_id}', [DashboardController::class,"dossier_medical"]);
 Route::post('add_consult', [DashboardController::class,"add_consult"]);
 Route::post('add_maladie', [DashboardController::class,"add_maladie"]);
