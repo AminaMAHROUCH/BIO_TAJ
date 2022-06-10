@@ -56,6 +56,121 @@
                 </div>
             </div>
         </div>
+        <!-- paiment consultation -->
+        <div class="col-lg-12">
+            <div class="card" style="height: 96%; ">
+                <div class="card-header" style="background: #DCDCDC;
+                padding-bottom: 15px;">
+                   
+                    <h3 class="card-title">لائحة للكشف</h3>
+                </div>
+                <div class="card-body">
+                <table id="example3"
+                            class="display dataTable no-footer  table-bordered table-responsive-sm"
+                            style="min-width: 845px" role="grid" aria-describedby="example3_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                        اسم المريض الكامل</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                        التاريخ</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                        الثمن</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                        colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                        الدفع</th>
+                                    <th class="sorting text-center" tabindex="0" aria-controls="example3"
+                                        colspan="1" aria-label="Action: activate to sort column ascending">
+                                        الإجراء</th>
+                                </tr>
+                            </thead>
+                            @foreach ($consultationsp as $consultation)
+                                <tbody>
+                                    <tr role="row" class="odd">
+                                        <td>{{ $consultation->nom }} {{ $consultation->prenom }}</td>
+                                        <td>{{ $consultation->date }}</td>
+                                        <td class="text-center">
+                                            {{-- @can('consultation_update') --}}
+                                            <a data-toggle="modal"
+                                                data-target="#consultation-edit-{{ $consultation->id }}"
+                                                class="btn btn-sm btn-primary"><i
+                                                    class="la la-pencil"></i></a>
+                                            {{-- @endcan --}}
+                                            {{-- @can('consultation_delete') --}}
+                                            <a data-toggle="modal"
+                                                data-target="#consultation-remove-{{ $consultation->id }}"
+                                                class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
+                                            {{-- @endcan --}}
+                                            {{-- @can('consultation_display') --}}
+                                            <a data-toggle="modal"
+                                                data-target="#consultation-info-{{ $consultation->id }}"
+                                                class="btn btn-sm btn-secondary"><i
+                                                    class="la la-info"></i></a>
+                                            {{-- @endcan --}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            @endforeach
+                        </table>
+                </div>
+            </div>
+        </div>
+        <!-- endpaiment -->
+            <!-- paiment consultation -->
+        <div class="col-lg-12">
+            <div class="card" style="height: 96%; ">
+                <div class="card-header" style="background: #DCDCDC;
+                padding-bottom: 15px;">
+                    @php
+                        $date = date('Y-m-d');
+                    @endphp
+                    <h3 class="card-title">لائحة المواعيد للكشف : {{ $date }}</h3>
+                </div>
+                <div class="card-body">
+                    <table id="example3" class="display dataTable no-footer">
+                        <thead>
+                            <th>الاسم الكامل</th>
+                            <th>أول زيارة</th>
+                            <th>تأكيد الحضور</th>
+                            <th>إجراء</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($rendezvous_consultation as $rendezvou)
+                            <tr>
+                                <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
+                                <td>
+                                    @if($rendezvou->isFirstTime == "1")
+                                        <span class="badge bg-success">نعم</span>
+                                    @else
+                                        <span class="badge bg-danger">لا</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($rendezvou->present == "1")
+                                        <span class="badge bg-success">نعم</span>
+                                    @else
+                                        <span class="badge bg-danger">لا</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <form action="{{route('addToList')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
+                                        <button type="submit" class="btn btn-secondary">إضافة</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+    </div>
+    <!-- endpaiment -->
         <div class="col-lg-12">
             <div class="card" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;

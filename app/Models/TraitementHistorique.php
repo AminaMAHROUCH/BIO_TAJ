@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TraitementHistorique extends Model
 {
     use HasFactory;
+
+    public function traitement(){
+        return $this->belongsTo(Traitement::class, 'traitement_id');
+    }
 }

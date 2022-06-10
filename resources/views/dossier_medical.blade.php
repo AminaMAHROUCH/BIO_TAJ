@@ -57,7 +57,6 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-link active" id="nav-maladie-tab" data-toggle="tab" href="#nav-maladie" role="tab" aria-controls="nav-contact" aria-selected="false"> المرض</a>
-                      <a class="nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">الكشف</a>
                       <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">العلاجات الموصوفة   </a>
                       <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> المنتوجات</a>
                     </div>
@@ -112,12 +111,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">كل الاستشارات </h4>
+                                <h4 class="card-title">المرض </h4>
                                 <a data-toggle="modal"
-                                data-target="#consultation-add-{{ $patient->id }}"
+                                data-target="#maladie-add"
                                 class="btn btn-sm btn-primary"><i
                                     class="la la-plus"></i></a>
                             </div>
@@ -126,26 +125,25 @@
                                     <table id="example3" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>التاريخ</th>
-                                                <th>ملاحضات</th>
-                                                <th>تعديل</th>
+                                                <th>العلاج</th>
+                                                <th>الثمن</th>
+                                                <th>تم إنجازه</th>
+                                                <th>المسؤول</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($consultations as $consult)
+                                            @foreach($traitements_hit as $traitement_h)
                                             <tr>
-                                                <td class="bord bord_">{{date('d-m-Y', strtotime($consult->date)) }}</td>
-                                                <td class="bord" style="white-space: normal;">{{ $consult->remarque}}</td>                                          
-                                                <td class="bord text-center">
-                                                    <a data-toggle="modal"
-                                                    data-target="#consultation-edit-{{ $consult->id }}"
-                                                    class="btn btn-sm btn-primary"><i
-                                                        class="la la-pencil"></i></a>
-                                                    
-                                                    <a data-toggle="modal"
-                                                    data-target="#consultation-remove-{{ $consult->id }}"
-                                                    class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                                </td>                                           
+                                                <td class="bord" style="white-space: normal;">{{ $traitement_h->traitement_id ? $traitement_h->traitement->nom : ''}}</td>                                            
+                                                <td class="bord" style="white-space: normal;">{{ $traitement_h->prix ? $traitement_h->prix: '-' }}</td>                                            
+                                                <td class="bord" style="white-space: normal;">
+                                                    @if($traitement_h->isEffected==1)
+                                                        <span class="badge bg-success">نعم</span>
+                                                    @else
+                                                        <span class="badge bg-danger">لا</span>
+                                                    @endif
+                                                </td>   
+                                                <td class="bord" style="white-space: normal;">{{ $traitement_h->user_id ? $traitement_h->user->name : '-'}}</td>                                                                                                                        
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -154,8 +152,48 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Efzefefzefeféefzef</div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">المرض </h4>
+                                <a data-toggle="modal"
+                                data-target="#maladie-add"
+                                class="btn btn-sm btn-primary"><i
+                                    class="la la-plus"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>المنتوج</th>
+                                                <th>الكمية </th>
+                                                <th>الثمن الإجمالي</th>
+                                                <th>التسبيق</th>
+                                                <th>الباقي</th>
+                                                <th>إجراء</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($produits_ as $produit)
+                                            <tr>
+                                                <td class="bord" style="white-space: normal;">{{ $produit->titre }}</td>
+                                                <td class="bord" style="white-space: normal;">{{ $produit->quantite_v }}</td>
+                                                <td class="bord" style="white-space: normal;">{{ $produit->prix_total }}</td>
+                                                <td class="bord" style="white-space: normal;">{{ $produit->avance }}</td>
+                                                <td class="bord" style="white-space: normal;">{{ $produit->reste }}</td>    
+                                                <td class="bord" style="white-space: normal;">rgr</td>    
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                   </div>
             </div>
         </div>
@@ -327,6 +365,8 @@
                         <h5>الكشف</h5>
                     </div>
                     <div class="card-body">
+                        <label for=""></label>
+                        <input type="number" name="prix">
                         <label for="">ملاحضات</label>
                         <textarea name="consultation_remarque" class="form-control ckeditor" id="summary-ckeditor" cols="30" rows="5"></textarea>
                     </div>

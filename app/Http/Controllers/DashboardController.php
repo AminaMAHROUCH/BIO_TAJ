@@ -28,8 +28,9 @@ class DashboardController extends Controller
       $rendezvous_consultation = RendezVous::where('type',"consultation")->get();
       $today_patients = Todayp::whereDate('created_at', '=',date('Y-m-d'))->get();
       $patients = Patient::get();
+      $consultationsp= Consultation::where('payed',0)->get();
       $traitement_historiques = DB::table('traitement_historiques')->get();//id user connecetr
-      return view('dashboard', compact('rendezvous_consultation','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
+      return view('dashboard', compact('rendezvous_consultation','consultationsp','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
     }
 
     public function storeToday(Request $request){
@@ -46,10 +47,12 @@ class DashboardController extends Controller
       $patients = Patient::all() ; 
       $maladies = Maladie::all() ; 
       $traitements = Traitement::all() ; 
+      $traitements_hit = TraitementHistorique::where("patient_id", $patient_id)->get(); 
+      $produits_ = Vente::where("patient_id", $patient_id)->get(); 
       $produits = Produit::all() ; 
       $maladiepatients = MaladiePatient::where("patient_id", $patient_id)->get();
       $consultations = Consultation::where("patient_id", $patient_id)->orderBy('id', 'DESC')->get();
-      return view('dossier_medical', compact('patient','patients', 'consultations', 'maladies', 'maladiepatients', 'traitements','produits'));
+      return view('dossier_medical', compact('patient','patients', 'consultations', 'maladies','traitements_hit', 'produits_','maladiepatients', 'traitements','produits'));
     }
 
     public function add_consult(Request $request){
@@ -79,6 +82,7 @@ class DashboardController extends Controller
       //consultation
       $consult = new Consultation();
       $consult->remarque = $request->consultation_remarque;
+      $consult->prix = $request->prix;
       $consult->date = date('Y-m-d H:i:s');
       $consult->patient_id = $request->patient_id;
       $consult->patient_id = $request->maladie_id;
