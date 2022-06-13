@@ -177,12 +177,16 @@
                                         <tbody>
                                             @foreach($produits_ as $produit)
                                             <tr>
-                                                <td class="bord" style="white-space: normal;">{{ $produit->titre }}</td>
+                                                <td class="bord" style="white-space: normal;">{{ $produit->produit_id ? $produit->produit->titre : '-' }}</td>
                                                 <td class="bord" style="white-space: normal;">{{ $produit->quantite_v }}</td>
                                                 <td class="bord" style="white-space: normal;">{{ $produit->prix_total }}</td>
                                                 <td class="bord" style="white-space: normal;">{{ $produit->avance }}</td>
                                                 <td class="bord" style="white-space: normal;">{{ $produit->reste }}</td>    
-                                                <td class="bord" style="white-space: normal;">rgr</td>    
+                                                <td class="bord" style="white-space: normal;">
+                                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#produit-v-{{$produit->id}}">
+                                                        تعديل
+                                                    </button>
+                                                </td>    
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -365,8 +369,8 @@
                         <h5>الكشف</h5>
                     </div>
                     <div class="card-body">
-                        <label for=""></label>
-                        <input type="number" name="prix">
+                        <label for="">الثمن</label>
+                        <input type="number" name="prix" class="form-control">
                         <label for="">ملاحضات</label>
                         <textarea name="consultation_remarque" class="form-control ckeditor" id="summary-ckeditor" cols="30" rows="5"></textarea>
                     </div>
@@ -487,41 +491,89 @@
         </div>
     </div>
 </div>
-    @foreach ($traitements as $traitement)
-        <div class="modal fade" id="traitement-info-{{ $traitement->id }}">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-secondary">
-                        <h5 class="modal-title text-white">العلاج</h5>
-                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+@foreach ($produits_ as $vente)
+    <div class="modal fade" id="produit-v-{{ $vente->id }}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title  text-white">تعديل المعلومات</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('vente.update', $vente->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">اسم العلاج</label>
-                                    <input style="background-color:#f8f9fa;" type="text" class="form-control" name="nom"
-                                        value="{{ $traitement->nom }}" readonly>
+                                    <label class="form-label">اسم المنتوج</label>
+                                    {{-- select with search sera tant mieux --}}
+                                    <select id="single-select" name="produit_id" class="form-control w-100 ">
+                                        @foreach ($produits as $produit)
+                                            <option value="{{ $produit->id }}"
+                                                {{ old('nom_produit') == $produit->titre ? 'selected' : '' }}>
+                                                {{ $produit->titre }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="form-label">الوصف</label>
-                                    <textarea style="background-color:#f8f9fa;" type="date" class="form-control" name="description" rows="5"
-                                        readonly>{{ $traitement->description }}</textarea>
+                                    <label class="form-label">الكمية</label>
+                                    <input type="number" class="form-control" name="quantite_v"
+                                        value="{{ old('quantite') }}">
                                 </div>
+                            </div>
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary">اضف</button>
+                                <button type="reset" class="btn btn-light">مسح</button>
                             </div>
                         </div>
-
-                    </div>
+                    </form>
                 </div>
             </div>
-    @endforeach
+        </div>
+    </div>
+@endforeach
+@foreach ($traitements as $traitement)
+    <div class="modal fade" id="traitement-info-{{ $traitement->id }}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary">
+                    <h5 class="modal-title text-white">العلاج</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">اسم العلاج</label>
+                                <input style="background-color:#f8f9fa;" type="text" class="form-control" name="nom"
+                                    value="{{ $traitement->nom }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">الوصف</label>
+                                <textarea style="background-color:#f8f9fa;" type="date" class="form-control" name="description" rows="5"
+                                    readonly>{{ $traitement->description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+@endforeach
+
 <!-- endsoins -->
 <!--  -->
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>

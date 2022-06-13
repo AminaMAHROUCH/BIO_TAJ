@@ -33,6 +33,8 @@ Route::get('/', function () {
 Route::get('/acceuil', function () {
     return view('dashboard');
 });
+Route::get('consult_payer', [DashboardController::class, "consult_payer"]);
+Route::put('traitement_payer/{id}', [DashboardController::class, "traitement_payer"])->name('traitement_payer');
 Route::get('dashboard', [DashboardController::class, "index"]);
 
 Route::post('patient/add', [RendezVousController::class, "add"])->name('patient.add');

@@ -112,7 +112,16 @@ class VenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vente = Vente::findOrFail($id);
+        $vente->quantite_v = $request->quantite_v; 
+        $vente->prix_total = $request->prix_total; 
+        $vente->avance = $request->avance; 
+        $vente->reste = $request->reste; 
+        $vente->patient_id = $request->patient_id; 
+        $vente->client_id = $request->client_id; 
+        $vente->produit_id = $request->produit_id;
+        $vente->save();
+        return back(); 
     }
 
     /**

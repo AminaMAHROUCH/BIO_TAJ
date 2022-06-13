@@ -29,7 +29,7 @@ class DashboardController extends Controller
       $today_patients = Todayp::whereDate('created_at', '=',date('Y-m-d'))->get();
       $patients = Patient::get();
       $consultationsp= Consultation::where('payed',0)->get();
-      $traitement_historiques = DB::table('traitement_historiques')->get();//id user connecetr
+      $traitement_historiques = TraitementHistorique::whereNull('prix')->get();//id user connecetr
       return view('dashboard', compact('rendezvous_consultation','consultationsp','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
     }
 
@@ -47,7 +47,7 @@ class DashboardController extends Controller
       $patients = Patient::all() ; 
       $maladies = Maladie::all() ; 
       $traitements = Traitement::all() ; 
-      $traitements_hit = TraitementHistorique::where("patient_id", $patient_id)->get(); 
+      $traitements_hit = TraitementHistorique::where("patient_id", $patient_id)->paginate(5); 
       $produits_ = Vente::where("patient_id", $patient_id)->get(); 
       $produits = Produit::all() ; 
       $maladiepatients = MaladiePatient::where("patient_id", $patient_id)->get();
@@ -106,6 +106,7 @@ class DashboardController extends Controller
         $produit = new Vente();
         $produit->patient_id = $request->patient_id;
         $produit->produit_id = $myArrayp[$i];
+        $produit->date_vente = date('Y-m-d H:i:s');;
         $produit->save();
       }
 
@@ -115,10 +116,22 @@ class DashboardController extends Controller
       $maladie->save();
 
       return back();
+    }
 
-      
-
-
+    public function consult_payer(Request $request){
+      $consult = Consultation::where('id', $request->consult_id)->first();
+      $consult->payed= 1;
+      $consult->save();
+      return response()->json(201);
+    }
+    public function traitement_payer(Request $request, $id){
+      $consult = TraitementHistorique::where('id', $id)->first();
+      $consult->prix= $request->prix_;
+      $consult->isEffected= 1;
+      // $consult->user_id= 1;
+      $consult->remarque= $request->remarque;
+      $consult->save();
+      return back();
     }
   
 }

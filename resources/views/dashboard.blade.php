@@ -62,7 +62,7 @@
                 <div class="card-header" style="background: #DCDCDC;
                 padding-bottom: 15px;">
                    
-                    <h3 class="card-title">لائحة للكشف</h3>
+                    <h3 class="card-title">لائحة الدفع للكشف </h3>
                 </div>
                 <div class="card-body">
                 <table id="example3"
@@ -90,25 +90,18 @@
                             @foreach ($consultationsp as $consultation)
                                 <tbody>
                                     <tr role="row" class="odd">
-                                        <td>{{ $consultation->nom }} {{ $consultation->prenom }}</td>
+                                        <td>{{ $consultation->patient_id ? $consultation->patient->nom.''.$consultation->patient->prenom : '-' }}</td>
                                         <td>{{ $consultation->date }}</td>
+                                        <td>{{ $consultation->prix }}</td>
+                                        <td>
+                                            <span class="badge bg-danger">Non</span>
+                                        </td>
                                         <td class="text-center">
                                             {{-- @can('consultation_update') --}}
-                                            <a data-toggle="modal"
-                                                data-target="#consultation-edit-{{ $consultation->id }}"
-                                                class="btn btn-sm btn-primary"><i
-                                                    class="la la-pencil"></i></a>
-                                            {{-- @endcan --}}
-                                            {{-- @can('consultation_delete') --}}
-                                            <a data-toggle="modal"
-                                                data-target="#consultation-remove-{{ $consultation->id }}"
-                                                class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                            {{-- @endcan --}}
-                                            {{-- @can('consultation_display') --}}
-                                            <a data-toggle="modal"
-                                                data-target="#consultation-info-{{ $consultation->id }}"
-                                                class="btn btn-sm btn-secondary"><i
-                                                    class="la la-info"></i></a>
+                                            <button type="button"
+                                                class=" btn btn-sm text-white btn-update-consult btn-danger"
+                                                data-id="{{ $consultation->id }}">Payer
+                                            </button>
                                             {{-- @endcan --}}
                                         </td>
                                     </tr>
@@ -127,45 +120,50 @@
                     @php
                         $date = date('Y-m-d');
                     @endphp
-                    <h3 class="card-title">لائحة المواعيد للكشف : {{ $date }}</h3>
+                    <h3 class="card-title">  لائحة الدفع للعلاج </h3>
                 </div>
                 <div class="card-body">
-                    <table id="example3" class="display dataTable no-footer">
-                        <thead>
-                            <th>الاسم الكامل</th>
-                            <th>أول زيارة</th>
-                            <th>تأكيد الحضور</th>
-                            <th>إجراء</th>
-                        </thead>
+                    <table id="example3"
+                    class="display dataTable no-footer  table-bordered table-responsive-sm"
+                    style="min-width: 845px" role="grid" aria-describedby="example3_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                اسم المريض الكامل</th>
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                العلاج</th>
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                الثمن</th>
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                المسؤول</th>
+                            <th class="sorting text-center" tabindex="0" aria-controls="example3"
+                                colspan="1" aria-label="Action: activate to sort column ascending">
+                                الإجراء</th>
+                        </tr>
+                    </thead>
+                    @foreach ($traitement_historiques as $trh)
                         <tbody>
-                            @foreach ($rendezvous_consultation as $rendezvou)
-                            <tr>
-                                <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
-                                <td>
-                                    @if($rendezvou->isFirstTime == "1")
-                                        <span class="badge bg-success">نعم</span>
-                                    @else
-                                        <span class="badge bg-danger">لا</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($rendezvou->present == "1")
-                                        <span class="badge bg-success">نعم</span>
-                                    @else
-                                        <span class="badge bg-danger">لا</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <form action="{{route('addToList')}}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
-                                        <button type="submit" class="btn btn-secondary">إضافة</button>
-                                    </form>
+                            <tr role="row" class="odd">
+                                <td>{{ $trh->patient_id ? $trh->patient->nom.' '.$trh->patient->prenom : '-'}}</td>
+                                <td>{{ $trh->traitement_id ? $trh->traitement->nom : '-' }}</td>
+                                <td>{{ $trh->prix ? $trh->prix : '-' }}</td>
+                                <td>{{ $trh->user_id ? $trh->user->name : '-' }}</td>
+                                <td class="text-center">
+                                    {{-- @can('consultation_update') --}}
+                                    <a data-toggle="modal"
+                                        data-target="#th-{{ $trh->id }}"
+                                        class="btn btn-sm btn-primary"><i
+                                            class="la la-pencil"></i></a>
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
-                            @endforeach
                         </tbody>
-                    </table>
+                    @endforeach
+                </table>
 
                 </div>
             </div>
@@ -207,11 +205,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                   <form action="{{route('addToList')}}" method="POST">
-                                       @csrf
-                                       <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
-                                       <button type="submit" class="btn btn-secondary">إضافة</button>
-                                   </form>
+                                    @if($rendezvou->present == "1")
+                                    <span class="btn btn-warning">نعم</span>
+                                @else 
+                                    <form action="{{route('addToList')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
+                                        <button type="submit" class="btn btn-secondary">إضافة</button>
+                                    </form>
+                                @endif
+                                 
                                 </td>
                             </tr>
                             @endforeach
@@ -255,11 +258,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                       <form action="{{route('addToList')}}" method="POST">
-                                           @csrf
-                                           <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
-                                           <button type="submit" class="btn btn-secondary">إضافة</button>
-                                       </form>
+                                        @if($rendezvou->present == "1")
+                                            <span class="btn btn-secondary">نعم</span>
+                                        @else 
+                                            <form action="{{route('addToList')}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
+                                                <button type="submit" class="btn btn-secondary">إضافة</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -313,44 +320,7 @@
             </div>
         </div>
         {{-- traitemant liste --}}
-        <div class="col-lg-12">
-            <div class="card" style="height: 96%; ">
-                <div class="card-header" style="background: #DCDCDC;
-                padding-bottom: 15px;">
-                    <h3 class="card-title">لائحة العلاجات </h3>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="example3" class="display dataTable no-footer">
-                            <thead>
-                                <tr>
-                                    <th class="px-5 py-3">الاسم</th>
-                                    <th class="py-3">الرعايةالثمن</th>
-                                    <th class="py-3">الحالة</th>
-                                    <th class="py-3">الاجراء</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($traitement_historiques as $traitement_hist)
-                                    <tr class="btn-reveal-trigger">
-
-                                        <td class="py-2">test</td>
-                                        <td class="py-2">test</td>
-                                        <td class="py-2">test</td>
-                                        <td class="py-2">test</td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
-                                                    class="la la-file-o"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </div>
     {{-- Modal Today --}}
     <!-- Modal -->
@@ -394,4 +364,70 @@
         </div>
     </div>
     {{-- end ModalToday --}}
+          <!-- Modal edit -->
+          @foreach ($traitement_historiques as $traitement_historique)
+          <div class="modal fade" id="th-{{ $traitement_historique->id }}">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-primary">
+                          <h5 class="modal-title  text-white">تعديل </h5>
+                          <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <form action="{{ route('traitement_payer', $traitement_historique->id) }}" method="POST">
+                              <input type="hidden" name="_method" value="PUT">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <div class="row">
+                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                      <div class="form-group">
+                                          <label class="form-label">الثمن</label>
+                                          <input type="number" name="prix_" class="form-control">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                      <div class="form-group">
+                                          <label class="form-label">ملاحظة أو تعليق</label>
+                                          <textarea type="date" class="form-control" name="remarque" rows="4"></textarea>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-lg-12 col-md-12 col-sm-12">
+                                      <button type="submit" class="btn btn-primary">تعديل</button>
+                                      <button type="reset" class="btn btn-light">مسح</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      @endforeach
+
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+     $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(".btn-update-consult").on('click', function() {
+            var consult_id = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                url: "/consult_payer",
+                dataType: "json",
+                data: {
+                    'consult_id': consult_id
+                },
+                success: function(response) {
+                    $("body").load(
+                        'http://127.0.0.1:8000/dashboard');
+                }
+            });
+        });
+    });
+</script>
+
