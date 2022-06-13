@@ -88,19 +88,15 @@
                                                 <td class="bord" style="white-space: normal;">{{ $maladiepatient->maladie_id ? $maladiepatient->maladie->maladie : ''}}</td>                                            
                                                 <td class="bord text-center">
                                                     <a data-toggle="modal"
-                                                    data-target="#maladie-edit-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-primary"><i
-                                                        class="la la-pencil"></i></a>
-                                                    <a data-toggle="modal"
                                                     data-target="#maladie-info-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-warning"><i
-                                                        class="la la-info"></i></a>
+                                                        class="la la-info"></i>Add</a>
                                                     
                                                     <a data-toggle="modal"
                                                     data-target="#maladie-remove-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
                                                     <a data-toggle="modal"
-                                                    data-target="#maladie-remove-{{ $maladiepatient->id }}"
+                                                    
                                                     class="btn btn-sm btn-danger"><i class="la la-info"></i></a>
                                                 </td>                                           
                                             </tr>
@@ -536,6 +532,32 @@
             </div>
         </div>
     </div>
+@endforeach
+@foreach ($maladiepatients as $maladie)
+<!-- Modal remove -->
+<div class="modal fade" id="maladie-remove-{{ $maladie->id }}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white">تنبيه</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                هل حقا تريد مسح هذا المرض
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('maladie.destroy', $maladie->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <button type="submit" class="btn btn-danger text-white">نعم</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endforeach
 @foreach ($traitements as $traitement)
     <div class="modal fade" id="traitement-info-{{ $traitement->id }}">
