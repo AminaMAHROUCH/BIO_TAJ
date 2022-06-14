@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-body text-center mt-3">
                     <div class="ico-sparkline">
-                        <div id="sparkline12"class="textpos">97</div>
+                        <div id="sparkline12"class="textpos">{{ count($patients)}}</div>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-body text-center mt-4 p-0">
                     <div class="ico-sparkline">
-                        <div id="spark-bar-6" class="textpos">47</div>
+                        <div id="spark-bar-6" class="textpos">{{$traitemnt_total}}</div>
                     </div>
                 </div>
             </div>
@@ -87,8 +87,8 @@
                                         الإجراء</th>
                                 </tr>
                             </thead>
-                            @foreach ($consultationsp as $consultation)
-                                <tbody>
+                            <tbody>
+                                @foreach ($consultationsp as $consultation)
                                     <tr role="row" class="odd">
                                         <td>{{ $consultation->patient_id ? $consultation->patient->nom.''.$consultation->patient->prenom : '-' }}</td>
                                         <td>{{ $consultation->date }}</td>
@@ -105,8 +105,8 @@
                                             {{-- @endcan --}}
                                         </td>
                                     </tr>
-                                </tbody>
-                            @endforeach
+                                @endforeach
+                            </tbody>
                         </table>
                 </div>
             </div>
@@ -145,8 +145,8 @@
                                 الإجراء</th>
                         </tr>
                     </thead>
-                    @foreach ($traitement_historiques as $trh)
-                        <tbody>
+                    <tbody>
+                            @foreach ($traitement_historiques as $trh)
                             <tr role="row" class="odd">
                                 <td>{{ $trh->patient_id ? $trh->patient->nom.' '.$trh->patient->prenom : '-'}}</td>
                                 <td>{{ $trh->traitement_id ? $trh->traitement->nom : '-' }}</td>
@@ -161,8 +161,8 @@
                                     {{-- @endcan --}}
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
-                    @endforeach
                 </table>
 
                 </div>
@@ -403,6 +403,7 @@
               </div>
           </div>
       @endforeach
+  
 
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

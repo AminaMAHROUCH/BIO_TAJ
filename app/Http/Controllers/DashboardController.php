@@ -14,6 +14,7 @@ use App\Models\TraitementHistorique;
 use App\Models\Vente;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -30,7 +31,9 @@ class DashboardController extends Controller
       $patients = Patient::get();
       $consultationsp= Consultation::where('payed',0)->get();
       $traitement_historiques = TraitementHistorique::whereNull('prix')->get();//id user connecetr
-      return view('dashboard', compact('rendezvous_consultation','consultationsp','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
+      //
+      $traitemnt_total = TraitementHistorique::whereMonth('created_at', '=', Carbon::today()->month)->count();
+      return view('dashboard', compact('rendezvous_consultation','consultationsp','traitemnt_total','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
     }
 
     public function storeToday(Request $request){
