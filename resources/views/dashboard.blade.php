@@ -90,7 +90,8 @@
                             <tbody>
                                 @foreach ($consultationsp as $consultation)
                                     <tr role="row" class="odd">
-                                        <td>{{ $consultation->patient_id ? $consultation->patient->nom.''.$consultation->patient->prenom : '-' }}</td>
+                                        <td>{{ $consultation->patient_id}}</td> 
+                                        <!-- ? $consultation->patient->nom.''.$consultation->patient->prenom : '-'  -->
                                         <td>{{ $consultation->date }}</td>
                                         <td>{{ $consultation->prix }}</td>
                                         <td>
@@ -424,8 +425,9 @@
                     'consult_id': consult_id
                 },
                 success: function(response) {
-                    $("body").load(
-                        'http://127.0.0.1:8000/dashboard');
+                    location.href='http://127.0.0.1:8000/dashboard';
+                    // $("body").load(
+                    //     'http://127.0.0.1:8000/dashboard');
                 }
             });
         });

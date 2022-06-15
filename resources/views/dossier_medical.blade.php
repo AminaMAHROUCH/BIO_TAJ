@@ -501,6 +501,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
+                            <input type="hidden" name="patient_id"value="{{$patient->id}}">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">اسم المنتوج</label>
@@ -518,7 +519,7 @@
                                 <div class="form-group">
                                     <label class="form-label">الكمية</label>
                                     <input type="number" class="form-control" name="quantite_v"
-                                        value="{{ old('quantite') }}">
+                                        value="{{ $vente->quantite_v }}">
                                 </div>
                             </div>
                             

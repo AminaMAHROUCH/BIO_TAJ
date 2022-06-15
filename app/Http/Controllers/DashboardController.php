@@ -31,7 +31,7 @@ class DashboardController extends Controller
       $today_patients = Todayp::whereDate('created_at', '=',date('Y-m-d'))->get();
       $patients = Patient::get();
       $consultationsp= Consultation::where('payed',0)->get();
-      $traitement_historiques = TraitementHistorique::get();//id user connecetr
+      $traitement_historiques = TraitementHistorique::whereNull("prix")->get();//id user connecetr
       //
       $traitemnt_total = TraitementHistorique::whereMonth('created_at', '=', Carbon::today()->month)->count();
       return view('dashboard', compact('rendezvous_consultation','consultationsp','traitemnt_total','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
@@ -90,6 +90,7 @@ class DashboardController extends Controller
       $consult->date = date('Y-m-d H:i:s');
       $consult->patient_id = $request->patient_id;
       $consult->patient_id = $request->maladie_id;
+      $consult->payed = 0;
       $consult->save();
 
       //traitmentHistorique

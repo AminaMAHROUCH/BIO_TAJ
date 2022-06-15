@@ -73,8 +73,8 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-compact" style="width: 200px;display: block!important;" src="{{ asset('template/images/logo.png') }}" alt="">
-                {{-- <img class="brand-title" src="{{ asset('template/images/logo.png') }}" alt=""> --}}
+                <!-- <img class="logo-abbr" style="width: 200px;display: block!important;" src="{{ asset('template/images/logo.png') }}" alt="">
+                {{-- <img class="brand-title" src="{{ asset('template/images/logo.png') }}" alt=""> --}} -->
             </a>
 
             <div class="nav-control">
@@ -92,35 +92,20 @@
             Header start
         ***********************************-->
         <div class="header">
-            <div class="header-content">
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                            <div class="search_bar dropdown">
-                               
-                                <ul id="menu" style="padding: 5px; display: contents;">
-                                    <li><a href="{{ url('rendez-vous') }}" class="btn btn-warning" style="colot:white">لائحة المواعيد</a></li>
-                                    <li style="margin-right: 10px;"><a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger" href="#" id="modalToday">أضف إلى قائمة اليوم</a></li>
-                            
-                                </ul>
-                            </div>
-                        </div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <button class="navbar-toggler collapsed" style="margin-right: 80%;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown notification_dropdown">
-                                <a class="nav-link bell ai-icon" href="#" role="button" data-toggle="dropdown">
-                                    <svg id="icon-user" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
-                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                    </svg>
-                                    <div class="pulse-css"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                </div>
+                    <div class="navbar-collapse justify-content-end collapse" id="navbarSupportedContent" style="padding-right: 66px;">
+                        <ul class="navbar-nav ">
+                            <li style="padding: 5px;" class="nav-item mr-2">
+                                <a class="btn  btn-warning" style="font-size: 15px !important" href="{{ url('rendez-vous') }}">لائحة المواعيد</a>
                             </li>
-                            <li>
+                            <li style="padding: 5px;" class="nav-item mr-2">
+                                <a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger" href="#" id="modalToday">أضف إلى قائمة اليوم</a>
+                            </li>
+                            <li style="padding: 5px;">
                                 <a class="btn btn-success" href="{{url('/logout')}}">
                                         تسجيل الخروج    
                                 </a>
@@ -128,7 +113,6 @@
                         </ul>
                     </div>
                 </nav>
-            </div>
         </div>
         <!--**********************************
             Header end ti-comment-alt

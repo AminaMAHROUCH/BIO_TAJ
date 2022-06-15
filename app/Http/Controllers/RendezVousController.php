@@ -49,7 +49,7 @@ class RendezVousController extends Controller
         $rendezvous->time = $request->input('time'); 
         $rendezvous->nom_malade = $request->input('nom_malade'); 
         $rendezvous->description = $request->input('description'); 
-        $rendezvous->isFirstTime = $request->input('isFirstTime'); 
+        $rendezvous->isFirstTime = $request->input('isFirstTime') ? 1 : 0; 
         $rendezvous->id_patient = $request->input('id_patient'); 
         $rendezvous->type = $request->input('type'); 
         $rendezvous->present = 0;
