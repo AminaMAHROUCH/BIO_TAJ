@@ -1,9 +1,9 @@
-(function($) {
-    "use strict"
+// (function($) {
+//     "use strict"
 
-    new dlabSettings({
-        direction: "rtl"
-    });
+//     new dlabSettings({
+//         direction: "rtl"
+//     });
 
 
-})(jQuery);
+// })(jQuery);

@@ -44,12 +44,9 @@ class UsersController extends Controller
     {
        
         $user->update($request->all());
-        $test= Candidature::where('cni', $user->cni)->first();
-        $test->email= $user->email;
-        $test->save();
         $user->roles()->sync($request->input('roles', []));
 
-        return redirect()->route('boursier.users.index', compact('user'));
+        return redirect('users');
     }
 
     public function show(User $user)

@@ -22,7 +22,7 @@
                                 class="mdi mdi-close"></i></span>
                     </button>
                     <strong> {{ session()->get('message') }} . و للذهاب الى لائحة المواعيد <a
-                            href="{{ route('rendez-vous', false) }}">: انقر هنا</a></strong>
+                            href="{{ url('rendez-vous', false) }}">: انقر هنا</a></strong>
                 </div>
             </div>
         </div>

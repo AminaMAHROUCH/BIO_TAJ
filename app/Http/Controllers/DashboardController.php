@@ -15,6 +15,7 @@ use App\Models\Vente;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -30,7 +31,7 @@ class DashboardController extends Controller
       $today_patients = Todayp::whereDate('created_at', '=',date('Y-m-d'))->get();
       $patients = Patient::get();
       $consultationsp= Consultation::where('payed',0)->get();
-      $traitement_historiques = TraitementHistorique::whereNull('prix')->get();//id user connecetr
+      $traitement_historiques = TraitementHistorique::get();//id user connecetr
       //
       $traitemnt_total = TraitementHistorique::whereMonth('created_at', '=', Carbon::today()->month)->count();
       return view('dashboard', compact('rendezvous_consultation','consultationsp','traitemnt_total','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
@@ -131,7 +132,7 @@ class DashboardController extends Controller
       $consult = TraitementHistorique::where('id', $id)->first();
       $consult->prix= $request->prix_;
       $consult->isEffected= 1;
-      // $consult->user_id= 1;
+      $consult->user_id= Auth::user()->id;
       $consult->remarque= $request->remarque;
       $consult->save();
       return back();
