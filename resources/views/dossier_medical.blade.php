@@ -89,15 +89,14 @@
                                                 <td class="bord text-center">
                                                     <a data-toggle="modal"
                                                     data-target="#maladie-info-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-warning"><i
-                                                        class="la la-info"></i>Add</a>
+                                                    class="btn btn-sm btn-secondary"><i
+                                                        class="la la-pencil"></i></a>
                                                     
-                                                    <a data-toggle="modal"
+                                                    <!-- <a data-toggle="modal"
                                                     data-target="#maladie-remove-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                                    <a data-toggle="modal"
-                                                    
-                                                    class="btn btn-sm btn-danger"><i class="la la-info"></i></a>
+                                                    class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a> -->
+                                                    <a data-toggle="modal" data-target="#maladie-show-{{ $maladiepatient->id }}"
+                                                    class="btn btn-sm btn-success"><i class="la la-info"></i></a>
                                                 </td>                                           
                                             </tr>
                                             @endforeach
@@ -369,6 +368,57 @@
                         <input type="number" name="prix" class="form-control">
                         <label for="">ملاحضات</label>
                         <textarea name="consultation_remarque" class="form-control ckeditor" id="summary-ckeditor" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5>العلاجات الموصوفة</h5>
+                    </div>
+                    <div class="card-body">
+                        <label for="">العلاجات</label>
+                        <div style="display:flex;">
+                            <input type="hidden" value="" name="soins[]" id="soins">
+                            <input type="text" value="" class="form-control " style="margin-left: 1%;width: 80%;" id="soins_" readonly>
+                            <a class="btn btn-warning text-white" data-toggle="modal" data-target="#soins-add">Soins</a>
+                        </div>
+                        <label for="">المنتوجات</label>
+                        <div style="display:flex;">
+                            <input type="hidden" value="" name="produits[]" id="produits">
+                            <input type="text" value="" class="form-control " style="margin-left: 1%;width: 80%;" id="produits_" readonly>
+                            <a class="btn btn-warning text-white" data-toggle="modal" data-target="#produits-add">Produits</a>
+
+                        </div>
+                    </div>
+                </div>
+                <label for="">ملاحضات</label>
+                <textarea name="maladie_remarque" id="" class="form-control ckeditor" cols="30" rows="5"></textarea>
+
+                <hr>
+                <button type="submit" class="btn btn-warning">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- show -->
+<div class="modal fade" id="maladie-show-{{$maladiepatient->id}}">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title  text-white">إضافة </h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>الكشف</h5>
+                    </div>
+                    <div class="card-body">
+                        <label for="">ملاحضات</label>
+                        <textarea name="consultation_remarque" class="form-control" cols="30" rows="5" readonly></textarea>
                     </div>
                 </div>
                 <div class="card">

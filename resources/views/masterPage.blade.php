@@ -106,9 +106,12 @@
                                 <a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger" href="#" id="modalToday">أضف إلى قائمة اليوم</a>
                             </li>
                             <li style="padding: 5px;">
-                                <a class="btn btn-success" href="{{url('/logout')}}">
+                                <a class="btn btn-success text-white" href="{{url('/logout')}}">
                                         تسجيل الخروج    
                                 </a>
+                            </li>
+                            <li style="padding: 5px;">
+                               <span class = "btn btn-dark" style="pointer-events: none;">{{Auth::user()->name}}</span>
                             </li>
                         </ul>
                     </div>
