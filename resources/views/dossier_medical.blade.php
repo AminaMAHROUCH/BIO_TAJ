@@ -51,6 +51,29 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
+                <h4 class="card-title">تشخيص المريض</h4>
+            </div>
+            <div class="card-body">
+                @if($visite)
+                @include('updatevisite')
+                @else
+                    <div class="row position">
+                    <a data-toggle="modal"
+                        data-target="#visite-add"
+                        class="btn btn-sm btn-primary"><i
+                            class="la la-plus"></i>إضافة
+                    </a>
+                    </div>
+                @endif
+             
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
                 <h4 class="card-title">الملف الطبي</h4>
             </div>
             <div class="card-body">
@@ -337,6 +360,21 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="visite-add">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title  text-white">إضافة </h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @include('visite');
             </div>
         </div>
     </div>
