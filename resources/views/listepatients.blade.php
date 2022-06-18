@@ -34,15 +34,15 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة المرضى </h4>
-                            {{-- @can('patient_add') --}}
+                            @can('patient_add')
                             <a href="{{ route('patient.create', false) }}" class="btn btn-primary">اضف</a>
-                            {{-- @endcan --}}
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
                                     <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                        <table id="example1"
+                                        <table id="example3"
                                             class="display dataTable no-footer  table-bordered table-responsive-sm"
                                             style="min-width: 845px" role="grid" aria-describedby="example3_info">
                                             <thead>
@@ -74,8 +74,8 @@
                                                         الإجراء</th>
                                                 </tr>
                                             </thead>
-                                            @foreach ($patients as $patient)
-                                                <tbody>
+                                            <tbody>
+                                                    @foreach ($patients as $patient)
                                                     <tr role="row" class="odd">
                                                         <td>{{ $patient->nom }}</td>
                                                         <td>{{ $patient->prenom }}</td>
@@ -83,28 +83,34 @@
                                                         <td>{{ $patient->telephone }}</td>
                                                         <td>{{ $patient->email }}</td>
                                                         <td class="text-center">
-                                                            {{-- @can('patient_update') --}}
+                                                            @can('patient_update')
                                                             <a data-toggle="modal"
                                                                 data-target="#patient-edit-{{ $patient->id }}"
                                                                 class="btn btn-sm btn-primary"><i
                                                                     class="la la-pencil"></i></a>
-                                                            {{-- @endcan --}}
-                                                            {{-- @can('patient_delete') --}}
+                                                            @endcan
+                                                            @can('patient_delete')
                                                             <a data-toggle="modal"
                                                                 data-target="#patient-remove-{{ $patient->id }}"
                                                                 class="btn btn-sm btn-danger"><i
                                                                     class="la la-trash-o"></i></a>
-                                                            {{-- @endcan --}}
-                                                            {{-- @can('patient_display') --}}
+                                                            @endcan
+                                                            @can('patient_display')
                                                             <a data-toggle="modal"
                                                                 data-target="#patient-info-{{ $patient->id }}"
                                                                 class="btn btn-sm btn-warning"><i
                                                                     class="la la-info"></i></a>
-                                                            {{-- @endcan --}}
+                                                            @endcan
+                                                            @can('dossier_medical')
+                                                           
+                                                                <a href="{{ url('dossier_medical/'.$patient->id ) }}" class="btn btn-sm btn-danger"><i
+                                                                        class="la la-file-o"></i></a>
+                                                          @endcan
+                                                           
                                                         </td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
-                                            @endforeach
                                         </table>
 
                                     </div>

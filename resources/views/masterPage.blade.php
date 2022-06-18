@@ -99,12 +99,15 @@
 
                     <div class="navbar-collapse justify-content-end collapse" id="navbarSupportedContent" style="padding-right: 66px;">
                         <ul class="navbar-nav ">
+                            @can('addtolist')
+
                             <li style="padding: 5px;" class="nav-item mr-2">
                                 <a class="btn  btn-warning" style="font-size: 15px !important" href="{{ url('rendez-vous') }}">لائحة المواعيد</a>
                             </li>
                             <li style="padding: 5px;" class="nav-item mr-2">
                                 <a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger" href="#" id="modalToday">أضف إلى قائمة اليوم</a>
                             </li>
+                            @endcan
                             <li style="padding: 5px;">
                                 <a class="btn btn-success text-white" href="{{url('/logout')}}">
                                         تسجيل الخروج    
@@ -127,166 +130,167 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
+                    @can('dashboard')
                     <li><a class="ai-icon" href="{{ url('dashboard') }}" aria-expanded="false">
                             <i class="la la-calendar"></i>
                             <span class="nav-text">الصفحة الرئيسيــــة</span>
                         </a>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('patient_item') --}}
+                    @endcan
+                    @can('patient_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المرضى</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('patients_list') --}}
+                            @can('patients_list')
                             <li><a href="{{ route('patient.index', false) }}">لائحة المرضى</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('patient_add') --}}
+                            @endcan
+                            @can('patient_add')
                             <li><a href="{{ route('patient.create', false) }}">إضافة مريض</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('malade_item') --}}
+                    @endcan
+                    @can('malade_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الامراض</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('malade_liste') --}}
+                            @can('malade_liste')
                             <li><a href="{{ route('maladie.index', false) }}">لائحة الامراض</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('malade_add') --}}
+                            @endcan
+                            @can('malade_add')
                             <li><a href="{{ route('maladie.create', false) }}">إضافة مرض</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('client_item') --}}
+                    @endcan
+                    @can('client_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الزبناء</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('clients_list') --}}
+                            @can('clients_list')
                             <li><a href="{{ route('client.index', false) }}">لائحة الزبناء</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('client_add') --}}
+                            @endcan
+                            @can('client_add')
                             <li><a href="{{ route('client.create', false) }}">إضافة زبون</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('produit_item') --}}
+                    @endcan
+                    @can('produit_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المنتوجات</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('produit_list') --}}
+                            @can('produit_list')
                             <li><a href="{{ route('produit.index', false) }}">لائحة المنتوجات</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('produit_add') --}}
+                            @endcan
+                            @can('produit_add')
                             <li><a href="{{ route('produit.create', false) }}">إضافة المنتوج </a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('fournisseur_item') --}}
+                    @endcan
+                    @can('fournisseur_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المزودين</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('fournisseur_list') --}}
+                            @can('fournisseur_list')
                             <li><a href="{{ route('fournisseur.index', false) }}">لائحة المزودين</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('fournisseur_add') --}}
+                            @endcan
+                            @can('fournisseur_add')
                             <li><a href="{{ route('fournisseur.create', false) }}">إضافة مزود جديد</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('traitement_item') --}}
+                    @endcan
+                    @can('traitement_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">العلاج</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('traitement_list') --}}
+                            @can('traitement_list')
                             <li><a href="{{ route('traitement.index', false) }}">لائحة المنتوجات</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('traitement_add') --}}
+                            @endcan
+                            @can('traitement_add')
                             <li><a href="{{ route('traitement.create', false) }}">إضافة العلاج</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('rendezvous_item') --}}
+                    @endcan
+                    @can('rendezvous_item')
                     <li>
                         <a class="   has-arrow" href="/rendez-vous" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المواعيد</span>
                         </a>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('vente_item') --}}
+                    @endcan
+                    @can('vente_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المبيعات</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('vente_list') --}}
+                            @can('vente_list')
                             <li><a href="{{ route('vente.index', false) }}">لائحة المبيعات</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('vente_add') --}}
+                            @endcan
+                            @can('vente_add')
                             <li><a href="{{ route('vente.create', false) }}">اضافة مبيعة</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('cosnsultation_item') --}}
+                    @endcan
+                    @can('cosnsultation_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الكشف</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('consultation_list') --}}
+                            @can('consultation_list')
                             <li><a href="{{ route('consultation.index', false) }}">لائحة الكشف</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('consultation_add') --}}
+                            @endcan
+                            @can('consultation_add')
                             <li><a href="{{ route('consultation.create', false) }}">اضافة كشف</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('permission_item') --}}
+                    @endcan
+                    @can('permission_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">الرخص</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('permissions_list') --}}
+                            @can('permissions_list')
                             <li><a href="{{ route('permissions.index', false) }}">لائحة الرخص</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('permissions_add') --}}
+                            @endcan
+                            @can('permissions_add')
                             <li><a href="{{ route('permissions.create', false) }}">اضافة رخصة</a></li>
-                            {{-- @endcan --}}
+                            @endcan
 
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('roles_item') --}}
+                    @endcan
+                    @can('roles_item')
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -294,31 +298,31 @@
                             <span class="nav-text">الادوار</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('roles_list') --}}
+                            @can('roles_list')
                             <li><a href="{{ route('roles.index', false) }}">لائحة الادوار</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('roles_add') --}}
+                            @endcan
+                            @can('roles_add')
                             <li><a href="{{ route('roles.create', false) }}">اضافة الدور</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
-                    {{-- @can('users_item') --}}
+                    @endcan
+                    @can('users_item')
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المستعمل</span>
                         </a>
                         <ul aria-expanded="false">
-                            {{-- @can('users_list') --}}
+                            @can('users_list')
                             <li><a href="{{ route('users.index', false) }}">لائحة المستعملين</a></li>
-                            {{-- @endcan --}}
-                            {{-- @can('users_add') --}}
+                            @endcan
+                            @can('users_add')
                             <li><a href="{{ route('users.create', false) }}">اضافة مستعمل</a></li>
-                            {{-- @endcan --}}
+                            @endcan
                         </ul>
                     </li>
-                    {{-- @endcan --}}
+                    @endcan
                 </ul>
             </div>
         </div>
@@ -328,7 +332,50 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">إضافة</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @php
+                 $patients = App\Models\Patient::paginate(5);
+                @endphp
+                <div class="modal-body">
+                    <form action="{{ url('addToday') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <select name="patient" id="single-select" class="form-control">
+                                    <option value="" selected>اختر...</option>
+                                    @foreach ($patients as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nom }} {{ $item->prenom }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
+                            <div class="col-lg-6" style="padding: 10px;">
+                                <label for="">أول زيارة <input type="checkbox" name="firstTime" id="" value="1"></label>
+                            </div>
+                        </div>
+                        {{-- <div style="float: left !important;"> --}}
+                        <div>
+                            <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">اغلاق</button>
+                            <button type="submit" class="btn btn-primary float-right ">حفظ </button>
+                            <a href="{{ route('patient.create') }}" class="btn btn-warning">اضف مريض جديد </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- end ModalToday --}}
 
     <script
     src="https://code.jquery.com/jquery-3.6.0.js"

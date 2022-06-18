@@ -19,8 +19,11 @@ class VenteController extends Controller
     public function index()
     {
         // 
-        $clients =  DB::select('select * from clients c , ventes v , produits p  where c.id = v.client_id and v.produit_id = p.id or c.id = v.nvclient_id  ');
-        $patients =  DB::select('select * from patients p , ventes v , produits pr where p.id = v.patient_id and v.produit_id = pr.id') ; 
+        $clients =  Vente::with('client')->get();
+        // DB::select('select * from clients c , ventes v , produits p  where c.id = v.client_id and v.produit_id = p.id or c.id = v.nvclient_id  ');
+        $patients =  Vente::with('patient')->get();
+        // dd($patients);
+        // DB::select('select v.*, p.* from patients p , ventes v , produits pr where p.id = v.patient_id and v.produit_id = pr.id') ; 
         return view("listeventes",['clients'=>$clients,'patients'=>$patients]) ; 
     }
 
@@ -112,14 +115,13 @@ class VenteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $prix = $request->prix * $request->quantite_v;
+        // dd($request->quantite_v);
         $vente = Vente::findOrFail($id);
         $vente->quantite_v = $request->quantite_v; 
-        $vente->prix_total = $request->prix_total; 
+        $vente->prix_total = $request->prix * $request->quantite_v;
         $vente->avance = $request->avance; 
-        $vente->reste = $request->reste; 
-        $vente->patient_id = $request->patient_id; 
-        $vente->client_id = $request->client_id; 
-        $vente->produit_id = $request->produit_id;
+        $vente->reste = $vente->prix_total-$request->avance; 
         $vente->save();
         return back(); 
     }
@@ -132,7 +134,10 @@ class VenteController extends Controller
      */
     public function destroy($id)
     {
-        //
+         // 
+         $produit = Vente::findOrFail($id) ; 
+         $produit->delete() ; 
+         return redirect()->back();
     }
 
 

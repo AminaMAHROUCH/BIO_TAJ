@@ -15,10 +15,16 @@
     .card{
         margin-bottom: 0 !important;
     }
+    .scroll {
+    width: 30em;
+    overflow-x: auto;
+    white-space: nowrap;
+}
 
 </style>
 @section('etudiantContent')
  
+    @can('statistique')
     <div class="row">
         <div class="col-xl-4 col-xxl-4 col-sm-6">
             <div class="widget-stat card bg-primary overflow-hidden">
@@ -57,18 +63,19 @@
             </div>
         </div>
         <!-- paiment consultation -->
+        @can('paiment_consult')
         <div class="col-lg-12">
-            <div class="card" style="height: 96%; ">
+            <div class="card scroll" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;
                 padding-bottom: 15px;">
                    
                     <h3 class="card-title">لائحة الدفع للكشف </h3>
                 </div>
                 <div class="card-body">
-                <table id="example3"
-                            class="display dataTable no-footer  table-bordered table-responsive-sm"
-                            style="min-width: 845px" role="grid" aria-describedby="example3_info">
-                            <thead>
+                    <table id="example3"
+                    class="display dataTable no-footer  table-bordered table-responsive-sm"
+                    style="min-width: 845px" role="grid" aria-describedby="example3_info">
+                    <thead>
                                 <tr role="row">
                                     <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                         colspan="1" aria-label="Roll No.: activate to sort column ascending">
@@ -90,7 +97,7 @@
                             <tbody>
                                 @foreach ($consultationsp as $consultation)
                                     <tr role="row" class="odd">
-                                        <td>{{ $consultation->patient_id}}</td> 
+                                        <td>{{ $consultation->patient_id ? $consultation->patient->nom.' '.$consultation->patient->prenom: ' '}}</td> 
                                         <!-- ? $consultation->patient->nom.''.$consultation->patient->prenom : '-'  -->
                                         <td>{{ $consultation->date }}</td>
                                         <td>{{ $consultation->prix }}</td>
@@ -98,12 +105,12 @@
                                             <span class="badge bg-danger">Non</span>
                                         </td>
                                         <td class="text-center">
-                                            {{-- @can('consultation_update') --}}
+                                            @can('consultation_update')
                                             <button type="button"
                                                 class=" btn btn-sm text-white btn-update-consult btn-danger"
                                                 data-id="{{ $consultation->id }}">Payer
                                             </button>
-                                            {{-- @endcan --}}
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
@@ -112,10 +119,12 @@
                 </div>
             </div>
         </div>
+        @endcan
         <!-- endpaiment -->
             <!-- paiment consultation -->
+            @can('paiment_soins')
         <div class="col-lg-12">
-            <div class="card" style="height: 96%; ">
+            <div class="card scroll" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;
                 padding-bottom: 15px;">
                     @php
@@ -154,12 +163,12 @@
                                 <td>{{ $trh->prix ? $trh->prix : '-' }}</td>
                                 <td>{{ $trh->user_id ? $trh->user->name : '-' }}</td>
                                 <td class="text-center">
-                                    {{-- @can('consultation_update') --}}
+                                    @can('consultation_update')
                                     <a data-toggle="modal"
                                         data-target="#th-{{ $trh->id }}"
                                         class="btn btn-sm btn-primary"><i
                                             class="la la-pencil"></i></a>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
@@ -169,9 +178,12 @@
                 </div>
             </div>
     </div>
+    @endcan
+    @endcan
     <!-- endpaiment -->
+        @can('rdv_consult')
         <div class="col-lg-12">
-            <div class="card" style="height: 96%; ">
+            <div class="card scroll" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;
                 padding-bottom: 15px;">
                     @php
@@ -225,8 +237,10 @@
                 </div>
             </div>
         </div>
+        @endcan
+        @can('rdv_soins')
         <div class="col-lg-12">
-            <div class="card" style="height: 96%; ">
+            <div class="card scroll" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;
                 padding-bottom: 15px;">
                     <h3 class="card-title">لائحة المواعيد للعلاج: {{ $date }} </h3>
@@ -278,8 +292,11 @@
                 </div>
             </div>
         </div>
+        @endcan
+        @can('today_patient')
+
         <div class="col-lg-12">
-            <div class="card" style="height: 96%; ">
+            <div class="card scroll" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;
                 padding-bottom: 15px;">
                     <h3 class="card-title">لائحة المرضى اليومية</h3>
@@ -291,7 +308,9 @@
                                 <tr>
                                     <th class="px-5 py-3">الاسم</th>
                                     <th class="py-3">الحالة</th>
+                                    @can('dossier_medical')
                                     <th class="py-3">الملف الطبي</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody id="customers">
@@ -307,10 +326,12 @@
                                     @else
                                         <span class="badge badge-rounded badge-primary">ليست أول زيارة</span></td>
                                 @endif
+                                @can('dossier_medical')
                                 <td>
                                     <a href="{{ url('dossier_medical/'.$today_p->patient_id ) }}" class="btn btn-sm btn-danger"><i
                                             class="la la-file-o"></i></a>
                                 </td>
+                                @endcan
                                 </tr>
                                 @endforeach
 
@@ -320,51 +341,12 @@
                 </div>
             </div>
         </div>
+        @endcan
         {{-- traitemant liste --}}
        
     </div>
     {{-- Modal Today --}}
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">إضافة</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('addToday') }}" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <select name="patient" id="single-select" class="form-control">
-                                    <option value="" selected>اختر...</option>
-                                    @foreach ($patients as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nom }} {{ $item->prenom }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            <div class="col-lg-6" style="padding: 10px;">
-                                <label for="">أول زيارة <input type="checkbox" name="firstTime" id="" value="1"></label>
-                            </div>
-                        </div>
-                        {{-- <div style="float: left !important;"> --}}
-                        <div>
-                            <button type="button" class="btn btn-secondary float-right" data-dismiss="modal">اغلاق</button>
-                            <button type="submit" class="btn btn-primary float-right ">حفظ </button>
-                            <a href="{{ route('patient.create') }}" class="btn btn-warning">اضف مريض جديد </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- end ModalToday --}}
           <!-- Modal edit -->
           @foreach ($traitement_historiques as $traitement_historique)
           <div class="modal fade" id="th-{{ $traitement_historique->id }}">

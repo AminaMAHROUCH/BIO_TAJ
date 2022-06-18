@@ -78,4 +78,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('add_dossier_medical', [DashboardController::class,"add_dossier_medical"]);
     Route::get('dossier_medical/{patient_id}', [DashboardController::class,"dossier_medical"]);
     Route::post('add_consult', [DashboardController::class,"add_consult"]);
-    Route::post('add_maladie', [DashboardController::class,"add_maladie"]);});
+    Route::post('add_maladie', [DashboardController::class,"add_maladie"]);
+    Route::post('addvisite', [DashboardController::class,"addvisite"]);
+    Route:: PUT('updateVisite/{id}', [DashboardController::class,"updateVisite"]);
+    Route:: get('details_dossier/{id}', [DashboardController::class,"details_dossier"]);
+
+});
+

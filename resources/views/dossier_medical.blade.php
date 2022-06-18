@@ -118,8 +118,9 @@
                                                     <!-- <a data-toggle="modal"
                                                     data-target="#maladie-remove-{{ $maladiepatient->id }}"
                                                     class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a> -->
-                                                    <a data-toggle="modal" data-target="#maladie-show-{{ $maladiepatient->id }}"
-                                                    class="btn btn-sm btn-success"><i class="la la-info"></i></a>
+                                                  
+                                                    <a href="{{url('details_dossier/'.$maladiepatient->maladie_id)}}" 
+                                                        class="btn btn-sm btn-success"><i class="la la-info"></i></a>
                                                 </td>                                           
                                             </tr>
                                             @endforeach
@@ -395,7 +396,8 @@
             <form action="{{url('add_dossier_medical')}}" method="post">
                 @csrf
             <input type="hidden" value="{{ $patient->id }}" name="patient_id">
-            <input type="hidden" value="{{ $maladiepatient->id }}" name="maladie_id">
+            <input type="hidden" value="{{ $maladiepatient->maladie_id }}" name="maladie_id">
+            <input type="hidden" value="{{ $maladiepatient->id }}" name="maladie">
             <input type="hidden" value="{{ $maladiepatient->order_ }}" name="order_">
                 <div class="card">
                     <div class="card-header">
@@ -512,16 +514,16 @@
                        
                     </tr>
                 </thead>
-                @foreach ($produits as $produit)
-                    <tbody>
+                <tbody>
+                        @foreach ($produits as $produit)
                         <tr role="row" class="odd">
                             <td class="text-center">
                                 <button class="btn btn-success btndatap_" data-id="{{ $produit->id }}" data-name="{{ $produit->titre }}"><i class="icon-check"></i></button>
                             </td> 
                             <td>{{ $produit->titre }}</td>
                         </tr>
+                        @endforeach
                     </tbody>
-                @endforeach
             </table>
             </div>
         </div>
@@ -553,8 +555,8 @@
                                 التفاصيل</th>
                         </tr>
                     </thead>
-                    @foreach ($traitements as $traitement)
-                        <tbody>
+                    <tbody>
+                            @foreach ($traitements as $traitement)
                             <tr role="row" class="odd">
                                 <td class="text-center">
                                     <button class="btn btn-success btndata_" data-id="{{ $traitement->id }}" data-name="{{ $traitement->nom }}"><i class="icon-check"></i></button>
@@ -568,8 +570,8 @@
                                     {{-- @endcan --}}
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
-                    @endforeach
                 </table>
             </div>
         </div>
