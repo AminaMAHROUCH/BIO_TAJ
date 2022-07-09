@@ -35,9 +35,9 @@ class DashboardController extends Controller
         $rendezvous_soins = RendezVous::whereDate('date', '=',date('Y-m-d'))->where("type","soins")->get();
         $rendezvous_consultation = RendezVous::whereDate('date', '=',date('Y-m-d'))->where('type',"consultation")->get();
         $today_patients = Todayp::whereDate('created_at', '=',date('Y-m-d'))->get();
-        $patients = Patient::paginate(5);
+        $patients = Patient::get();
         $consultationsp= Consultation::where('payed',0)->get();
-        $traitement_historiques = TraitementHistorique::whereNull("prix")->get();//id user connecetr
+        $traitement_historiques = TraitementHistorique::whereDate('created_at', '=',date('Y-m-d'))->get();//id user connecetr
         //
         $traitemnt_total = TraitementHistorique::whereMonth('created_at', '=', Carbon::today()->month)->count();
         return view('dashboard', compact('rendezvous_consultation','consultationsp','traitemnt_total','rendezvous_soins','traitement_historiques', 'today_patients', 'patients'));
@@ -139,6 +139,14 @@ class DashboardController extends Controller
       $consult->save();
       return response()->json(201);
     }
+
+    public function tr_payer(Request $request){
+      $consult = TraitementHistorique::where('id', $request->tr_id)->first();
+      $consult->payed= 1;
+      $consult->save();
+      return back();
+    }
+
     public function traitement_payer(Request $request, $id){
       $consult = TraitementHistorique::where('id', $id)->first();
       $consult->prix= $request->prix_;
@@ -189,6 +197,22 @@ class DashboardController extends Controller
       $traitement_historiques = TraitementHistorique::where('maladie_id', $maladie_id)->get();
       $produits = Vente::where('id_maladie', $maladie_id)->get();
       return view('details_dossier', compact('consultation','maladie','traitement_historiques','produits'));
+    }
+
+    public function addToTrh(Request $req){
+      $rdv = RendezVous::findOrFail($req->rdvid);
+      // dd($rdv);
+      // $data = implode(',' , $rdv->traitement);
+      $myArray = explode(',', $rdv->traitement);
+      // dd($myArray);
+      for($i=0;$i<count($myArray)-1; $i++){
+        $traitement_h = new TraitementHistorique();
+        $traitement_h->patient_id = $rdv->id_patient;
+        $traitement_h->traitement_id = $myArray[$i];
+        $traitement_h->save();
+        return back();
+      }
+
     }
   
 }

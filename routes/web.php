@@ -39,11 +39,13 @@ Route::group(['middleware' => ['auth']], function () {
     // });
     Route::get('logout', [LoginController::class,'logout']);
     Route::get('consult_payer', [DashboardController::class, "consult_payer"]);
+    Route::get('tr_payer', [DashboardController::class, "tr_payer"]);
     Route::put('traitement_payer/{id}', [DashboardController::class, "traitement_payer"])->name('traitement_payer');
     Route::get('dashboard', [DashboardController::class, "index"]);
 
     Route::post('patient/add', [RendezVousController::class, "add"])->name('patient.add');
     Route::post('addToList', [RendezVousController::class, "add_today"])->name('addToList');
+    Route::post('addToTrh', [DashboardController::class, "addToTrh"])->name('addToTrh');
 
     Route::resource('patient', PatientController::class);
     Route::resource('maladie', MaladieController::class);

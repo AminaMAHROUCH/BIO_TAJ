@@ -16,7 +16,6 @@
         margin-bottom: 0 !important;
     }
     .scroll {
-    width: 30em;
     overflow-x: auto;
     white-space: nowrap;
 }
@@ -62,8 +61,9 @@
                 </div>
             </div>
         </div>
+    @endcan
         <!-- paiment consultation -->
-        @can('paiment_consult')
+        {{-- @can('paiment_consult')
         <div class="col-lg-12">
             <div class="card scroll" style="height: 96%; ">
                 <div class="card-header" style="background: #DCDCDC;
@@ -119,7 +119,7 @@
                 </div>
             </div>
         </div>
-        @endcan
+        @endcan --}}
         <!-- endpaiment -->
             <!-- paiment consultation -->
             @can('paiment_soins')
@@ -163,6 +163,14 @@
                                 <td>{{ $trh->prix ? $trh->prix : '-' }}</td>
                                 <td>{{ $trh->user_id ? $trh->user->name : '-' }}</td>
                                 <td class="text-center">
+                                    @if($trh->user_id)
+                                        @can('soins_payer')
+                                                <button type="button"
+                                                    class=" btn btn-sm text-white btn-update-tr btn-danger"
+                                                    data-id="{{ $trh->id }}">Payer
+                                                </button>
+                                        @endcan
+                                    @endif
                                     @can('consultation_update')
                                     <a data-toggle="modal"
                                         data-target="#th-{{ $trh->id }}"
@@ -178,7 +186,7 @@
                 </div>
             </div>
     </div>
-    @endcan
+   
     @endcan
     <!-- endpaiment -->
         @can('rdv_consult')
@@ -198,7 +206,7 @@
                             <th>أول زيارة</th>
                             <th>تأكيد الحضور</th>
                             <th>إجراء</th>
-                        </thead>
+                        </thead> 
                         <tbody>
                             @foreach ($rendezvous_consultation as $rendezvou)
                             <tr>
@@ -250,6 +258,7 @@
                         <table id="example3" class="display dataTable no-footer">
                             <thead>
                                 <th>الاسم الكامل</th>
+                                <th>الرعاية</th>
                                 <th>أول زيارة</th>
                                 <th>تأكيد الحضور</th>
                                 <th>إجراء</th>
@@ -258,6 +267,12 @@
                                 @foreach ($rendezvous_soins as $rendezvou)
                                 <tr>
                                     <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
+                                    <td>
+                                        <a data-toggle="modal"
+                                        data-target="#soin-details-{{ $rendezvou->id }}"
+                                        class="btn btn-sm btn-primary"><i
+                                            class="la la-plus"></i></a>
+                                    </td>
                                     <td>
                                         @if($rendezvou->isFirstTime == "1")
                                             <span class="badge bg-success">نعم</span>
@@ -276,9 +291,9 @@
                                         @if($rendezvou->present == "1")
                                             <span class="btn btn-secondary">نعم</span>
                                         @else 
-                                            <form action="{{route('addToList')}}" method="POST">
+                                            <form action="{{route('addToTrh')}}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="rend_id" value="{{ $rendezvou->id_patient}}">
+                                                <input type="hidden" name="rdvid" value="{{ $rendezvou->id}}">
                                                 <button type="submit" class="btn btn-secondary">إضافة</button>
                                             </form>
                                         @endif
@@ -288,6 +303,32 @@
                             </tbody>
                         </table>
 
+                @foreach ($rendezvous_soins as $maladie)
+                <div class="modal fade" id="soin-details-{{ $maladie->id }}">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-secondary">
+                                <h5 class="modal-title text-white">الرعاية</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                  
+                                    @foreach (explode(',', $maladie->traitement) as $soin)
+                                    @if($soin)
+                                        @php
+                                        $tr = App\Models\Traitement::where('id', $soin)->first(); 
+                                        @endphp
+                                            <li><b>*</b>{{ $tr->nom }}</li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
                     </div>
                 </div>
             </div>
@@ -405,6 +446,23 @@
                 dataType: "json",
                 data: {
                     'consult_id': consult_id
+                },
+                success: function(response) {
+                    location.href='http://127.0.0.1:8000/dashboard';
+                    // $("body").load(
+                    //     'http://127.0.0.1:8000/dashboard');
+                }
+            });
+        });
+        $(".btn-update-tr").on('click', function() {
+            var tr_id = $(this).data('id');
+            console.log(tr_id);
+            $.ajax({
+                type: "GET",
+                url: "/tr_payer",
+                dataType: "json",
+                data: {
+                    'tr_id': tr_id
                 },
                 success: function(response) {
                     location.href='http://127.0.0.1:8000/dashboard';

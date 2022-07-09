@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RendezVous;
 use App\Models\Patient;
 use App\Models\Todayp;
+use App\Models\Traitement;
 use Illuminate\Http\Request;
 
 class RendezVousController extends Controller
@@ -19,7 +20,7 @@ class RendezVousController extends Controller
         //
         $rendezvouss = RendezVous::all() ; 
         // dd($rendezvouss->patient());
-        $patients = Patient::all() ; 
+        $patients = Patient::paginate() ; 
         return view("listerendezvous",['rendezvouss'=>$rendezvouss, 'patients'=>$patients]);
     }
 
@@ -30,8 +31,9 @@ class RendezVousController extends Controller
      */
     public function create()
     {
-        $patients = Patient::all();
-        return view("addrendez_vous", compact('patients')); 
+        $patients = Patient::paginate();
+        $traitements = Traitement::paginate();
+        return view("addrendez_vous", compact('patients', 'traitements')); 
     }
 
 
@@ -52,6 +54,18 @@ class RendezVousController extends Controller
         $rendezvous->isFirstTime = $request->input('isFirstTime') ? 1 : 0; 
         $rendezvous->id_patient = $request->input('id_patient'); 
         $rendezvous->type = $request->input('type'); 
+        if($request->input('type') == 'soins'){
+            $tr = $request->input('traitement', []);
+            $test = '';
+            for ($i=0; $i <count($tr) ; $i++) { 
+                // dd($tr[$i]);
+                $test .= $tr[$i]. ','; 
+            }
+            $rendezvous->traitement = $test;
+            
+        }else{
+            $rendezvous->traitement = '';
+        }
         $rendezvous->present = 0;
         $rendezvous->save() ; 
         return redirect()->back()->with('message', 'تمت الاضافة بنجاح');

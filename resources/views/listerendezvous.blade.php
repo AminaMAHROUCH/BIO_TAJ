@@ -57,6 +57,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                                 colspan="1" aria-label="Email: activate to sort column ascending">
                                                 الحالة</th>
+                                           
 
                                             <th class="sorting text-center" tabindex="0" aria-controls="example3"
                                                 colspan="1" aria-label="Action: activate to sort column ascending">
@@ -70,6 +71,7 @@
                                                 <td>{{ $rendezvous->patient($rendezvous->id_patient)->prenom }}</td>
                                                 <td>{{ $rendezvous->patient($rendezvous->id_patient)->telephone }}</td>
                                                 <td>{{ $rendezvous->type }}</td>
+                                                
                                                 <td class="text-center">
                                                     <a data-toggle="modal"
                                                         data-target="#rendezvous-edit-{{ $rendezvous->id }}"
@@ -379,8 +381,6 @@
                         </div>
                     </div>
                 @endforeach --}}
-
-
 
         </div>
     </div>

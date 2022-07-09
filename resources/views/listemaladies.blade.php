@@ -35,38 +35,14 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">لائحة الامراض </h4>
-                            {{-- @can('malade_add') --}}
+                            @can('malade_add')
                             <a href="{{ route('maladie.create', false) }}" class="btn btn-primary">اضف</a>
-                            {{-- @endcan --}}
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                    <div class="dataTables_length" id="example3_length"><label>Show <div
-                                                class="dropdown bootstrap-select"><select name="example3_length"
-                                                    aria-controls="example3" class="" tabindex="-98">
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select><button type="button" class="btn dropdown-toggle btn-light"
-                                                    data-toggle="dropdown" role="button" title="10">
-                                                    <div class="filter-option">
-                                                        <div class="filter-option-inner">
-                                                            <div class="filter-option-inner-inner">10</div>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                                <div class="dropdown-menu " role="combobox">
-                                                    <div class="inner show" role="listbox" aria-expanded="false"
-                                                        tabindex="-1">
-                                                        <ul class="dropdown-menu inner show"></ul>
-                                                    </div>
-                                                </div>
-                                            </div> entries</label></div>
-                                    <div id="example3_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                class="" placeholder="" aria-controls="example3"></label>
-                                    </div>
+                                   
                                     <table id="example3"
                                         class="display dataTable no-footer  table-bordered table-responsive-sm"
                                         style="min-width: 845px" role="grid" aria-describedby="example3_info">
@@ -83,8 +59,8 @@
                                                     الإجراء</th>
                                             </tr>
                                         </thead>
-                                        @foreach ($maladies as $maladie)
-                                            <tbody>
+                                        <tbody>
+                                                @foreach ($maladies as $maladie)
                                                 <tr role="row" class="odd">
                                                     <td>{{ $maladie->maladie }}</td>
                                                     <td class="text-center">
@@ -94,39 +70,29 @@
                                                                 class="la la-plus"></i></a>
                                                     </td>
                                                     <td class="text-center">
-                                                        {{-- @can('malade_update') --}}
+                                                        @can('malade_update')
                                                         <a data-toggle="modal"
                                                             data-target="#maladie-edit-{{ $maladie->id }}"
                                                             class="btn btn-sm btn-primary"><i
                                                                 class="la la-pencil"></i></a>
-                                                        {{-- @endcan --}}
-                                                        {{-- @can('malade_delete') --}}
+                                                        @endcan
+                                                        @can('malade_delete')
                                                         <a data-toggle="modal"
                                                             data-target="#maladie-remove-{{ $maladie->id }}"
                                                             class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>
-                                                        {{-- @endcan --}}
-                                                        {{-- @can('malade_display') --}}
+                                                        @endcan
+                                                        @can('malade_display')
                                                         <a data-toggle="modal"
                                                             data-target="#maladie-info-{{ $maladie->id }}"
                                                             class="btn btn-sm btn-secondary"><i
                                                                 class="la la-info"></i></a>
-                                                        {{-- @endcan --}}
+                                                        @endcan
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
-                                        @endforeach
                                     </table>
-                                    <div class="dataTables_info" id="example3_info" role="status" aria-live="polite">
-                                        Showing 1 to 10 of 30 entries</div>
-                                    <div class="dataTables_paginate paging_simple_numbers" id="example3_paginate"><a
-                                            class="paginate_button previous disabled" aria-controls="example3"
-                                            data-dt-idx="0" tabindex="0" id="example3_previous">Previous</a><span><a
-                                                class="paginate_button current" aria-controls="example3" data-dt-idx="1"
-                                                tabindex="0">1</a><a class="paginate_button " aria-controls="example3"
-                                                data-dt-idx="2" tabindex="0">2</a><a class="paginate_button "
-                                                aria-controls="example3" data-dt-idx="3" tabindex="0">3</a></span><a
-                                            class="paginate_button next" aria-controls="example3" data-dt-idx="4"
-                                            tabindex="0" id="example3_next">Next</a></div>
+                                   
                                 </div>
                             </div>
                         </div>

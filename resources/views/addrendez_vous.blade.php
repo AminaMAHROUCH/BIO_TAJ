@@ -52,11 +52,24 @@
                                         <a class="btn btn-primary" data-toggle="modal" data-target="#rendezvous-add">المرضى</a>
                                     </div>
                                     <div class="col-lg-6">
-                                        <select name="type" class="form-control">
+                                        <select name="type" class="form-control" id="choose">
                                             <option value="">-اختر-</option>
-                                            <option value="soins">الرعاية</option>
-                                            <option value="consultation">الكشف</option>
+                                            <option data-value="soins" value="soins">الرعاية</option>
+                                            <option data-value="" value="consultation">الكشف</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row show_" style="padding: 2px">
+                                        <div class="col-lg-12">
+                                            <label for="" style="padding: 5px">العلاجات</label>
+                                            <select name="traitement[]" multiple class="form-control selectpicker" data-live-search="true">
+                                                @foreach ($traitements as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nom }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -111,7 +124,7 @@
                             <div class="table-responsive">
                                 <div id="example3_wrapper" class="dataTables_wrapper no-footer">
                                     <div id="example3_wrapper" class="dataTables_wrapper no-footer">
-                                        <table id="example1"
+                                        <table id="example3"
                                             class="display dataTable no-footer  table-bordered table-responsive-sm"
                                             style="min-width: 845px" role="grid" aria-describedby="example3_info">
                                             <thead>
@@ -139,8 +152,8 @@
                                                    
                                                 </tr>
                                             </thead>
-                                             @foreach ($patients as $patient)
-                                                <tbody>
+                                            <tbody>
+                                                    @foreach ($patients as $patient)
                                                     <tr role="row" class="odd">
                                                         <td class="text-center">
                                                           <button class="btn btn-success btndata" data-id="{{ $patient->id }}"><i class="icon-check"></i></button>
@@ -150,8 +163,8 @@
                                                         <td style="white-space: nowrap;">{{ $patient->telephone }}</td>
                                                         <td style="white-space: nowrap;">{{ $patient->email }}</td>
                                                     </tr>
+                                                    @endforeach
                                                 </tbody>
-                                            @endforeach
                                            
                                         </table>
 
@@ -270,6 +283,7 @@
                 </div>
             </div>
 
+            
 
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -291,7 +305,22 @@
 
 </script>
 <script>
+    $(function() {
+  $('.selectpicker').selectpicker();
+});
     $(document).ready(function(){
+        $('.show_').hide();
+        $('#choose').change(function(){
+            var valu= $(this).val();
+            if(valu == 'soins'){
+                $('.show_').show();
+            }else if(valu == 'consultation'){
+                $('.show_').hide();
+
+            }
+        }).trigger('change');
+
+
        $('#ajaxSubmit').click(function(e){
           e.preventDefault();
           $.ajaxSetup({
