@@ -71,7 +71,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">الوصف</label>
-                                    <textarea type="date" class="form-control" name="description" rows="5"></textarea>
+                                    <textarea type="text" class="form-control" name="description" rows="5"></textarea>
                                 </div>
                             </div>
 

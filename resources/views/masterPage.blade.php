@@ -235,7 +235,7 @@
                     @endcan
                     @can('rendezvous_item')
                     <li>
-                        <a class="   has-arrow" href="/rendez-vous" aria-expanded="false">
+                        <a class="   has-arrow" href="{{url('/rendez-vous')}}" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">المواعيد</span>
                         </a>

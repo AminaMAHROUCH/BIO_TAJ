@@ -1,5 +1,6 @@
-<form action="{{url('addvisite')}}" methode="POST">
-    @csrf
+<form methode="POST" action="{{route('addvisite')}}" >
+           <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
     <div class="row">
         <div class="col-lg-6">
             <label for="">الوزن</label>
@@ -42,5 +43,10 @@
 
         <textarea name="sympthomes" class="form-control" cols="30" rows="5"></textarea>
         </div>
+    </div>
+    <div>
+        <button class="btn btn-success" type="submit">
+            Add
+        </button>
     </div>
 </form>

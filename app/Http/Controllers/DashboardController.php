@@ -102,27 +102,30 @@ class DashboardController extends Controller
       $consult->save();
 
       //traitmentHistorique
-      
-      $data = implode(',' , $request->soins);
-      $myArray = explode(',', $data);
-      for($i=0;$i<count($myArray); $i++){
-        $traitement_h = new TraitementHistorique();
-        $traitement_h->patient_id = $request->patient_id;
-        $traitement_h->traitement_id = $myArray[$i];
-        $traitement_h->maladie_id = $request->maladie_id;
-        $traitement_h->save();
+      if($request->soins){
+          $data = implode(',' , $request->soins);
+          $myArray = explode(',', $data);
+          for($i=0;$i<count($myArray); $i++){
+            $traitement_h = new TraitementHistorique();
+            $traitement_h->patient_id = $request->patient_id;
+            $traitement_h->traitement_id = $myArray[$i];
+            $traitement_h->maladie_id = $request->maladie_id;
+            $traitement_h->save();
+          }
       }
 
       // produits 
-      $datap = implode(',' , $request->produits);
-      $myArrayp = explode(',', $datap);
-      for($i=0; $i<count($myArrayp); $i++){
-        $produit = new Vente();
-        $produit->patient_id = $request->patient_id;
-        $produit->produit_id = $myArrayp[$i];
-        $produit->id_maladie = $request->maladie_id;
-        $produit->date_vente = date('Y-m-d H:i:s');
-        $produit->save();
+      if($request->produits){
+          $datap = implode(',' , $request->produits);
+          $myArrayp = explode(',', $datap);
+          for($i=0; $i<count($myArrayp); $i++){
+            $produit = new Vente();
+            $produit->patient_id = $request->patient_id;
+            $produit->produit_id = $myArrayp[$i];
+            $produit->id_maladie = $request->maladie_id;
+            $produit->date_vente = date('Y-m-d H:i:s');
+            $produit->save();
+          }
       }
 
       //maladie
@@ -140,11 +143,12 @@ class DashboardController extends Controller
       return response()->json(201);
     }
 
-    public function tr_payer(Request $request){
+    public function traitement_payerr(Request $request){
       $consult = TraitementHistorique::where('id', $request->tr_id)->first();
       $consult->payed= 1;
       $consult->save();
-      return back();
+     return response()->json(201);
+
     }
 
     public function traitement_payer(Request $request, $id){
@@ -210,6 +214,10 @@ class DashboardController extends Controller
         $traitement_h->patient_id = $rdv->id_patient;
         $traitement_h->traitement_id = $myArray[$i];
         $traitement_h->save();
+        
+        //
+        $rdv->present = 1;
+        $rdv->save();
         return back();
       }
 

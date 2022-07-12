@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use DB;
 
 class PatientController extends Controller
 {
@@ -14,7 +15,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::paginate(5) ; 
+        $patients = Patient::paginate(50) ; 
 
         return view("listepatients",['patients'=>$patients]) ; 
     }
@@ -26,8 +27,9 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
-        return view("addpatient") ; 
+        $villes= DB::table('ville')->get();
+        
+        return view("addpatient",compact('villes') ) ; 
     }
 
     /**

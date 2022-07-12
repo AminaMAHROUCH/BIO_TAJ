@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     // });
     Route::get('logout', [LoginController::class,'logout']);
     Route::get('consult_payer', [DashboardController::class, "consult_payer"]);
-    Route::get('tr_payer', [DashboardController::class, "tr_payer"]);
+    Route::get('traitement_payerr', [DashboardController::class, "traitement_payerr"]);
     Route::put('traitement_payer/{id}', [DashboardController::class, "traitement_payer"])->name('traitement_payer');
     Route::get('dashboard', [DashboardController::class, "index"]);
 
@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dossier_medical/{patient_id}', [DashboardController::class,"dossier_medical"]);
     Route::post('add_consult', [DashboardController::class,"add_consult"]);
     Route::post('add_maladie', [DashboardController::class,"add_maladie"]);
-    Route::post('addvisite', [DashboardController::class,"addvisite"]);
+    Route::POST('addvisite', [DashboardController::class,"addvisite"])->name('addvisite');
     Route:: PUT('updateVisite/{id}', [DashboardController::class,"updateVisite"]);
     Route:: get('details_dossier/{id}', [DashboardController::class,"details_dossier"]);
 

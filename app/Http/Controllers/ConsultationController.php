@@ -21,6 +21,7 @@ class ConsultationController extends Controller
                     ->join('patients', 'patients.id', '=', 'consultations.patient_id')
                     ->select("*")
                     ->get(); 
+            dd($consultations);
         $patients = Patient::all() ; 
         return view("listeconsultations",['consultations'=>$consultations,'patients'=>$patients]) ; 
     }

@@ -48,7 +48,7 @@
                                                     {{ $patient->nom }}{{ $patient->prenom }}</option>
                                             @endforeach> --}}
                                         {{-- </select> --}}
-                                        <input type="text" name="id_patient" value="" id="myInput" class="form-control" style="width: 50%;">
+                                        <input type="text" readonly  name="id_patient" value="" id="myInput" class="form-control" style="width: 50%; background-color:lavender;">
                                         <a class="btn btn-primary" data-toggle="modal" data-target="#rendezvous-add">المرضى</a>
                                     </div>
                                     <div class="col-lg-6">
@@ -203,7 +203,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label class="form-label">تاريخ الازدياد</label>
-                                            <input type="date" class="form-control" name="date_naissance" id="date_naissance">
+                                            <input type="text" class="form-control" name="date_naissance" palceholder="jj/mm/aaaa" id="date_naissance">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -350,6 +350,7 @@
              success: function(result){
                 console.log(result);
                 $("#patient-add").modal('hide');
+                window.location.href = 'http://biotaj.com/taj_apps/createrendezvous';
                 $("#rendezvous-add").modal('show');
 
              }});

@@ -110,9 +110,11 @@
                                                         </td>
                                                     </tr>
                                                     @endforeach
+                                                    
                                                 </tbody>
+                                                    <!--{{ $patients->links() }}-->
                                         </table>
-
+<!--{{ $patients->links('pagination::bootstrap-4') }}-->
                                     </div>
                                 </div>
                             </div>

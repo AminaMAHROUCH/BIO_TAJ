@@ -67,9 +67,9 @@
                                     @foreach ($rendezvouss as $rendezvous)
                                         <tbody>
                                             <tr role="row" class="odd">
-                                                <td>{{ $rendezvous->patient($rendezvous->id_patient)->nom }}</td>
-                                                <td>{{ $rendezvous->patient($rendezvous->id_patient)->prenom }}</td>
-                                                <td>{{ $rendezvous->patient($rendezvous->id_patient)->telephone }}</td>
+        <td>{{ $rendezvous->id_patient? ($rendezvous->patient($rendezvous->id_patient)->nom): '' }}</td>
+                                                <td>{{ $rendezvous->id_patient? ($rendezvous->patient($rendezvous->id_patient)->prenom): ''  }}</td>
+                                <td>{{ $rendezvous->id_patient? ($rendezvous->patient($rendezvous->id_patient)->telephone): ''}}</td>
                                                 <td>{{ $rendezvous->type }}</td>
                                                 
                                                 <td class="text-center">

@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-    @endcan
+          @endcan
         <!-- paiment consultation -->
         {{-- @can('paiment_consult')
         <div class="col-lg-12">
@@ -102,7 +102,7 @@
                                         <td>{{ $consultation->date }}</td>
                                         <td>{{ $consultation->prix }}</td>
                                         <td>
-                                            <span class="badge bg-danger">Non</span>
+                                <span class="badge bg-danger">Non</span>
                                         </td>
                                         <td class="text-center">
                                             @can('consultation_update')
@@ -150,6 +150,10 @@
                             <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
                                 colspan="1" aria-label="Roll No.: activate to sort column ascending">
                                 المسؤول</th>
+                            <th class="sorting" tabindex="0" aria-controls="example3" rowspan="1"
+                                colspan="1" aria-label="Roll No.: activate to sort column ascending">
+                                تم الدفع</th>
+                                
                             <th class="sorting text-center" tabindex="0" aria-controls="example3"
                                 colspan="1" aria-label="Action: activate to sort column ascending">
                                 الإجراء</th>
@@ -159,17 +163,31 @@
                             @foreach ($traitement_historiques as $trh)
                             <tr role="row" class="odd">
                                 <td>{{ $trh->patient_id ? $trh->patient->nom.' '.$trh->patient->prenom : '-'}}</td>
-                                <td>{{ $trh->traitement_id ? $trh->traitement->nom : '-' }}</td>
-                                <td>{{ $trh->prix ? $trh->prix : '-' }}</td>
-                                <td>{{ $trh->user_id ? $trh->user->name : '-' }}</td>
+                <td>{{ $trh->traitement_id ? $trh->traitement->nom : '-' }}</td>
+            <td>{{ $trh->prix ? $trh->prix : '-' }}</td>
+                    <td>{{ $trh->user_id ? $trh->user->name : '-' }}</td>
+                    <td>
+                        @if($trh->payed == "1")
+                                        <span class="badge bg-success">نعم</span>
+                                    @else
+                                        <span class="badge bg-danger">لا</span>
+                                    @endif 
+                    </td>
+                                
                                 <td class="text-center">
+                                    
                                     @if($trh->user_id)
-                                        @can('soins_payer')
-                                                <button type="button"
-                                                    class=" btn btn-sm text-white btn-update-tr btn-danger"
-                                                    data-id="{{ $trh->id }}">Payer
-                                                </button>
-                                        @endcan
+                                    
+                                        @if($trh->payed == 0)
+                                            @can('soins_payer')
+                                                    <button type="button"
+                                                        class=" btn btn-sm text-white btn-update-tr btn-danger"
+                                                        data-id="{{ $trh->id }}">Payer
+                                                    </button>
+                                            @endcan
+                                        @else
+                                                                            <span>تم الدفع</span>
+                                    @endif
                                     @endif
                                     @can('consultation_update')
                                     <a data-toggle="modal"
@@ -186,7 +204,7 @@
                 </div>
             </div>
     </div>
-   
+  
     @endcan
     <!-- endpaiment -->
         @can('rdv_consult')
@@ -210,7 +228,7 @@
                         <tbody>
                             @foreach ($rendezvous_consultation as $rendezvou)
                             <tr>
-                                <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
+    <td>{{ $rendezvou->id_patient ? ($rendezvou->patient($rendezvou->id_patient)->nom.''.$rendezvou->patient($rendezvou->id_patient)->prenom) : '' }}</td>
                                 <td>
                                     @if($rendezvou->isFirstTime == "1")
                                         <span class="badge bg-success">نعم</span>
@@ -266,7 +284,7 @@
                             <tbody>
                                 @foreach ($rendezvous_soins as $rendezvou)
                                 <tr>
-                                    <td>{{ $rendezvou->patient($rendezvou->id_patient)->nom }} {{ $rendezvou->patient($rendezvou->id_patient)->prenom }}</td>
+                                   <td>{{ $rendezvou->id_patient ? ($rendezvou->patient($rendezvou->id_patient)->nom.''.$rendezvou->patient($rendezvou->id_patient)->prenom) : '' }}</td>
                                     <td>
                                         <a data-toggle="modal"
                                         data-target="#soin-details-{{ $rendezvou->id }}"
@@ -448,7 +466,7 @@
                     'consult_id': consult_id
                 },
                 success: function(response) {
-                    location.href='http://127.0.0.1:8000/dashboard';
+                    location.href='https://biotaj.com/taj_apps/dashboard';
                     // $("body").load(
                     //     'http://127.0.0.1:8000/dashboard');
                 }
@@ -456,16 +474,15 @@
         });
         $(".btn-update-tr").on('click', function() {
             var tr_id = $(this).data('id');
-            console.log(tr_id);
             $.ajax({
                 type: "GET",
-                url: "/tr_payer",
+                url: "traitement_payerr",
                 dataType: "json",
                 data: {
                     'tr_id': tr_id
                 },
                 success: function(response) {
-                    location.href='http://127.0.0.1:8000/dashboard';
+                    location.href='https://biotaj.com/taj_apps/dashboard';
                     // $("body").load(
                     //     'http://127.0.0.1:8000/dashboard');
                 }

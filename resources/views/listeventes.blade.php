@@ -126,12 +126,12 @@
                                                         value="{{ $vente->quantite_v }}">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-12 pricehide">
-                                                <div class="form-group">
-                                                    <label class="form-label">ثمن البيع</label>
-                                                    <input type="text" class="form-control bg-light prixvente" name="prix_total" readonly value="{{ $vente->prix_total }}">
-                                                </div>
-                                            </div>
+                                            <!--<div class="col-lg-6 col-md-6 col-sm-12 pricehide">-->
+                                            <!--    <div class="form-group">-->
+                                            <!--        <label class="form-label">ثمن البيع</label>-->
+                                            <!--        <input type="text" class="form-control bg-light prixvente" name="prix_total" readonly value="{{ $vente->prix_total }}">-->
+                                            <!--    </div>-->
+                                            <!--</div>-->
         
                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                 <div class="form-group">

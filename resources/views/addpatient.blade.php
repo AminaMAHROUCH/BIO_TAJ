@@ -53,7 +53,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">تاريخ الازدياد</label>
-                                    <input type="date" class="form-control" name="date_naissance">
+                                    <input type="text" class="form-control" name="date_naissance" placeholder="jj/mm/aaaa">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
@@ -94,7 +94,12 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="form-label">المدينة</label>
-                                    <input type="text" class="form-control" name="id_ville">
+                                    <select name="id_ville" class="form-control selectpicker" data-live-search="true" >
+                                        
+                                    @foreach($villes as $ville)
+                                    <option value="{{$ville->id_ville}}">{{$ville->ville}}</option>
+                                    @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">

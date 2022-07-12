@@ -407,7 +407,7 @@
                         <label for="">الثمن</label>
                         <input type="number" name="prix" class="form-control">
                         <label for="">ملاحضات</label>
-                        <textarea name="consultation_remarque" class="form-control ckeditor" id="summary-ckeditor" cols="30" rows="5"></textarea>
+                        <textarea name="consultation_remarque" class="form-control " id="summary-ckeditor" cols="30" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="card">
@@ -431,7 +431,7 @@
                     </div>
                 </div>
                 <label for="">ملاحضات</label>
-                <textarea name="maladie_remarque" id="" class="form-control ckeditor" cols="30" rows="5"></textarea>
+                <textarea name="maladie_remarque" id="" class="form-control " cols="30" rows="5"></textarea>
 
                 <hr>
                 <button type="submit" class="btn btn-warning">Add</button>
@@ -482,7 +482,7 @@
                     </div>
                 </div>
                 <label for="">ملاحضات</label>
-                <textarea name="maladie_remarque" id="" class="form-control ckeditor" cols="30" rows="5"></textarea>
+                <textarea name="maladie_remarque" id="" class="form-control " cols="30" rows="5"></textarea>
 
                 <hr>
                 <button type="submit" class="btn btn-warning">Add</button>
